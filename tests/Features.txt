@@ -1,0 +1,59 @@
+Tests of the example feature class
+==================================
+
+Null instance
+-------------
+
+    >>> import geojson
+    >>> from geojson.feature import SimpleWebFeature
+    >>> feature = SimpleWebFeature()
+    >>> feature.id is None
+    True
+
+Parameterized instance
+----------------------
+
+    >>> feature = SimpleWebFeature(id='1',
+    ...             geometry={'type': 'Point', 'coordinates': [0.0, 0.0]},
+    ...             title=u'Feature 1', summary=u'The first feature',
+    ...             link='http://example.org/features/1')
+
+    It satisfies the feature protocol
+
+    >>> feature['id']
+    '1'
+    >>> feature['properties']['title']
+    u'Feature 1'
+    >>> feature['properties']['summary']
+    u'The first feature'
+    >>> feature['properties']['link']
+    'http://example.org/features/1'
+    >>> feature['geometry']
+    {'type': 'Point', 'coordinates': [0.0, 0.0]}
+
+
+Encoding
+--------
+
+    >>> geojson.dumps(feature)
+    '{"geometry": {"type": "Point", "coordinates": [0.0, 0.0]}, "id": "1", "properties": {"title": "Feature 1", "link": "http:\\/\\/example.org\\/features\\/1", "summary": "The first feature"}}'
+
+Decoding
+--------
+
+    >>> factory = geojson.feature.createSimpleWebFeature
+    >>> json = '{"geometry": {"type": "Point", "coordinates": [0.0, 0.0]}, "id": "1", "properties": {"title": "Feature 1", "link": "http:\\/\\/example.org\\/features\\/1", "summary": "The first feature"}}'
+    >>> feature = geojson.loads(json, object_hook=factory)
+    >>> type(feature)
+    <class 'geojson.feature.SimpleWebFeature'>
+    >>> feature.id
+    '1'
+    >>> feature.properties.title
+    u'Feature 1'
+    >>> feature.properties.summary
+    u'The first feature'
+    >>> feature.properties.link
+    'http://example.org/features/1'
+    >>> str(feature.geometry)
+    "{'type': 'Point', 'coordinates': [0.0, 0.0]}"
+

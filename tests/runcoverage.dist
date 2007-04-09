@@ -1,0 +1,5 @@
+#!/bin/sh
+echo "running coverage tests ..."
+python coverage.py -e
+python coverage.py -x runalltests.py
+python coverage.py -rm ../geojson/protocol.py ../geojson/feature.py

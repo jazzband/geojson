@@ -1,2 +1,2 @@
-from coding import dumps, loads
+from coding import dump, dumps, load, loads
 

@@ -14,7 +14,7 @@ Parameterized instance
 ----------------------
 
     >>> feature = SimpleWebFeature(id='1',
-    ...             geometry={'type': 'Point', 'coordinates': [0.0, 0.0]},
+    ...             geometry={'type': 'Point', 'coordinates': [[0.0, 0.0]]},
     ...             title=u'Feature 1', summary=u'The first feature',
     ...             link='http://example.org/features/1')
 
@@ -29,20 +29,20 @@ Parameterized instance
     >>> feature['properties']['link']
     'http://example.org/features/1'
     >>> feature['geometry']
-    {'type': 'Point', 'coordinates': [0.0, 0.0]}
+    {'type': 'Point', 'coordinates': [[0.0, 0.0]]}
 
 
 Encoding
 --------
 
     >>> geojson.dumps(feature)
-    '{"geometry": {"type": "Point", "coordinates": [0.0, 0.0]}, "id": "1", "properties": {"title": "Feature 1", "link": "http:\\/\\/example.org\\/features\\/1", "summary": "The first feature"}}'
+    '{"geometry": {"type": "Point", "coordinates": [[0.0, 0.0]]}, "id": "1", "properties": {"title": "Feature 1", "link": "http:\\/\\/example.org\\/features\\/1", "summary": "The first feature"}}'
 
 Decoding
 --------
 
     >>> factory = geojson.feature.createSimpleWebFeature
-    >>> json = '{"geometry": {"type": "Point", "coordinates": [0.0, 0.0]}, "id": "1", "properties": {"title": "Feature 1", "link": "http:\\/\\/example.org\\/features\\/1", "summary": "The first feature"}}'
+    >>> json = '{"geometry": {"type": "Point", "coordinates": [[0.0, 0.0]]}, "id": "1", "properties": {"title": "Feature 1", "link": "http://example.org/features/1", "summary": "The first feature"}}'
     >>> feature = geojson.loads(json, object_hook=factory)
     >>> type(feature)
     <class 'geojson.feature.SimpleWebFeature'>
@@ -55,5 +55,5 @@ Decoding
     >>> feature.properties.link
     'http://example.org/features/1'
     >>> str(feature.geometry)
-    "{'type': 'Point', 'coordinates': [0.0, 0.0]}"
+    "{'type': 'Point', 'coordinates': [[0.0, 0.0]]}"
 

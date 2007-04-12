@@ -60,7 +60,7 @@ def createSimpleWebFeature(o):
         p = o['properties']
         return SimpleWebFeature(str(id), 
             {'type': str(g.get('type', None)),
-             'coordinates': g.get('coordinates', [])},
+             'coordinates': g.get('coordinates', [[]])},
             title=p.get('title', None),
             summary=p.get('summary', None),
             link=str(p.get('link', None)))

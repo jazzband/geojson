@@ -31,6 +31,8 @@ Parameterized instance
     >>> feature['geometry']
     {'type': 'Point', 'coordinates': [[0.0, 0.0]]}
 
+    >>> geojson.issupported(feature)
+    True
 
 Encoding
 --------
@@ -56,4 +58,7 @@ Decoding
     'http://example.org/features/1'
     >>> str(feature.geometry)
     "{'type': 'Point', 'coordinates': [[0.0, 0.0]]}"
+
+    >>> geojson.issupported(feature)
+    True
 

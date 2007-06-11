@@ -1,0 +1,80 @@
+Tests of the feature protocol
+=============================
+
+A dictionary can satisfy the protocol
+-------------------------------------
+
+  >>> f = {
+  ...   'id': '1',
+  ...   'geometry': {'type': 'Point', 'coordinates': [0, 0]},
+  ...   'properties': {'title': 'Dict 1'},
+  ... }
+
+  >>> import geojson
+  >>> geojson.issupported(f)
+  True
+
+  Encoding
+
+  >>> json = geojson.dumps(f)
+  >>> json
+  '{"geometry": {"type": "Point", "coordinates": [0, 0]}, "type": "Feature", "id": "1", "properties": {"title": "Dict 1"}}'
+
+  Decoding
+
+  >>> o = geojson.loads(json)
+  >>> o
+  {u'geometry': {u'type': u'Point', u'coordinates': [0, 0]}, u'type': u'Feature', u'id': u'1', u'properties': {u'title': u'Dict 1'}}
+
+
+Example feature class
+---------------------
+
+  >>> from geojson.feature import SimpleWebFeature
+  >>> feature = SimpleWebFeature(id='1',
+  ...             geometry={'type': 'Point', 'coordinates': [0.0, 0.0]},
+  ...             title=u'Feature 1', summary=u'The first feature',
+  ...             link='http://example.org/features/1')
+
+  It satisfies the feature protocol
+
+  >>> feature.id
+  '1'
+  >>> feature.properties['title']
+  u'Feature 1'
+  >>> feature.properties['summary']
+  u'The first feature'
+  >>> feature.properties['link']
+  'http://example.org/features/1'
+  >>> feature.geometry
+  {'type': 'Point', 'coordinates': [0.0, 0.0]}
+
+  >>> geojson.issupported(feature)
+  True
+
+  Encoding
+
+  >>> geojson.dumps(feature)
+  '{"geometry": {"type": "Point", "coordinates": [0.0, 0.0]}, "type": "Feature", "id": "1", "properties": {"summary": "The first feature", "link": "http:\\/\\/example.org\\/features\\/1", "title": "Feature 1"}}'
+
+  Decoding
+
+  >>> factory = geojson.feature.createSimpleWebFeature
+  >>> json = '{"geometry": {"type": "Point", "coordinates": [0.0, 0.0]}, "type": "Feature", "id": "1", "properties": {"summary": "The first feature", "link": "http:\\/\\/example.org\\/features\\/1", "title": "Feature 1"}}'
+  >>> feature = geojson.loads(json, object_hook=factory)
+  >>> type(feature)
+  <class 'geojson.feature.SimpleWebFeature'>
+  >>> feature.id
+  '1'
+  >>> feature.properties['title']
+  u'Feature 1'
+  >>> feature.properties['summary']
+  u'The first feature'
+  >>> feature.properties['link']
+  'http://example.org/features/1'
+  >>> feature.geometry
+  {'type': 'Point', 'coordinates': [0.0, 0.0]}
+
+  >>> geojson.issupported(feature)
+  True
+

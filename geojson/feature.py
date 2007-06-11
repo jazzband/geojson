@@ -11,19 +11,6 @@ SimpleWebFeature is a working example of a class that satisfies the Python GIS
 feature protocol.
 """
    
-class PropertyCollection(dict):
-    
-    """
-    A Collection of feature properties.
-    """
-    
-    def __getattr__(self, name):
-        return self[name]
-
-    def __setattr__(self, name, value):
-        self[name] = value
-
-
 class SimpleWebFeature(object):
 
     """
@@ -35,19 +22,10 @@ class SimpleWebFeature(object):
         """Initialize."""
         self.id = id
         self.geometry = geometry
-        self.properties = PropertyCollection()
+        self.properties = {}
         self.properties['title'] = title
         self.properties['summary'] = summary
         self.properties['link'] = link
-
-    def __getitem__(self, key):
-        """To satisfy the Python GIS feature protocol, we need to handle at
-        least id, geometry, and properties keys.
-        """
-        try:
-            return getattr(self, key)
-        except AttributeError, e:
-            raise KeyError, e
 
 
 def createSimpleWebFeature(o):
@@ -59,11 +37,11 @@ def createSimpleWebFeature(o):
         g = o['geometry']
         p = o['properties']
         return SimpleWebFeature(str(id), 
-            {'type': str(g.get('type', None)),
-             'coordinates': g.get('coordinates', [[]])},
-            title=p.get('title', None),
-            summary=p.get('summary', None),
-            link=str(p.get('link', None)))
+            {'type': str(g.get('type')),
+             'coordinates': g.get('coordinates', [])},
+            title=p.get('title'),
+            summary=p.get('summary'),
+            link=str(p.get('link')))
     except (KeyError, TypeError):
         pass
     return o

@@ -5,7 +5,6 @@ import sys
 
 try:
     import pkg_resources
-    pkg_resources.require('PCL-Core')
     pkg_resources.require('PCL-GeoJSON')
 except:
     pass

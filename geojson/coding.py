@@ -16,7 +16,10 @@ from geojson.feature import SimpleWebFeature
 class Fly(object):
     
     def __init__(self, ob):
-        self._ob = ob
+        if hasattr(ob, '__geo_interface__'):
+            self._ob = ob.__geo_interface__
+        else:
+            self._ob = ob
 
     def get(self, attr, default=None):
         try:
@@ -86,9 +89,8 @@ class PyGFPEncoder(simplejson.JSONEncoder):
             return self.geom_default(o)
         elif o.has('geometry'):
             return self.feature_default(o)
-        elif len(o) > 0:
+        elif o.has('members'):
             value = {
-                'type': 'FeatureCollection',
                 'members': [self.feature_default(Fly(m)) for m in iter(o)]
                 }
             if o.has('crs'):

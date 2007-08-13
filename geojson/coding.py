@@ -75,7 +75,6 @@ class PyGFPEncoder(simplejson.JSONEncoder):
 
     def feature_default(self, o):
         value = {
-            'type': 'Feature',
             'id': o.get('id'),
             'properties': o.get('properties'),
             'geometry': self.geom_default(Fly(o.get('geometry'))),

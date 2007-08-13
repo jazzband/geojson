@@ -9,7 +9,7 @@ def issupported(ob):
         assert fly.has('geometry')
         assert fly.has('properties')
     except AssertionError, e:
-        raise Warning, e
+        raise Warning, str(e)
         return False
     return True
         

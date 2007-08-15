@@ -90,7 +90,7 @@ class PyGFPEncoder(simplejson.JSONEncoder):
             return self.feature_default(o)
         elif o.has('members'):
             value = {
-                'members': [self.feature_default(Fly(m)) for m in iter(o)]
+                'members': [self.feature_default(Fly(m)) for m in iter(o.get('members'))]
                 }
             if o.has('crs'):
                 value['crs'] = self.crs_default(o.get('crs'))

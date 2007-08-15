@@ -37,6 +37,11 @@ consideration).
 *coordinates*: a sequence of sequences of float values in x, y, (and maybe z)
 order.
 
+Coordinate Systems
+------------------
+
+Version 1.0 does not consider coordinate systems. 
+
 The Simplest Possible Example
 -----------------------------
 

@@ -13,7 +13,7 @@ from geojson.feature import SimpleWebFeature
 
 # Equal access to object attributes or mapping items
 
-class Fly(object):
+class Map(object):
     
     def __init__(self, ob):
         if hasattr(ob, '__geo_interface__'):
@@ -58,11 +58,11 @@ class PyGFPEncoder(simplejson.JSONEncoder):
         if o.get('type') == 'GeometryCollection':
             value = {
                 'type': 'GeometryCollection',
-                'members': 
-                    [self.geom_default(Fly(g)) for g in o.get('members')],
+                'geometries': 
+                    [self.geom_default(Map(g)) for g in o.get('geometries')],
                 }
             if o.has('crs'):
-                value['crs'] = self.crs_default(Fly(o.get('crs')))
+                value['crs'] = self.crs_default(Map(o.get('crs')))
             return value
         else:
             value = {
@@ -70,17 +70,18 @@ class PyGFPEncoder(simplejson.JSONEncoder):
                 'coordinates': tuple(o.get('coordinates')),
                 }
             if o.has('crs'):
-                value['crs'] = self.crs_default(Fly(o.get('crs')))
+                value['crs'] = self.crs_default(Map(o.get('crs')))
             return value
 
     def feature_default(self, o):
         value = {
+            'type': 'Feature',
             'id': o.get('id'),
             'properties': o.get('properties'),
-            'geometry': self.geom_default(Fly(o.get('geometry'))),
+            'geometry': self.geom_default(Map(o.get('geometry'))),
             }
         if o.has('crs'):
-            value['crs'] = self.crs_default(Fly(o.get('crs')))
+            value['crs'] = self.crs_default(Map(o.get('crs')))
         return value
 
     def default(self, o):
@@ -88,9 +89,10 @@ class PyGFPEncoder(simplejson.JSONEncoder):
             return self.geom_default(o)
         elif o.has('geometry'):
             return self.feature_default(o)
-        elif o.has('members'):
+        elif o.has('features'):
             value = {
-                'members': [self.feature_default(Fly(m)) for m in iter(o.get('members'))]
+                'type': 'FeatureCollection',
+                'features': [self.feature_default(Map(m)) for m in iter(o.get('members'))]
                 }
             if o.has('crs'):
                 value['crs'] = self.crs_default(o.get('crs'))
@@ -103,10 +105,10 @@ class PyGFPEncoder(simplejson.JSONEncoder):
 # object creation hooks
 
 def dump(obj, fp):
-    return simplejson.dump(Fly(obj), fp, cls=PyGFPEncoder)
+    return simplejson.dump(Map(obj), fp, cls=PyGFPEncoder)
 
 def dumps(obj):
-    return simplejson.dumps(Fly(obj), cls=PyGFPEncoder)
+    return simplejson.dumps(Map(obj), cls=PyGFPEncoder)
 
 def load(fp, object_hook=None):
     return simplejson.load(fp, cls=simplejson.JSONDecoder, 

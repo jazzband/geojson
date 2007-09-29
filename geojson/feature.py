@@ -7,8 +7,8 @@
 # ============================================================================
 
 """
-SimpleWebFeature is a working example of a class that satisfies the Python GIS
-feature protocol.
+SimpleWebFeature is a working example of a class that satisfies the Python geo
+interface.
 """
    
 class SimpleWebFeature(object):
@@ -27,7 +27,16 @@ class SimpleWebFeature(object):
         self.properties['summary'] = summary
         self.properties['link'] = link
 
+    @property
+    def __geo_interface__(self):
+        return {
+            "type": "Feature",
+            "id": self.id,
+            "properties": self.properties,
+            "geometry": self.geometry
+            }
 
+        
 def createSimpleWebFeature(o):
     """Create an instance of SimpleWebFeature from a dict, o. If o does not
     match a Python feature object, simply return o. This function serves as a 

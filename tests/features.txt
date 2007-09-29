@@ -12,8 +12,6 @@ A dictionary can satisfy the protocol
   ... }
 
   >>> import geojson
-  >>> geojson.issupported(f)
-  True
 
   Encoding
 
@@ -49,9 +47,6 @@ feature class
   >>> feature.geometry
   {'type': 'Point', 'coordinates': [0.0, 0.0]}
 
-  >>> geojson.issupported(feature)
-  True
-
   Encoding
 
   >>> geojson.dumps(feature)
@@ -75,9 +70,6 @@ feature class
   >>> feature.geometry
   {'type': 'Point', 'coordinates': [0.0, 0.0]}
 
-  >>> geojson.issupported(feature)
-  True
-
 Test the geo interface
 ----------------------
 
@@ -94,8 +86,6 @@ Test the geo interface
   >>> ob = Thingy('1', 'thingy one', -106.0, 40.0)
   >>> ob.__geo_interface__['geometry']
   {'type': 'Point', 'coordinates': (-106.0, 40.0)}
-  >>> geojson.issupported(ob)
-  True
   >>> geojson.dumps(ob)
   '{"geometry": {"type": "Point", "coordinates": [-106.0, 40.0]}, "type": "Feature", "id": "1", "properties": {"title": "thingy one"}}'
 

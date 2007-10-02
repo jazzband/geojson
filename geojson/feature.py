@@ -27,16 +27,17 @@ class SimpleWebFeature(object):
         self.properties['summary'] = summary
         self.properties['link'] = link
 
-    @property
-    def __geo_interface__(self):
+    def as_dict(self):
         return {
             "type": "Feature",
             "id": self.id,
             "properties": self.properties,
             "geometry": self.geometry
             }
+    
+    __geo_interface__ = property(as_dict)
 
-        
+
 def createSimpleWebFeature(o):
     """Create an instance of SimpleWebFeature from a dict, o. If o does not
     match a Python feature object, simply return o. This function serves as a 

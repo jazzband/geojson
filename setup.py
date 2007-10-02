@@ -2,7 +2,7 @@
 from setuptools import setup
 
 setup(name          = 'GeoJSON',
-      version       = '1.0',
+      version       = '1.0a2',
       description   = 'Encoder/decoder for simple GIS features',
       license       = 'BSD',
       keywords      = 'gis geography json',

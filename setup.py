@@ -5,7 +5,7 @@ from setuptools import setup
 readme_text = file('README.txt', 'rb').read()
 
 setup(name          = 'GeoJSON',
-      version       = '1.0a2',
+      version       = '1.0a3',
       description   = 'Encoder/decoder for simple GIS features',
       license       = 'BSD',
       keywords      = 'gis geography json',

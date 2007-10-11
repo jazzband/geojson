@@ -92,7 +92,7 @@ class PyGFPEncoder(simplejson.JSONEncoder):
         elif o.has('features'):
             value = {
                 'type': 'FeatureCollection',
-                'features': [self.feature_default(Map(m)) for m in iter(o.get('members'))]
+                'features': [self.feature_default(Map(m)) for m in iter(o.get('features'))]
                 }
             if o.has('crs'):
                 value['crs'] = self.crs_default(o.get('crs'))

@@ -98,7 +98,7 @@ class PyGFPEncoder(simplejson.JSONEncoder):
                 value['crs'] = self.crs_default(o.get('crs'))
             return value
         else:
-            return simplejson.JSONEncoder.default()
+            return simplejson.JSONEncoder().default(o)
 
 
 # Wrap the functions from simplejson, providing encoder, decoders, and

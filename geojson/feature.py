@@ -10,49 +10,42 @@
 SimpleWebFeature is a working example of a class that satisfies the Python geo
 interface.
 """
-   
-class SimpleWebFeature(object):
 
-    """
-    A simple, Atom-ish, single geometry (WGS84) GIS feature. 
-    """
+from geojson.base import GeoJSON
 
-    def __init__(self, id=None, geometry=None, title=None, summary=None, 
-                 link=None):
-        """Initialize."""
+
+class Feature(GeoJSON):
+
+    """A (WGS84) GIS Feature."""
+
+    def __init__(self, id=None, geometry=None, properties=None, **extra):
+        super(Feature, self).__init__(**extra)
         self.id = id
         self.geometry = geometry
-        self.properties = {}
-        self.properties['title'] = title
-        self.properties['summary'] = summary
-        self.properties['link'] = link
+        self.properties = properties
 
-    def as_dict(self):
-        return {
-            "type": "Feature",
-            "id": self.id,
-            "properties": self.properties,
-            "geometry": self.geometry
-            }
+    @property
+    def __geo_interface__(self):
+        d = super(Feature, self).__geo_interface__
+        d.update(id=self.id,
+                 geometry=self.geometry,
+                 properties=self.properties)
+        return d
+
+
+class FeatureCollection(GeoJSON):
+
+    """A collection of Features."""
+
+    def __init__(self, features, **extra):
+        super(FeatureCollection, self).__init__(**extra)
+        self.features = features
+
+    @property
+    def __geo_interface__(self):
+        d = super(FeatureCollection, self).__geo_interface__
+        d.update(features=self.features)
+        return d
     
-    __geo_interface__ = property(as_dict)
-
-
-def createSimpleWebFeature(o):
-    """Create an instance of SimpleWebFeature from a dict, o. If o does not
-    match a Python feature object, simply return o. This function serves as a 
-    simplejson decoder hook. See coding.load()."""
-    try:
-        id = o['id']
-        g = o['geometry']
-        p = o['properties']
-        return SimpleWebFeature(str(id), 
-            {'type': str(g.get('type')),
-             'coordinates': g.get('coordinates', [])},
-            title=p.get('title'),
-            summary=p.get('summary'),
-            link=str(p.get('link')))
-    except (KeyError, TypeError):
-        pass
-    return o
+   
 

@@ -1,0 +1,80 @@
+Tests of the geometry protocol
+==============================
+
+A dictionary can satisfy the protocol
+-------------------------------------
+
+  >>> g = {
+  ...    "type": "Point",
+  ...    "coordinates": [1.3, -54.23242]
+  ... }
+
+  >>> import geojson
+  >>> import geojson.geometry
+
+  Encoding
+
+  >>> json = geojson.dumps(g)
+  >>> json
+  '{"type": "Point", "coordinates": [1.3, -54.23242]}'
+
+  Decoding
+
+  >>> o = geojson.loads(json)
+  >>> o
+  {u'type': u'Point', u'coordinates': [1.3, -54.232419999999998]}
+
+
+geometry class
+---------------------
+
+  >>> ls = geojson.geometry.LineString(((52.1, -34.131), (65.231, -34.234)))
+
+  >>> ls.__geo_interface__
+  {'type': 'LineString', 'coordinates': ((52.100000000000001, -34.131), (65.230999999999995, -34.234000000000002))}
+
+  It satisfies the geometry protocol
+
+  >>> ls.type
+  'LineString'
+  >>> ls.coordinates
+  ((52.100000000000001, -34.131), (65.230999999999995, -34.234000000000002))
+
+
+  Encoding
+
+  >>> json = geojson.dumps(ls)
+  >>> json
+  '{"type": "LineString", "coordinates": [[52.1, -34.131], [65.231, -34.234]]}'
+
+  Decoding
+  >>> geojson.loads(json)
+  {u'type': u'LineString', u'coordinates': [[52.100000000000001, -34.131], [65.230999999999995, -34.234000000000002]]}
+ 
+  >>> factory = geojson.encoding.to_geojson_object
+  >>> geom = geojson.loads(json, object_hook=factory)
+  >>> type(geom)
+  <class 'geojson.geometry.LineString'>
+  >>> geom.type
+  'LineString'
+  >>> geom.coordinates
+  [[52.100000000000001, -34.131], [65.230999999999995, -34.234000000000002]]
+ 
+
+Test the geo interface
+----------------------
+
+  >>> class PointThingy(object):
+  ...     def __init__(self, x, y):
+  ...         self.x = x
+  ...         self.y = y
+  ...     @property
+  ...     def __geo_interface__(self):
+  ...        return {"type": "Point", "coordinates": (self.x, self.y)}
+
+  >>> ob = PointThingy(-106.0, 40.0)
+  >>> ob.__geo_interface__['coordinates']
+  (-106.0, 40.0)
+  >>> geojson.dumps(ob)
+  '{"type": "Point", "coordinates": [-106.0, 40.0]}'
+

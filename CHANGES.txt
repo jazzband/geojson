@@ -1,2 +1,6 @@
 Changes
 =======
+
+- Added respresentations of the default GeoJSON types in feauture.py and
+  geometry.py
+- No longer support input to {dumps,dump} which are not 'mapping' like objects.

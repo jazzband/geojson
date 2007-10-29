@@ -1,0 +1,22 @@
+Tests of the feature protocol embedded in a arbitrary json document
+===================================================================
+
+
+   >>> d = {"blog": {"posts": [{"atom:summary": "post 1", "type": "atom:item", "atom:description": "i love blogging"}, {"atom:summary": "post 2 from CA", "type": "atom:item", "location": {"type": "Point", "coordinates": [-120, 40]}, "atom:description": "geoblogging in California"}], "location": {"type": "Polygon", "coordinates": [[[-121, 39], [-119, 39], [-119, 41], [-121, 41], [-121, 39]]]}}}
+
+  >>> import geojson
+
+  Encoding
+
+  >>> json = geojson.dumps(d)
+  >>> json
+  '{"blog": {"posts": [{"atom:summary": "post 1", "type": "atom:item", "atom:description": "i love blogging"}, {"atom:summary": "post 2 from CA", "type": "atom:item", "location": {"type": "Point", "coordinates": [-120, 40]}, "atom:description": "geoblogging in California"}], "location": {"type": "Polygon", "coordinates": [[[-121, 39], [-119, 39], [-119, 41], [-121, 41], [-121, 39]]]}}}'
+
+  Decoding
+
+  >>> o = geojson.loads(json)
+  >>> type(o)
+  <type 'dict'>
+  >>> o
+  {u'blog': {u'posts': [{u'atom:summary': u'post 1', u'type': u'atom:item', u'atom:description': u'i love blogging'}, {u'atom:summary': u'post 2 from CA', u'type': u'atom:item', u'location': {u'type': u'Point', u'coordinates': [-120, 40]}, u'atom:description': u'geoblogging in California'}], u'location': {u'type': u'Polygon', u'coordinates': [[[-121, 39], [-119, 39], [-119, 41], [-121, 41], [-121, 39]]]}}}
+

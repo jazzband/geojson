@@ -1,0 +1,65 @@
+
+Tests that addional members are allowed in any level of GeoJSON
+===============================================================
+
+A dictionary can satisfy the protocol
+-------------------------------------
+
+  >>> f = {
+  ...     "type": "Feature",
+  ...     "geometry": {
+  ...                  "type": "LineString",
+  ...                  "coordinates": [[100.0, 0.0], [101.0, 1.0]]
+  ...     },
+  ...     "properties": {
+  ...                  "prop0": "value0",
+  ...                  "prop1": "value1"
+  ...     },
+  ...     "foo": "bar"
+  ... }
+
+  >>> import geojson
+
+  Encoding
+
+  >>> json = geojson.dumps(f)
+  
+  >>> json
+  '{"geometry": {"type": "LineString", "coordinates": [[100.0, 0.0], [101.0, 1.0]]}, "foo": "bar", "type": "Feature", "properties": {"prop0": "value0", "prop1": "value1"}, "id": null}'
+
+  Decoding
+
+  >>> o = geojson.loads(json)
+  
+  >>> json
+  '{"geometry": {"type": "LineString", "coordinates": [[100.0, 0.0], [101.0, 1.0]]}, "foo": "bar", "type": "Feature", "properties": {"prop0": "value0", "prop1": "value1"}, "id": null}'
+
+
+Custom objects can be decoded into a json structure containing valid geojson
+----------------------------------------------------------------------------
+
+  >>> class Route(object):
+  ...    def __init__(self, title, description, waypoints):
+  ...        self.title = title
+  ...        self.descrpition = description
+  ...        self.waypoints = waypoints
+  ...    @property
+  ...    def __geo_interface__(self):
+  ...        return dict(type="Feature", geometry=dict(type="LineString", coordinates=self.waypoints),
+  ...                    title=self.title, description=self.descrpition)
+  ...
+
+  >>> r = Route("Snowdonia circular", "A nice bike ride around some mountains", ((1.0, 2.0), (2.0, 3.2)))
+  
+  >>> json = geojson.dumps(r)
+  
+  >>> json
+  '{"description": "A nice bike ride around some mountains", "title": "Snowdonia circular", "geometry": {"type": "LineString", "coordinates": [[1.0, 2.0], [2.0, 3.2]]}, "type": "Feature", "properties": null, "id": null}'
+
+  >>> r = geojson.loads(json)
+  >>> r
+  {u'description': u'A nice bike ride around some mountains', u'title': u'Snowdonia circular', u'geometry': {u'type': u'LineString', u'coordinates': [[1.0, 2.0], [2.0, 3.2000000000000002]]}, u'id': None, u'type': u'Feature', u'properties': None}
+
+
+
+

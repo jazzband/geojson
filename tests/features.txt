@@ -17,18 +17,19 @@ A dictionary can satisfy the protocol
 
   >>> json = geojson.dumps(f)
   >>> json
-  '{"geometry": {"type": "Point", "coordinates": [0, 0]}, "type": "Feature", "id": "1", "properties": {"title": "Dict 1"}}'
+  '{"geometry": {"type": "Point", "coordinates": [0, 0]}, "type": "Feature", "properties": {"title": "Dict 1"}, "id": "1"}'
 
   Decoding
 
   >>> o = geojson.loads(json)
   >>> o
-  {u'geometry': {u'type': u'Point', u'coordinates': [0, 0]}, u'type': u'Feature', u'id': u'1', u'properties': {u'title': u'Dict 1'}}
+  {u'geometry': {u'type': u'Point', u'coordinates': [0, 0]}, u'type': u'Feature', u'properties': {u'title': u'Dict 1'}, u'id': u'1'}
+
 
 feature class
 ---------------------
 
-  >>> from geojson.feature import SimpleWebFeature
+  >>> from geojson.examples import SimpleWebFeature
   >>> feature = SimpleWebFeature(id='1',
   ...             geometry={'type': 'Point', 'coordinates': [0.0, 0.0]},
   ...             title=u'Feature 1', summary=u'The first feature',
@@ -50,15 +51,15 @@ feature class
   Encoding
 
   >>> geojson.dumps(feature)
-  '{"geometry": {"type": "Point", "coordinates": [0.0, 0.0]}, "type": "Feature", "id": "1", "properties": {"summary": "The first feature", "link": "http:\\/\\/example.org\\/features\\/1", "title": "Feature 1"}}'
+  '{"geometry": {"type": "Point", "coordinates": [0.0, 0.0]}, "type": "Feature", "properties": {"summary": "The first feature", "link": "http:\\/\\/example.org\\/features\\/1", "title": "Feature 1"}, "id": "1"}'
 
   Decoding
 
-  >>> factory = geojson.feature.createSimpleWebFeature
+  >>> factory = geojson.examples.createSimpleWebFeature
   >>> json = '{"geometry": {"type": "Point", "coordinates": [0.0, 0.0]}, "id": "1", "properties": {"summary": "The first feature", "link": "http:\\/\\/example.org\\/features\\/1", "title": "Feature 1"}}'
   >>> feature = geojson.loads(json, object_hook=factory)
   >>> type(feature)
-  <class 'geojson.feature.SimpleWebFeature'>
+  <class 'geojson.examples.SimpleWebFeature'>
   >>> feature.id
   '1'
   >>> feature.properties['title']
@@ -87,5 +88,4 @@ Test the geo interface
   >>> ob.__geo_interface__['geometry']
   {'type': 'Point', 'coordinates': (-106.0, 40.0)}
   >>> geojson.dumps(ob)
-  '{"geometry": {"type": "Point", "coordinates": [-106.0, 40.0]}, "type": "Feature", "id": "1", "properties": {"title": "thingy one"}}'
-
+  '{"geometry": {"type": "Point", "coordinates": [-106.0, 40.0]}, "id": "1", "properties": {"title": "thingy one"}}'

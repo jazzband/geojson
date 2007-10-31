@@ -1,0 +1,37 @@
+Test c2c features
+=================
+
+  >>> class Feature(object):
+  ...     def __init__(self, id, geometry, **props):
+  ...         self.id = id
+  ...         self.geometry = geometry
+  ...         self.properties = {}
+  ...         for key, value in props.items():
+  ...             self.properties[key] = value
+  ...
+  ...     @property
+  ...     def __geo_interface__(self):
+  ...         return {
+  ...                'type': 'Feature',
+  ...                'id': self.id,
+  ...                'geometry': self.geometry.__geo_interface__,
+  ...                'properties': self.properties
+  ...                }
+
+  >>> class FeatureCollection(list):
+  ...     @property
+  ...     def __geo_interface__(self):
+  ...         return {
+  ...                'type': 'FeatureCollection',
+  ...                'features': [f.__geo_interface__ for f in iter(self)]
+  ...                }
+
+  >>> from shapely.geometry import Point
+  >>> f = Feature(12, Point(9, 5), foo='bar')
+  >>> import geojson
+  >>> geojson.dumps(f)
+  '{"geometry": {"type": "Point", "coordinates": [9.0, 5.0]}, "type": "Feature", "properties": {"foo": "bar"}, "id": 12}'
+  >>> c = FeatureCollection([f])
+  >>> geojson.dumps(c)
+  '{"type": "FeatureCollection", "features": [{"geometry": {"type": "Point", "coordinates": [9.0, 5.0]}, "type": "Feature", "id": 12, "properties": {"foo": "bar"}}]}'
+

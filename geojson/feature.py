@@ -21,17 +21,16 @@ class Feature(GeoJSON):
     def __init__(self, id=None, geometry=None, properties=None, **extra):
         super(Feature, self).__init__(**extra)
         self.id = id
-        self.geometry = GeoJSON.from_value(geometry, geojson.geometry, 
-                                           default=geojson.geometry.Geometry)
+        self.geometry = self.to_instance(geometry)
         if properties is None:
             properties = {}
-        self.properties = properties
+        self.properties = properties 
 
     @property
     def __geo_interface__(self):
         d = super(Feature, self).__geo_interface__
         d.update(id=self.id,
-                 geometry=self.geometry,
+                 geometry=self.geometry.__geo_interface__,
                  properties=self.properties)
         return d
 

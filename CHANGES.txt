@@ -2,5 +2,12 @@ Changes
 =======
 
 - Added respresentations of the default GeoJSON types in feauture.py and
-  geometry.py
-- No longer support input to {dumps,dump} which are not 'mapping' like objects.
+  geometry.py.
+- input to {dumps,dump} must be 'mapping' like objects or support
+  __geo_interface__.
+- default geometry crs of EPSG 4326 will added if none provided.
+- Can use geojson.<type> to implement a __geo_interface__.
+- Can nest a geometry object anywhere in a json structure (see doctests
+  including_additional_members.txt).
+- Can encode and decode geojson.<type> objects in addition to mappings. 
+  

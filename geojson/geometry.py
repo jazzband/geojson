@@ -11,11 +11,7 @@ class Geometry(GeoJSON):
         super(Geometry, self).__init__(**extra)
         self._decimal_precision = decimal_precision
         self.coordinates = coordinates
-        self.crs = GeoJSON.from_value(crs, geojson.crs, default=lambda:None)
-        #self.check(self.coordinates)
-
-    def check(self, coordinates):
-        pass
+        self.crs = self.to_instance(crs, default=lambda:None, strict=True)
 
     @property
     def __geo_interface__(self):
@@ -27,53 +23,6 @@ class Geometry(GeoJSON):
         return d
 
         
-class Point(Geometry):
-
-    @classmethod
-    def check(cls, coordinates):
-        if len(coordinates) != 2:
-            msg = "Geometry of type %r must be 2 dimensional" % coordinates
-            raise ValueError(msg)
-
-        
-class MultiPoint(Geometry): 
-
-    @classmethod
-    def check(cls, coordinates):
-        for point in coordinates:
-            Point.check(point)
-
-
-class LineString(MultiPoint):  pass
-
-
-class MultiLineString(Geometry): 
-
-    @classmethod
-    def check(cls, coordinates):
-        for linestring in coordinates:
-            LineString.check(linestring)
-
-
-class Polygon(Geometry): 
-
-    @classmethod
-    def check(cls, coordinates):
-        # check it's a ring
-        (first, last) = (coordinates[0], coordinates[-1])
-        if round(last - first, self._decimal_precision) == 0:
-            raise ValueError("Invalid Polygon, must form a ring.")
-        MultiPoint.check(coordinates)
-
-
-class MultiPolygon(Geometry): 
-
-    @classmethod
-    def check(cls, coordinates):
-        for polygon in coordinates:
-            Polygon.check(polygon)
-
-
 class GeometryCollection(GeoJSON):
 
     """A collection of (WGS84) GIS geometries."""
@@ -89,4 +38,18 @@ class GeometryCollection(GeoJSON):
         d.update(geometries=geometries)
         return d
 
-        
+  
+# Marker classes.
+
+class Point(Geometry): pass
+  
+class MultiPoint(Geometry): pass
+  
+class LineString(MultiPoint):  pass
+
+class MultiLineString(Geometry): pass 
+
+class Polygon(Geometry): pass
+
+class MultiPolygon(Geometry): pass
+          

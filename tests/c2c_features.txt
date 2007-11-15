@@ -14,7 +14,7 @@ Test c2c features
   ...         return {
   ...                'type': 'Feature',
   ...                'id': self.id,
-  ...                'geometry': self.geometry.__geo_interface__,
+  ...                'geometry': self.geometry,
   ...                'properties': self.properties
   ...                }
 
@@ -23,7 +23,7 @@ Test c2c features
   ...     def __geo_interface__(self):
   ...         return {
   ...                'type': 'FeatureCollection',
-  ...                'features': [f.__geo_interface__ for f in iter(self)]
+  ...                'features': list(f for f in self)
   ...                }
 
   >>> from shapely.geometry import Point
@@ -33,5 +33,4 @@ Test c2c features
   '{"geometry": {"type": "Point", "coordinates": [9.0, 5.0]}, "type": "Feature", "properties": {"foo": "bar"}, "id": 12}'
   >>> c = FeatureCollection([f])
   >>> geojson.dumps(c)
-  '{"type": "FeatureCollection", "features": [{"geometry": {"type": "Point", "coordinates": [9.0, 5.0]}, "type": "Feature", "id": 12, "properties": {"foo": "bar"}}]}'
-
+  '{"type": "FeatureCollection", "features": [{"geometry": {"type": "Point", "coordinates": [9.0, 5.0]}, "type": "Feature", "properties": {"foo": "bar"}, "id": 12}]}'

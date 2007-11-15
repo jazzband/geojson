@@ -6,120 +6,26 @@
 # Contact: Sean Gillies, sgillies@frii.com
 # ============================================================================
 
+#from __future__ import absolute_import
 import operator
-
 import simplejson
 
-from geojson.base import GeoJSON
-from geojson import crs
-from geojson import geometry
-from geojson import feature 
-
-
-GEO_INTERFACE_MARKER = "__geo_interface__"
-_geojson_factories = dict(Point=geometry.Point, 
-                          MultiPoint=geometry.MultiPoint, 
-                          LineString=geometry.LineString, 
-                          MultiLineString=geometry.MultiLineString,
-                          Polygon=geometry.Polygon, 
-                          MultiPolygon=geometry.MultiPolygon,
-                          GeometryCollection=geometry.GeometryCollection,
-                          Feature=feature.Feature, 
-                          FeatureCollection=feature.FeatureCollection,
-                          EPSG=crs.EPSG)
-                  
-
-def is_mapping(ob):
-    return hasattr(ob, '__getitem__')
-
-
-def to_mapping(ob):
-    if hasattr(ob, GEO_INTERFACE_MARKER):
-        candidate = ob.__geo_interface__
-    else:
-        candidate = ob
-    if not is_mapping(candidate):
-        msg = "Expecting something that has %r or a mapping, got %r" 
-        msg %= (GEO_INTERFACE_MARKER, ob)
-        raise ValueError(msg) 
-    return Mapping(candidate)
-
-
-def to_geojson_dict(mapping):
-    """Convert a mapping to GeoJSON.
-
-    The resulting value will have GeoJSON's defaults applied.
-    """
-    d = dict(mapping)
-    type_ = d.pop("type", None)
-    if type_:
-        geojson_factory = _geojson_factories.get(type_, GeoJSON)
-        d = geojson_factory(**d).__geo_interface__
-    return d
-
-
-def to_geojson_object(geojson_dict):
-    """Encode a GeoJSON dict into an GeoJSON object.
-
-    Assumes the caller knows that the dict should satisfy a GeoJSON type.
-    """
-    # ensure keys are strings
-    d = dict((str(k), geojson_dict[k]) for k in geojson_dict)
-    try:
-        type_ = d.pop("type")
-        geojson_factory = _geojson_factories.get(type_)
-        if geojson_factory is None:
-            raise ValueError("Got something that's None from mapping for type %r" % type_)
-        return geojson_factory(**d)
-    except KeyError, ke:
-        if d:
-            return d
-        raise ValueError("dictionary is not valid geojson dictionary %r" % ke)
-
-
-class Mapping(object):
-    
-    """Define what a ``mapping`` is to geojson.
-
-    Until py3k, where we have abstract base classes, this will have to do.
-    """
-
-    def __init__(self, ob):
-        super(Mapping, self).__init__()
-        self._ob = ob
-
-    def __contains__(self, name):
-        return bool(self.get(name))
-
-    def __getitem__(self, key):
-        return self._ob[key]
-
-    def __iter__(self):
-        return iter(self._ob)
-
-    def __len__(self):
-        return len(self._ob)
-
-    def keys(self):
-        return list(self._ob)
-
-    def get(self, key, default=None):
-        try:
-            value = self._ob[key]
-        except KeyError:
-            value = default
-        return value
-
-    def update(self, other):
-        for key in other:
-            if not key in self:
-                self[key] = other[key]
-
+import geojson
+from geojson.mapping import Mapping, to_mapping
 
 class PyGFPEncoder(simplejson.JSONEncoder):
 
     def default(self, obj):
-        return to_geojson_dict(obj)
+        if isinstance(obj, Mapping):
+            mapping = obj
+        else:
+            mapping = to_mapping(obj)
+        d = dict(mapping)
+        type_str = d.pop("type", None)
+        if type_str:
+            geojson_factory = getattr(geojson, type_str, geojson.GeoJSON)
+            d = geojson_factory(**d).__geo_interface__
+        return d
 
 
 # Wrap the functions from simplejson, providing encoder, decoders, and

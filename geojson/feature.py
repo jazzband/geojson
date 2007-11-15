@@ -12,7 +12,7 @@ interface.
 """
 
 from geojson.base import GeoJSON
-
+import geojson.geometry 
 
 class Feature(GeoJSON):
 
@@ -21,7 +21,10 @@ class Feature(GeoJSON):
     def __init__(self, id=None, geometry=None, properties=None, **extra):
         super(Feature, self).__init__(**extra)
         self.id = id
-        self.geometry = geometry
+        self.geometry = GeoJSON.from_value(geometry, geojson.geometry, 
+                                           default=geojson.geometry.Geometry)
+        if properties is None:
+            properties = {}
         self.properties = properties
 
     @property

@@ -28,28 +28,25 @@ A dictionary can satisfy the protocol
 geometry class
 ---------------------
 
-  >>> ls = geojson.geometry.LineString(((52.1, -34.131), (65.231, -34.234)))
+  >>> ls = geojson.geometry.LineString(((52.1, -34.131), (65.231, -34.234)), crs=geojson.crs.EPSG())
 
   >>> ls.__geo_interface__
-  {'type': 'LineString', 'coordinates': ((52.100000000000001, -34.131), (65.230999999999995, -34.234000000000002))}
-
-  It satisfies the geometry protocol
+  {'crs': {'type': 'EPSG', 'properties': {'code': 4326}}, 'type': 'LineString', 'coordinates': ((52.100000000000001, -34.131), (65.230999999999995, -34.234000000000002))}
 
   >>> ls.type
   'LineString'
   >>> ls.coordinates
   ((52.100000000000001, -34.131), (65.230999999999995, -34.234000000000002))
 
-
   Encoding
 
   >>> json = geojson.dumps(ls)
   >>> json
-  '{"type": "LineString", "coordinates": [[52.1, -34.131], [65.231, -34.234]]}'
+  '{"crs": {"type": "EPSG", "properties": {"code": 4326}}, "type": "LineString", "coordinates": [[52.1, -34.131], [65.231, -34.234]]}'
 
   Decoding
   >>> geojson.loads(json)
-  {u'type': u'LineString', u'coordinates': [[52.100000000000001, -34.131], [65.230999999999995, -34.234000000000002]]}
+  {u'crs': {u'type': u'EPSG', u'properties': {u'code': 4326}}, u'type': u'LineString', u'coordinates': [[52.100000000000001, -34.131], [65.230999999999995, -34.234000000000002]]}
  
   >>> factory = geojson.encoding.to_geojson_object
   >>> geom = geojson.loads(json, object_hook=factory)
@@ -59,6 +56,45 @@ geometry class
   'LineString'
   >>> geom.coordinates
   [[52.100000000000001, -34.131], [65.230999999999995, -34.234000000000002]]
+ 
+
+  Test custom crs 
+ 
+  >>> from geojson.crs import EPSG
+
+  >>> coords = ((-1918145.0108183471, -4098018.9166399641), (-680004.67204747663, -3864394.3196185972))
+
+  >>> ls = geojson.geometry.LineString(coords, crs=EPSG(properties=dict(code=2423)))
+
+  >>> ls.__geo_interface__
+  {'crs': {'type': 'EPSG', 'properties': {'code': 2423}}, 'type': 'LineString', 'coordinates': ((-1918145.0108183471, -4098018.9166399641), (-680004.67204747663, -3864394.3196185972))}
+
+  It satisfies the geometry protocol
+
+
+  >>> ls.type
+  'LineString'
+  >>> ls.coordinates
+  ((-1918145.0108183471, -4098018.9166399641), (-680004.67204747663, -3864394.3196185972))
+
+  Encoding
+
+  >>> json = geojson.dumps(ls)
+  >>> json
+  '{"crs": {"type": "EPSG", "properties": {"code": 2423}}, "type": "LineString", "coordinates": [[-1918145.01082, -4098018.91664], [-680004.672047, -3864394.31962]]}'
+
+  Decoding
+  >>> geojson.loads(json)
+  {u'crs': {u'type': u'EPSG', u'properties': {u'code': 2423}}, u'type': u'LineString', u'coordinates': [[-1918145.01082, -4098018.91664], [-680004.67204700003, -3864394.3196200002]]}
+ 
+  >>> factory = geojson.encoding.to_geojson_object
+  >>> geom = geojson.loads(json, object_hook=factory)
+  >>> type(geom)
+  <class 'geojson.geometry.LineString'>
+  >>> geom.type
+  'LineString'
+  >>> geom.coordinates
+  [[-1918145.01082, -4098018.91664], [-680004.67204700003, -3864394.3196200002]]
  
 
 Test the geo interface

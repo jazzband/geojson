@@ -11,6 +11,7 @@ import operator
 import simplejson
 
 from geojson.base import GeoJSON
+from geojson import crs
 from geojson import geometry
 from geojson import feature 
 
@@ -24,19 +25,12 @@ _geojson_factories = dict(Point=geometry.Point,
                           MultiPolygon=geometry.MultiPolygon,
                           GeometryCollection=geometry.GeometryCollection,
                           Feature=feature.Feature, 
-                          FeatureCollection=feature.FeatureCollection)
+                          FeatureCollection=feature.FeatureCollection,
+                          EPSG=crs.EPSG)
                   
 
 def is_mapping(ob):
-    #mapping_attrs = ("__getitem__", "__iter__", "__len__", "keys")
-    #ag = operator.attrgetter(*mapping_attrs)
-    #try: 
-    #    ag(ob)
-    #except AttributeError:
-    #    return False
-    if not hasattr(ob, '__getitem__'):
-        return False
-    return True
+    return hasattr(ob, '__getitem__')
 
 
 def to_mapping(ob):
@@ -72,10 +66,15 @@ def to_geojson_object(geojson_dict):
     # ensure keys are strings
     d = dict((str(k), geojson_dict[k]) for k in geojson_dict)
     try:
-        geojson_factory = _geojson_factories.get(d.pop("type"))
+        type_ = d.pop("type")
+        geojson_factory = _geojson_factories.get(type_)
+        if geojson_factory is None:
+            raise ValueError("Got something that's None from mapping for type %r" % type_)
         return geojson_factory(**d)
-    except KeyError:
-        raise ValueError("dictionary is not valid geojson dictionary")
+    except KeyError, ke:
+        if d:
+            return d
+        raise ValueError("dictionary is not valid geojson dictionary %r" % ke)
 
 
 class Mapping(object):

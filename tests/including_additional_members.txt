@@ -54,12 +54,9 @@ Custom objects can be decoded into a json structure containing valid geojson
   >>> json = geojson.dumps(r)
   
   >>> json
-  '{"description": "A nice bike ride around some mountains", "title": "Snowdonia circular", "geometry": {"type": "LineString", "coordinates": [[1.0, 2.0], [2.0, 3.2]]}, "type": "Feature", "properties": null, "id": null}'
+  '{"description": "A nice bike ride around some mountains", "title": "Snowdonia circular", "geometry": {"type": "LineString", "coordinates": [[1.0, 2.0], [2.0, 3.2]]}, "type": "Feature", "properties": {}, "id": null}'
 
   >>> r = geojson.loads(json)
   >>> r
-  {u'description': u'A nice bike ride around some mountains', u'title': u'Snowdonia circular', u'geometry': {u'type': u'LineString', u'coordinates': [[1.0, 2.0], [2.0, 3.2000000000000002]]}, u'id': None, u'type': u'Feature', u'properties': None}
-
-
-
+  {u'description': u'A nice bike ride around some mountains', u'title': u'Snowdonia circular', u'geometry': {u'type': u'LineString', u'coordinates': [[1.0, 2.0], [2.0, 3.2000000000000002]]}, u'id': None, u'type': u'Feature', u'properties': {}}
 

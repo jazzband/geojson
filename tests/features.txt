@@ -17,13 +17,13 @@ A dictionary can satisfy the protocol
 
   >>> json = geojson.dumps(f)
   >>> json
-  '{"geometry": {"type": "Point", "coordinates": [0, 0]}, "type": "Feature", "properties": {"title": "Dict 1"}, "id": "1"}'
+  '{"geometry": {"crs": {"type": "EPSG", "properties": {"code": 4326}}, "type": "Point", "coordinates": [0, 0]}, "type": "Feature", "properties": {"title": "Dict 1"}, "id": "1"}'
 
   Decoding
 
   >>> o = geojson.loads(json)
   >>> o
-  {u'geometry': {u'type': u'Point', u'coordinates': [0, 0]}, u'type': u'Feature', u'properties': {u'title': u'Dict 1'}, u'id': u'1'}
+  {u'geometry': {u'crs': {u'type': u'EPSG', u'properties': {u'code': 4326}}, u'type': u'Point', u'coordinates': [0, 0]}, u'type': u'Feature', u'properties': {u'title': u'Dict 1'}, u'id': u'1'}
 
 
 feature class
@@ -51,7 +51,7 @@ feature class
   Encoding
 
   >>> geojson.dumps(feature)
-  '{"geometry": {"type": "Point", "coordinates": [0.0, 0.0]}, "type": "Feature", "properties": {"summary": "The first feature", "link": "http:\\/\\/example.org\\/features\\/1", "title": "Feature 1"}, "id": "1"}'
+  '{"geometry": {"crs": {"type": "EPSG", "properties": {"code": 4326}}, "type": "Point", "coordinates": [0.0, 0.0]}, "type": "Feature", "properties": {"summary": "The first feature", "link": "http:\\/\\/example.org\\/features\\/1", "title": "Feature 1"}, "id": "1"}'
 
   Decoding
 

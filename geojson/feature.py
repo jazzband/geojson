@@ -21,7 +21,7 @@ class Feature(GeoJSON):
     def __init__(self, id=None, geometry=None, properties=None, **extra):
         super(Feature, self).__init__(**extra)
         self.id = id
-        self.geometry = self.to_instance(geometry)
+        self.geometry = self.to_instance(geometry, strict=True)
         if properties is None:
             properties = {}
         self.properties = properties 

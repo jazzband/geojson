@@ -6,8 +6,6 @@
 # Contact: Sean Gillies, sgillies@frii.com
 # ============================================================================
 
-#from __future__ import absolute_import
-import operator
 import simplejson
 
 import geojson

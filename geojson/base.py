@@ -2,6 +2,7 @@
 from geojson.mapping import is_mapping, to_mapping
 import geojson
 
+
 class GeoJSON(object):
 
     def __init__(self, **extra):
@@ -20,6 +21,8 @@ class GeoJSON(object):
 
     def __iter__(self):        
         def iter_geo_interface(ob):
+            if not hasattr(ob, "__geo_interface__"):
+                return
             for (key, value) in ob.__geo_interface__.items():
                 if hasattr(value, "__geo_interface__"):
                     key, value = iter_geo_interface(value)
@@ -49,6 +52,8 @@ class GeoJSON(object):
             try:
                 type_ = d.pop("type")
                 geojson_factory = getattr(geojson, type_)
+                if not issubclass(geojson_factory, GeoJSON):
+                    raise TypeError("Not a valid GeoJSON type: %r (geojson_factory: %r, cls: %r)" % (type_, geojson_factory, cls))
                 instance = geojson_factory(**d)
             except (AttributeError, KeyError), invalid:
                 if not strict:
@@ -59,24 +64,4 @@ class GeoJSON(object):
                     raise ValueError(msg)
         return instance
 
-#    @classmethod
-#    def from_value(cls, value, namespace, base=None, default=None):
-#        if not base:
-#            base = cls
-#        if isinstance(value, base):
-#            return value
-#        if value:
-#            type_ = value.pop("type", None)
-#            if type_:
-#                candidate = getattr(namespace, type_, None)
-#                if candidate:
-#                    if issubclass(candidate, base):
-#                        d = dict((str(k), value[k]) for k in value)
-#                        return candidate(**d)
-#                    else:
-#                        d["type"] = type_
-#                        raise ValueError("%r is not a valid geometry type" % candidate)
-#        if not default:
-#            default = base
-#        return default()
-#
+

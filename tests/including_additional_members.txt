@@ -25,14 +25,14 @@ A dictionary can satisfy the protocol
   >>> json = geojson.dumps(f)
   
   >>> json
-  '{"geometry": {"type": "LineString", "coordinates": [[100.0, 0.0], [101.0, 1.0]]}, "foo": "bar", "type": "Feature", "properties": {"prop0": "value0", "prop1": "value1"}, "id": null}'
+  '{"geometry": {"crs": {"type": "EPSG", "properties": {"code": 4326}}, "type": "LineString", "coordinates": [[100.0, 0.0], [101.0, 1.0]]}, "foo": "bar", "type": "Feature", "properties": {"prop0": "value0", "prop1": "value1"}, "id": null}'
 
   Decoding
 
   >>> o = geojson.loads(json)
   
   >>> json
-  '{"geometry": {"type": "LineString", "coordinates": [[100.0, 0.0], [101.0, 1.0]]}, "foo": "bar", "type": "Feature", "properties": {"prop0": "value0", "prop1": "value1"}, "id": null}'
+  '{"geometry": {"crs": {"type": "EPSG", "properties": {"code": 4326}}, "type": "LineString", "coordinates": [[100.0, 0.0], [101.0, 1.0]]}, "foo": "bar", "type": "Feature", "properties": {"prop0": "value0", "prop1": "value1"}, "id": null}'
 
 
 Custom objects can be decoded into a json structure containing valid geojson
@@ -54,9 +54,9 @@ Custom objects can be decoded into a json structure containing valid geojson
   >>> json = geojson.dumps(r)
   
   >>> json
-  '{"description": "A nice bike ride around some mountains", "title": "Snowdonia circular", "geometry": {"type": "LineString", "coordinates": [[1.0, 2.0], [2.0, 3.2]]}, "type": "Feature", "properties": {}, "id": null}'
+  '{"description": "A nice bike ride around some mountains", "title": "Snowdonia circular", "geometry": {"crs": {"type": "EPSG", "properties": {"code": 4326}}, "type": "LineString", "coordinates": [[1.0, 2.0], [2.0, 3.2]]}, "type": "Feature", "properties": {}, "id": null}'
 
   >>> r = geojson.loads(json)
   >>> r
-  {u'description': u'A nice bike ride around some mountains', u'title': u'Snowdonia circular', u'geometry': {u'type': u'LineString', u'coordinates': [[1.0, 2.0], [2.0, 3.2000000000000002]]}, u'id': None, u'type': u'Feature', u'properties': {}}
+  {u'description': u'A nice bike ride around some mountains', u'title': u'Snowdonia circular', u'geometry': {u'crs': {u'type': u'EPSG', u'properties': {u'code': 4326}}, u'type': u'LineString', u'coordinates': [[1.0, 2.0], [2.0, 3.2000000000000002]]}, u'id': None, u'type': u'Feature', u'properties': {}}
 

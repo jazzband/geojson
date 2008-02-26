@@ -53,10 +53,10 @@ Custom objects can be decoded into a json structure containing valid geojson
   
   >>> json = geojson.dumps(r)
   
-  >>> json
-  '{"description": "A nice bike ride around some mountains", "title": "Snowdonia circular", "geometry": {"crs": {"type": "EPSG", "properties": {"code": 4326}}, "type": "LineString", "coordinates": [[1.0, 2.0], [2.0, 3.2]]}, "type": "Feature", "properties": {}, "id": null}'
+  >>> json  # doctest: +ELLIPSIS
+  '{"description": "A nice bike ride around some mountains", "title": "Snowdonia circular", "geometry": {"crs": {"type": "EPSG", "properties": {"code": 4326}}, "type": "LineString", "coordinates": [[1..., 2...], [2..., 3...]]}, "type": "Feature", "properties": {}, "id": null}'
 
-  >>> r = geojson.loads(json)
-  >>> r
-  {u'description': u'A nice bike ride around some mountains', u'title': u'Snowdonia circular', u'geometry': {u'crs': {u'type': u'EPSG', u'properties': {u'code': 4326}}, u'type': u'LineString', u'coordinates': [[1.0, 2.0], [2.0, 3.2000000000000002]]}, u'id': None, u'type': u'Feature', u'properties': {}}
+  >>> r = geojson.loads(json) 
+  >>> r # doctest: +ELLIPSIS
+  {u'description': u'A nice bike ride around some mountains', u'title': u'Snowdonia circular', u'geometry': {u'crs': {u'type': u'EPSG', u'properties': {u'code': 4326}}, u'type': u'LineString', u'coordinates': [[1..., 2...], [2..., 3...]]}, u'id': None, u'type': u'Feature', u'properties': {}}
 

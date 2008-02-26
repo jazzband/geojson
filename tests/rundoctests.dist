@@ -1,3 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 #export PYTHONPATH="/home/sean/Projects/GeoJSON/dev-packages"
-python runalldoctests.py -v
+
+for python_version in python python2.4 python2.5; do
+    py_exec_path=$(which "$python_version");
+    if [ -e "$py_exec_path" ] &&  [ -x "$py_exec_path" ]; then
+	echo "Testing under $python_version ($py_exec_path)" 
+ 	"$python_version" runalldoctests.py -v 
+    fi
+done

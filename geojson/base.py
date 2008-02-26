@@ -53,7 +53,10 @@ class GeoJSON(object):
                 type_ = d.pop("type")
                 geojson_factory = getattr(geojson, type_)
                 if not issubclass(geojson_factory, GeoJSON):
-                    raise TypeError("Not a valid GeoJSON type: %r (geojson_factory: %r, cls: %r)" % (type_, geojson_factory, cls))
+                    raise TypeError("""\
+                    Not a valid GeoJSON type:
+                    %r (geojson_factory: %r, cls: %r)
+                    """ % (type_, geojson_factory, cls))
                 instance = geojson_factory(**d)
             except (AttributeError, KeyError), invalid:
                 if not strict:

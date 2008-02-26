@@ -22,9 +22,7 @@ class Feature(GeoJSON):
         super(Feature, self).__init__(**extra)
         self.id = id
         self.geometry = self.to_instance(geometry, strict=True)
-        if properties is None:
-            properties = {}
-        self.properties = properties 
+        self.properties = properties or {}
 
     @property
     def __geo_interface__(self):

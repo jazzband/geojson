@@ -7,7 +7,7 @@ class CoordinateReferenceSystem(GeoJSON):
 
     def __init__(self, properties=None, **extra):
         super(CoordinateReferenceSystem, self).__init__(**extra)
-        self.properties = properties if properties else {}
+        self.properties = properties or {}
 
     @property
     def __geo_interface__(self):
@@ -20,4 +20,4 @@ class EPSG(CoordinateReferenceSystem):
 
     def __init__(self, properties=None, **extra):
         super(EPSG, self).__init__(**extra)
-        self.properties = properties if properties else {"code": 4326}
+        self.properties = properties or {"code": 4326}

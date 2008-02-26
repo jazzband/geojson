@@ -1,4 +1,3 @@
-
 from geojson.base import GeoJSON
 import geojson.crs 
 
@@ -19,6 +18,7 @@ class Geometry(GeoJSON):
         crs = self.crs.__geo_interface__
         d.update(coordinates=self.coordinates, crs=crs)
         return d
+
 
 class GeometryCollection(GeoJSON):
 
@@ -58,4 +58,3 @@ class Polygon(Geometry): pass
 
 class MultiPolygon(Geometry): pass
 
-          

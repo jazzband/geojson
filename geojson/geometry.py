@@ -6,9 +6,8 @@ class Geometry(GeoJSON):
 
     """A (WGS84) GIS geometry."""
 
-    def __init__(self, coordinates=None, crs=None, decimal_precision=7, **extra):
+    def __init__(self, coordinates=None, crs=None, **extra):
         super(Geometry, self).__init__(**extra)
-        self._decimal_precision = decimal_precision
         self.coordinates = coordinates or []
         self.crs = self.to_instance(crs, default=geojson.crs.EPSG, strict=True)
                     

@@ -6,10 +6,10 @@ class Geometry(GeoJSON):
 
     """A (WGS84) GIS geometry."""
 
-    def __init__(self, coordinates=(), crs=None, decimal_precision=7, **extra):
+    def __init__(self, coordinates=None, crs=None, decimal_precision=7, **extra):
         super(Geometry, self).__init__(**extra)
         self._decimal_precision = decimal_precision
-        self.coordinates = coordinates
+        self.coordinates = coordinates or []
         self.crs = self.to_instance(crs, default=geojson.crs.EPSG, strict=True)
                     
     @property
@@ -24,18 +24,16 @@ class GeometryCollection(GeoJSON):
 
     """A collection of (WGS84) GIS geometries."""
 
-    def __init__(self, geometries, **extra):
+    def __init__(self, geometries=None, **extra):
         super(GeometryCollection, self).__init__(**extra)
-        self.geometries = geometries
-
+        self.geometries = geometries or []
+            
     @property
     def __geo_interface__(self):
         d = super(GeometryCollection, self).__geo_interface__
-        geometries = list(g.__geo_interface__ for g in self.geometries)
+        geometries = list(self.to_instance(geom, strict=True)
+                          for geom in self.geometries)
         d.update(geometries=geometries)
-        if self.crs:
-            crs = self.crs.__geo_interface__
-            d.update(crs=crs)
         return d
 
 

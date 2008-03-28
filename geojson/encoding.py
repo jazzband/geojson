@@ -7,9 +7,10 @@
 # ============================================================================
 
 import simplejson
-
 import geojson
+import geojson.factory
 from geojson.mapping import Mapping, to_mapping
+
 
 class PyGFPEncoder(simplejson.JSONEncoder):
 
@@ -21,7 +22,7 @@ class PyGFPEncoder(simplejson.JSONEncoder):
         d = dict(mapping)
         type_str = d.pop("type", None)
         if type_str:
-            geojson_factory = getattr(geojson, type_str, geojson.GeoJSON)
+            geojson_factory = getattr(geojson.factory, type_str, geojson.factory.GeoJSON)
             d = geojson_factory(**d).__geo_interface__
         return d
 

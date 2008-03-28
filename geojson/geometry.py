@@ -9,13 +9,16 @@ class Geometry(GeoJSON):
     def __init__(self, coordinates=None, crs=None, **extra):
         super(Geometry, self).__init__(**extra)
         self.coordinates = coordinates or []
-        self.crs = self.to_instance(crs, default=geojson.crs.EPSG, strict=True)
+        self.crs = self.to_instance(crs, default=geojson.crs.Default, strict=True)
                     
     @property
     def __geo_interface__(self):
         d = super(Geometry, self).__geo_interface__
-        crs = self.crs.__geo_interface__
-        d.update(coordinates=self.coordinates, crs=crs)
+        crs = getattr(self.crs, '__geo_interface__', None)
+        if crs is None:
+            d.update(coordinates=self.coordinates)
+        else:
+            d.update(coordinates=self.coordinates, crs=crs)
         return d
 
 

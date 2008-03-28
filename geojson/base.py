@@ -1,6 +1,7 @@
 
 from geojson.mapping import is_mapping, to_mapping
 import geojson
+import geojson.factory
 
 
 class GeoJSON(object):
@@ -51,7 +52,7 @@ class GeoJSON(object):
             d = dict((str(k), mapping[k]) for k in mapping)
             try:
                 type_ = d.pop("type")
-                geojson_factory = getattr(geojson, type_)
+                geojson_factory = getattr(geojson.factory, type_)
                 if not issubclass(geojson_factory, GeoJSON):
                     raise TypeError("""\
                     Not a valid GeoJSON type:

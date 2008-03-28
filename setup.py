@@ -17,6 +17,7 @@ setup(name          = 'GeoJSON',
       long_description = readme_text,
       packages          = ['geojson'],
       install_requires  = ['simplejson', 'setuptools'],
+      test_suite    = 'tests.test_suite',
       classifiers   = [
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',

@@ -15,10 +15,9 @@ class Geometry(GeoJSON):
     def __geo_interface__(self):
         d = super(Geometry, self).__geo_interface__
         crs = getattr(self.crs, '__geo_interface__', None)
-        if crs is None:
-            d.update(coordinates=self.coordinates)
-        else:
-            d.update(coordinates=self.coordinates, crs=crs)
+        d.update(coordinates=self.coordinates) 
+        if crs is not None:
+            d.update(crs=crs)
         return d
 
 

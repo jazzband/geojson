@@ -19,17 +19,15 @@ class CoordinateReferenceSystem(GeoJSON):
 class Named(CoordinateReferenceSystem):
 
     def __init__(self, properties=None, **extra):
-        super(Named, self).__init__(**extra)
-        self.type = 'name'
-        self.properties = properties
+        super(Named, self).__init__(properties=properties, **extra)
+        self.type = "name"
 
 
 class Linked(CoordinateReferenceSystem):
     
     def __init__(self, properties=None, **extra):
-        super(Linked, self).__init__(**extra)
-        self.type = 'link'
-        self.properties = properties
+        super(Linked, self).__init__(properties=properties, **extra)
+        self.type = "link"
 
 
 class Default(object):

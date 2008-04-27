@@ -1,31 +1,31 @@
 
 from setuptools import setup
 
-# Get text from README.txt
-readme_text = file('README.txt', 'rb').read()
+readme_text = open("README.txt", "rb").read()
+version = open("VERSION.txt", "rb").read()
 
-setup(name          = 'GeoJSON',
-      version       = '1.0a4',
-      description   = 'Encoder/decoder for simple GIS features',
-      license       = 'BSD',
-      keywords      = 'gis geography json',
-      author        = 'Sean Gillies',
-      author_email  = 'sgillies@frii.com',
-      maintainer        = 'Sean Gillies',
-      maintainer_email  = 'sgillies@frii.com',
-      url           = 'http://trac.gispython.org/projects/PCL/wiki/GeoJSON',
+setup(name          = "GeoJSON",
+      version       = version,
+      description   = "Encoder/decoder for simple GIS features",
+      license       = "BSD",
+      keywords      = "gis geography json",
+      author        = "Sean Gillies",
+      author_email  = "sgillies@frii.com",
+      maintainer        = "Sean Gillies",
+      maintainer_email  = "sgillies@frii.com",
+      url           = "http://trac.gispython.org/projects/PCL/wiki/GeoJSON",
       long_description = readme_text,
-      packages          = ['geojson'],
-      install_requires  = ['simplejson', 'setuptools'],
-      test_suite    = 'tests.test_suite',
+      packages          = ["geojson"],
+      install_requires  = ["simplejson", "setuptools"],
+      test_suite    = "tests.test_suite",
       classifiers   = [
-        'Development Status :: 3 - Alpha',
-        'Intended Audience :: Developers',
-        'Intended Audience :: Science/Research',
-        'License :: OSI Approved :: BSD License',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Topic :: Scientific/Engineering :: GIS',
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: BSD License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Topic :: Scientific/Engineering :: GIS",
         ],
 )
 

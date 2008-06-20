@@ -1,14 +1,14 @@
 Changes
 =======
 
-1.0a4 (Sun Apr 27 2008)
+1.0b1 (2008-MM-DD)
 ------------------
+- Rename encoding module to codec.
 
+1.0a4 (2008-04-27)
+------------------
 - Get in step with GeoJSON draft version 6.
-
 - Made all code work with Python 2.4.3, 2.5.1, will test with all variations.
   (see tests/rundoctests.dist)
-
 - Made tests use ELLIPSIS to avoid output transmogification due to floating
   point representation. 
-  

@@ -1,10 +1,9 @@
-
 from setuptools import setup
 
 readme_text = open("README.txt", "rb").read()
 version = open("VERSION.txt", "rb").read()
 
-setup(name          = "GeoJSON",
+setup(name          = "geojson",
       version       = version,
       description   = "Encoder/decoder for simple GIS features",
       license       = "BSD",
@@ -19,7 +18,7 @@ setup(name          = "GeoJSON",
       install_requires  = ["simplejson", "setuptools"],
       test_suite    = "tests.test_suite",
       classifiers   = [
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
         "License :: OSI Approved :: BSD License",
@@ -28,4 +27,3 @@ setup(name          = "GeoJSON",
         "Topic :: Scientific/Engineering :: GIS",
         ],
 )
-

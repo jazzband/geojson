@@ -1,4 +1,4 @@
-from encoding import dump, dumps, load, loads
+from codec import dump, dumps, load, loads
 from geometry import Point, LineString, Polygon
 from geometry import MultiLineString, MultiPoint, MultiPolygon
 from geometry import GeometryCollection

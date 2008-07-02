@@ -1,7 +1,7 @@
 Changes
 =======
 
-1.0b1 (2008-MM-DD)
+1.0b1 (2008-07-02)
 ------------------
 - Rename encoding module to codec.
 

@@ -1,7 +1,7 @@
 from setuptools import setup
 
 readme_text = open("README.txt", "rb").read()
-version = open("VERSION.txt", "rb").read()
+version = open("VERSION.txt", "rb").read().strip()
 
 setup(name          = "geojson",
       version       = version,

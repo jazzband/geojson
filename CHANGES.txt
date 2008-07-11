@@ -1,6 +1,10 @@
 Changes
 =======
 
+1.0rc1 (2008-07-11)
+-------------------
+- Release candidate.
+
 1.0b1 (2008-07-02)
 ------------------
 - Rename encoding module to codec.

@@ -1,6 +1,11 @@
 Changes
 =======
 
+1.0rc2 (2008-07-14)
+-------------------
+- 2nd release candidate.
+- Rename PyGFPEncoder to GeoJSONEncoder and expose it from the geojson module.
+
 1.0rc1 (2008-07-11)
 -------------------
 - Release candidate.

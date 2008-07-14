@@ -12,7 +12,7 @@ import geojson.factory
 from geojson.mapping import Mapping, to_mapping
 
 
-class PyGFPEncoder(simplejson.JSONEncoder):
+class GeoJSONEncoder(simplejson.JSONEncoder):
 
     def default(self, obj):
         if isinstance(obj, Mapping):
@@ -30,11 +30,11 @@ class PyGFPEncoder(simplejson.JSONEncoder):
 # Wrap the functions from simplejson, providing encoder, decoders, and
 # object creation hooks
 
-def dump(obj, fp, cls=PyGFPEncoder, **kwargs):
+def dump(obj, fp, cls=GeoJSONEncoder, **kwargs):
     return simplejson.dump(to_mapping(obj), fp, cls=cls, **kwargs)
 
 
-def dumps(obj, cls=PyGFPEncoder, **kwargs):
+def dumps(obj, cls=GeoJSONEncoder, **kwargs):
     return simplejson.dumps(to_mapping(obj), cls=cls, **kwargs)
 
 
@@ -45,3 +45,5 @@ def load(fp, cls=simplejson.JSONDecoder, object_hook=None, **kwargs):
 def loads(s, cls=simplejson.JSONDecoder, object_hook=None, **kwargs):
     return simplejson.loads(s, cls=cls, object_hook=object_hook, **kwargs)
 
+# Backwards compatibility
+PyGFPEncoder = GeoJSONEncoder

@@ -57,3 +57,7 @@ class Polygon(Geometry): pass
 
 class MultiPolygon(Geometry): pass
 
+
+class Default(object): 
+    """GeoJSON default.""" 
+    pass

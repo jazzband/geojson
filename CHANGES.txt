@@ -1,6 +1,10 @@
 Changes
 =======
 
+1.0.1 (2008-12-19)
+------------------
+- Handle features with null geometries (#174).
+
 1.0 (2008-08-01)
 ----------------
 - Final 1.0 release.

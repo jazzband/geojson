@@ -1,6 +1,7 @@
 Encoding objects with __geo_interface__
 ------------------------------------------
   >>> import geojson
+  >>> dumps = lambda **kwargs: geojson.dumps(sort_keys=True, **kwargs)
 
   >>> class LatLon(object):
   ...     
@@ -17,9 +18,9 @@ Encoding objects with __geo_interface__
   
   Can be encoded into geojson geometry:
 
-  >>> json = geojson.dumps(lat_lon)
+  >>> json = geojson.dumps(lat_lon, sort_keys=True)
   >>> json # doctest: +ELLIPSIS
-  '{"type": "Point", "coordinates": [4..., -54...]}'
+  '{"coordinates": [4..., -54...], "type": "Point"}'
 
   Objects with a __geo_interface__ attribute or property can be nested in geojson feature:
 
@@ -27,9 +28,9 @@ Encoding objects with __geo_interface__
 
   And feature will encode:
 
-  >>> json = geojson.dumps(f)
+  >>> json = geojson.dumps(f, sort_keys=True)
   >>> json # doctest: +ELLIPSIS
-  '{"geometry": {"type": "Point", "coordinates": [4..., -54...]}, "type": "Feature", "properties": {}, "id": null}'
+  '{"geometry": {"coordinates": [4..., -54...], "type": "Point"}, "id": null, "properties": {}, "type": "Feature"}'
 
   geojson types can be used to implemented a __geo_interface__:
 
@@ -48,27 +49,27 @@ Encoding objects with __geo_interface__
   ...   
 
   >>> ll2 = LatLon2(-54.1231, 4.53242)
-  >>> json2 = geojson.dumps(ll2)
+  >>> json2 = geojson.dumps(ll2, sort_keys=True)
   >>> json2 # doctest: +ELLIPSIS
-  '{"type": "Point", "coordinates": [4..., -54...]}'
+  '{"coordinates": [4..., -54...], "type": "Point"}'
   
-
   Decoding
     - to a dict
 
   >>> feature_dict = geojson.loads(json)
-  >>> feature_dict # doctest: +ELLIPSIS
-  {u'geometry': {u'type': u'Point', u'coordinates': [4..., -54...]}, u'type': u'Feature', u'properties': {}, u'id': None}
+  >>> geojson.dumps(feature_dict, sort_keys=True)  # doctest: +ELLIPSIS
+  '{"geometry": {"coordinates": [4.5324200000000001, -54.123100000000001], "type": "Point"}, "id": null, "properties": {}, "type": "Feature"}'
 
   - or to an object, via a factory. Here we'll create GeoJSON object.
 
   >>> ll2 = LatLon2(43.3,-154.1) 
-  >>> json = geojson.dumps(ll2) 
+  >>> json = geojson.dumps(ll2, sort_keys=True) 
   >>> json # doctest: +ELLIPSIS
-  '{"type": "Point", "coordinates": [-154..., 43...]}'
+  '{"coordinates": [-154..., 43...], "type": "Point"}'
   
-  >>> geojson.loads(json) # doctest: +ELLIPSIS
-  {u'type': u'Point', u'coordinates': [-154..., 43...]}
+  >>> o = geojson.loads(json) # doctest: +ELLIPSIS
+  >>> geojson.dumps(o, sort_keys=True) # doctest: +ELLIPSIS
+  '{"coordinates": [-154..., 43...], "type": "Point"}'
   
   >>> factory = lambda ob: geojson.GeoJSON.to_instance(ob)
   >>> geometry = geojson.loads(json, object_hook=factory)

@@ -15,15 +15,15 @@ A dictionary can satisfy the protocol
 
   Encoding
 
-  >>> json = geojson.dumps(f)
+  >>> json = geojson.dumps(f, sort_keys=True)
   >>> json  # doctest: +ELLIPSIS
-  '{"geometry": {"type": "Point", "coordinates": [53..., -4...]}, "type": "Feature", "properties": {"title": "Dict 1"}, "id": "1"}'
+  '{"geometry": {"coordinates": [53..., -4...], "type": "Point"}, "id": "1", "properties": {"title": "Dict 1"}, "type": "Feature"}'
 
   Decoding
 
   >>> o = geojson.loads(json)
-  >>> o  # doctest: +ELLIPSIS
-  {u'geometry': {u'type': u'Point', u'coordinates': [53..., -4...]}, u'type': u'Feature', u'properties': {u'title': u'Dict 1'}, u'id': u'1'}
+  >>> geojson.dumps(o, sort_keys=True)  # doctest: +ELLIPSIS
+  '{"geometry": {"coordinates": [53..., -4...], "type": "Point"}, "id": "1", "properties": {"title": "Dict 1"}, "type": "Feature"}'
 
 
 feature class
@@ -50,22 +50,22 @@ feature class
 
   Encoding
 
-  >>> geojson.dumps(feature)  # doctest: +ELLIPSIS
-  '{"geometry": {"type": "Point", "coordinates": [53..., -4...]}, "type": "Feature", "properties": {"summary": "The first feature", "link": "http:\\/\\/example.org\\/features\\/1", "title": "Feature 1"}, "id": "1"}'
+  >>> geojson.dumps(feature, sort_keys=True)  # doctest: +ELLIPSIS
+  '{"geometry": {"coordinates": [53..., -4...], "type": "Point"}, "id": "1", "properties": {"link": "http://example.org/features/1", "summary": "The first feature", "title": "Feature 1"}, "type": "Feature"}'
 
   Decoding
 
   >>> factory = geojson.examples.createSimpleWebFeature 
-  >>> json = '{"geometry": {"type": "Point", "coordinates": [53.04781795911469, -4.10888671875]}, "id": "1", "properties": {"summary": "The first feature", "link": "http:\\/\\/example.org\\/features\\/1", "title": "Feature 1"}}'
-  >>> feature = geojson.loads(json, object_hook=factory)
+  >>> json = '{"geometry": {"type": "Point", "coordinates": [53.04781795911469, -4.10888671875]}, "id": "1", "properties": {"summary": "The first feature", "link": "http://example.org/features/1", "title": "Feature 1"}}'
+  >>> feature = geojson.loads(json, object_hook=factory, encoding="utf-8")
   >>> type(feature)
   <class 'geojson.examples.SimpleWebFeature'>
   >>> feature.id
   '1'
-  >>> feature.properties['title']
-  u'Feature 1'
-  >>> feature.properties['summary']
-  u'The first feature'
+  >>> print feature.properties['title']
+  Feature 1
+  >>> print feature.properties['summary']
+  The first feature
   >>> feature.properties['link']
   'http://example.org/features/1'
   >>> feature.geometry  # doctest: +ELLIPSIS
@@ -87,5 +87,5 @@ Test the geo interface
   >>> ob = Thingy('1', 'thingy one', -106.0, 40.0)
   >>> ob.__geo_interface__['geometry']  # doctest: +ELLIPSIS
   {'type': 'Point', 'coordinates': (-106..., 40...)}
-  >>> geojson.dumps(ob)  # doctest: +ELLIPSIS
-  '{"geometry": {"type": "Point", "coordinates": [-106..., 40...]}, "id": "1", "properties": {"title": "thingy one"}}'
+  >>> geojson.dumps(ob, sort_keys=True)  # doctest: +ELLIPSIS
+  '{"geometry": {"coordinates": [-106..., 40...], "type": "Point"}, "id": "1", "properties": {"title": "thingy one"}}'

@@ -12,16 +12,16 @@ A dictionary can satisfy the protocol
   Encoding
 
   >>> import geojson
-  >>> json = geojson.dumps(gc)
+  >>> json = geojson.dumps(gc, sort_keys=True)
   >>> json  # doctest: +ELLIPSIS
-  '{"type": "GeometryCollection", "geometries": [{"type": "Point", "coordinates": [44..., 67...]}]}'
+  '{"geometries": [{"coordinates": [44..., 67...], "type": "Point"}], "type": "GeometryCollection"}'
 
 
   Decoding
   
   >>> gcb = geojson.loads(json)
-  >>> gcb  # doctest: +ELLIPSIS
-  {u'type': u'GeometryCollection', u'geometries': [{u'type': u'Point', u'coordinates': [44..., 67...]}]}
+  >>> geojson.dumps(gcb, sort_keys=True, encoding="ascii")  # doctest: +ELLIPSIS
+  '{"geometries": [{"coordinates": [44..., 67...], "type": "Point"}], "type": "GeometryCollection"}'
 
 
 GeoJSON types thmeselves satisfy the protocol (of course!)
@@ -34,10 +34,9 @@ GeoJSON types thmeselves satisfy the protocol (of course!)
 
   Encoding
 
-  >>> json = geojson.dumps(gc2)
+  >>> json = geojson.dumps(gc2, sort_keys=True)
   >>> json  # doctest: +ELLIPSIS
-  '{"type": "GeometryCollection", "geometries": [{"type": "Point", "coordinates": [53..., -4...]}]}'
-
+  '{"geometries": [{"coordinates": [53..., -4...], "type": "Point"}], "type": "GeometryCollection"}'
   
   and can decode back into a instance of the same kind, or supply your own hook:
 

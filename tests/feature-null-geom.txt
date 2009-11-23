@@ -1,7 +1,8 @@
 Test dump of null geometry features
 
   >>> import geojson 
-  >>> geojson.dumps(geojson.Feature(id=12, geometry=None, properties={'foo': 'bar'})) # doctest: +ELLIPSIS 
-  '{"geometry": null, "type": "Feature", "properties": {"foo": "bar"}, "id": 12}' 
-  >>> geojson.dumps(geojson.Feature(id=12, properties={'foo': 'bar'})) # doctest: +ELLIPSIS 
-  '{"geometry": null, "type": "Feature", "properties": {"foo": "bar"}, "id": 12}'
+  >>> geojson.dumps(geojson.Feature(id=12, geometry=None, properties={'foo': 'bar'}), sort_keys=True) # doctest: +ELLIPSIS,+NORMALIZE_WHITESPACE
+  '{"geometry": null, "id": 12, "properties": {"foo": "bar"}, "type": "Feature"}'
+
+  >>> geojson.dumps(geojson.Feature(id=12, properties={'foo': 'bar'}), sort_keys=True) # doctest: +ELLIPSIS,+NORMALIZE_WHITESPACE
+  '{"geometry": null, "id": 12, "properties": {"foo": "bar"}, "type": "Feature"}'

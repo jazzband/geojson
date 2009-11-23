@@ -5,17 +5,17 @@
 # 
 # Contact: Sean Gillies, sgillies@frii.com
 # ============================================================================
-
 import simplejson
+    
 import geojson
 import geojson.factory
-from geojson.mapping import Mapping, to_mapping
+from geojson.mapping import is_mapping, to_mapping
 
 
 class GeoJSONEncoder(simplejson.JSONEncoder):
 
     def default(self, obj):
-        if isinstance(obj, Mapping):
+        if is_mapping(obj):
             mapping = obj
         else:
             mapping = to_mapping(obj)
@@ -23,11 +23,12 @@ class GeoJSONEncoder(simplejson.JSONEncoder):
         type_str = d.pop("type", None)
         if type_str:
             geojson_factory = getattr(geojson.factory, type_str, geojson.factory.GeoJSON)
-            d = geojson_factory(**d).__geo_interface__
+            kwargs = dict((str(k), d[k]) for k in d)
+            d = geojson_factory(**kwargs).__geo_interface__
         return d
 
 
-# Wrap the functions from simplejson, providing encoder, decoders, and
+# Wrap the functions from json, providing encoder, decoders, and
 # object creation hooks
 
 def dump(obj, fp, cls=GeoJSONEncoder, **kwargs):

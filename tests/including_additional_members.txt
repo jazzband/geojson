@@ -22,18 +22,17 @@ A dictionary can satisfy the protocol
 
   Encoding
 
-  >>> json = geojson.dumps(f)
+  >>> json = geojson.dumps(f, sort_keys=True)
   
-  >>> json
-  '{"geometry": {"type": "LineString", "coordinates": [[100.0, 0.0], [101.0, 1.0]]}, "foo": "bar", "type": "Feature", "properties": {"prop0": "value0", "prop1": "value1"}, "id": null}'
+  >>> json # doctest: +ELLIPSIS
+  '{"foo": "bar", "geometry": {"coordinates": [[100..., 0...], [101..., 1...]], "type": "LineString"}, "id": null, "properties": {"prop0": "value0", "prop1": "value1"}, "type": "Feature"}'
 
   Decoding
 
   >>> o = geojson.loads(json)
   
-  >>> json
-  '{"geometry": {"type": "LineString", "coordinates": [[100.0, 0.0], [101.0, 1.0]]}, "foo": "bar", "type": "Feature", "properties": {"prop0": "value0", "prop1": "value1"}, "id": null}'
-
+  >>> json # doctest: +ELLIPSIS
+  '{"foo": "bar", "geometry": {"coordinates": [[100..., 0...], [101..., 1...]], "type": "LineString"}, "id": null, "properties": {"prop0": "value0", "prop1": "value1"}, "type": "Feature"}'
 
 Custom objects can be decoded into a json structure containing valid geojson
 ----------------------------------------------------------------------------
@@ -51,12 +50,30 @@ Custom objects can be decoded into a json structure containing valid geojson
 
   >>> r = Route("Snowdonia circular", "A nice bike ride around some mountains", ((1.0, 2.0), (2.0, 3.2)))
   
-  >>> json = geojson.dumps(r)
+  >>> json = geojson.dumps(r, sort_keys=True)
   
   >>> json  # doctest: +ELLIPSIS
-  '{"description": "A nice bike ride around some mountains", "title": "Snowdonia circular", "geometry": {"type": "LineString", "coordinates": [[1..., 2...], [2..., 3...]]}, "type": "Feature", "properties": {}, "id": null}'
+  '{"description": "A nice bike ride around some mountains", "geometry": {"coordinates": [[1..., 2...], [2..., 3...]], "type": "LineString"}, "id": null, "properties": {}, "title": "Snowdonia circular", "type": "Feature"}'
 
   >>> r = geojson.loads(json) 
-  >>> r # doctest: +ELLIPSIS
-  {u'description': u'A nice bike ride around some mountains', u'title': u'Snowdonia circular', u'geometry': {u'type': u'LineString', u'coordinates': [[1..., 2...], [2..., 3...]]}, u'id': None, u'type': u'Feature', u'properties': {}}
+  >>> print r["description"] 
+  A nice bike ride around some mountains
+
+  >>> print r["title"]
+  Snowdonia circular
+
+  >>> print r["type"]
+  Feature
+
+  >>> r["geometry"]["coordinates"]# doctest: +ELLIPSIS
+  [[1..., 2...], [2..., 3...]]
+
+  >>> print r["id"]
+  None
+
+  >>> print r["geometry"]["type"] 
+  LineString
+
+  >>> r["properties"]
+  {}
 

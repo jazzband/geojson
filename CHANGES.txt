@@ -1,5 +1,8 @@
 Changes
 =======
+1.0.2 (2009-11-24)
+------------------
+- Use nose test framework instead of rolling our own.
 
 1.0.1 (2008-12-19)
 ------------------

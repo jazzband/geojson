@@ -39,6 +39,7 @@ Test c2c features
   >>> geojson.dumps(f, sort_keys=True) # doctest: +ELLIPSIS 
   '{"geometry": {"coordinates": [49..., 55...], "type": "Point"}, "id": 12, "properties": {"foo": "bar"}, "type": "Feature"}'
 
-  >>> c = FeatureCollection([f])
+  >>> features = [f]
+  >>> c = FeatureCollection(features)
   >>> geojson.dumps(c, sort_keys=True) # doctest: +ELLIPSIS
   '{"features": [{"geometry": {"coordinates": [49..., 55...], "type": "Point"}, "id": 12, "properties": {"foo": "bar"}, "type": "Feature"}], "type": "FeatureCollection"}'

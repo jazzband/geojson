@@ -1,0 +1,30 @@
+GeoJSON enforces strict JSON
+----------------------------
+  GeoJSON produces and consumes only strict JSON.
+  NaN and Infinity are not permissible values according to the JSON specification.
+
+  >>> import geojson
+  >>> geojson.dumps({"type": "Point", "coordinates": [float("nan"), 1.0]}) # doctest: +ELLIPSIS
+  Traceback (most recent call last):
+              ...
+  ValueError:...not JSON compliant...
+
+  
+  >>> geojson.dumps({"type": "Point", "coordinates": [float("nan"), 1.0]}) # doctest: +ELLIPSIS
+  Traceback (most recent call last):
+              ...
+  ValueError:...not JSON compliant...
+
+  >>> json = '{"type": "Point", "coordinates": [1.0, NaN]}'
+  >>> geojson.loads(json) # doctest: +ELLIPSIS
+  Traceback (most recent call last):
+              ...
+  ValueError:...not JSON compliant...
+
+  >>> json = '{"type": "Point", "coordinates": [Infinity, -Infinity]}'
+  >>> geojson.loads(json) # doctest: +ELLIPSIS
+  Traceback (most recent call last):
+              ...
+  ValueError:...not JSON compliant...
+ 
+  

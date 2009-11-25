@@ -30,7 +30,7 @@ GeoJSON types thmeselves satisfy the protocol (of course!)
   >>> geometries = [geojson.Point(coordinates=[53.04781795911469, -4.10888671875])]
   >>> gc2 = geojson.GeometryCollection(geometries)
   >>> gc2.geometries # doctest: +ELLIPSIS
-  [Point(coordinates=[53..., -4...])]
+  [{"coordinates": [53..., -4...], "type": "Point"}]
 
   Encoding
 
@@ -42,11 +42,11 @@ GeoJSON types thmeselves satisfy the protocol (of course!)
 
   >>> gc = geojson.loads(json, object_hook=geojson.GeoJSON.to_instance)
   >>> gc.geometries  # doctest: +ELLIPSIS
-  [Point(coordinates=[53..., -4...])]
+  [{"coordinates": [53..., -4...], "type": "Point"}]
   
   >>> geometry = gc.geometries[0]  
   >>> geometry # doctest: +ELLIPSIS
-  Point(coordinates=[53..., -4...])
+  {"coordinates": [53..., -4...], "type": "Point"}
 
   >>> geometry.coordinates  # doctest: +ELLIPSIS
   [53..., -4...]

@@ -25,9 +25,11 @@ Encoding objects with __geo_interface__
   Objects with a __geo_interface__ attribute or property can be nested in geojson feature:
 
   >>> f = geojson.Feature(geometry=lat_lon)
+  >>> f # doctest: +ELLIPSIS
+  {"geometry": {"coordinates": [4..., -54...], "type": "Point"}, "id": null, "properties": {}, "type": "Feature"}
+
 
   And feature will encode:
-
   >>> json = geojson.dumps(f, sort_keys=True)
   >>> json # doctest: +ELLIPSIS
   '{"geometry": {"coordinates": [4..., -54...], "type": "Point"}, "id": null, "properties": {}, "type": "Feature"}'
@@ -74,5 +76,5 @@ Encoding objects with __geo_interface__
   >>> factory = lambda ob: geojson.GeoJSON.to_instance(ob)
   >>> geometry = geojson.loads(json, object_hook=factory)
   >>> geometry   # doctest: +ELLIPSIS     
-  Point(coordinates=[-154..., 43...])
+  {"coordinates": [-154..., 43...], "type": "Point"}
  

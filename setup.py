@@ -1,7 +1,13 @@
+import sys
 from setuptools import setup
 
 readme_text = open("README.txt", "rb").read()
 version = open("VERSION.txt", "rb").read().strip()
+
+deps = ["setuptools"]
+if sys.version_info[:2] <= (2, 6):
+    deps.append("simplejson")
+
 
 setup(name="geojson",
       version =version,
@@ -17,8 +23,8 @@ setup(name="geojson",
       packages =["geojson"],
       package_dir={"geojson": "geojson"},
       package_data={"geojson": ["VERSION.txt"]},
-      tests_require=["nose>=0.11", "coverage"],
-      install_requires =["setuptools", "simplejson"],
+      tests_require=["nose>=0.11"],
+      install_requires=deps,
       test_suite="tests.test_suite",
       classifiers=[
         "Development Status :: 5 - Production/Stable",

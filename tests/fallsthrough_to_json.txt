@@ -1,0 +1,47 @@
+Falling through to JSON
+-----------------------
+
+GeoJSON is a super set of JSON.
+Thus this test is a demonstration and regression test of what happens when you pass 
+geojson something that isn't GeoJSON.
+
+   >>> import geojson
+   >>> d = {"plain": ["old", "dict"]}
+   >>> geojson.dumps(d, sort_keys=True)
+   '{"plain": ["old", "dict"]}'
+
+   If you have 'type' member, then geojson will niavely assume this is GeoJSON
+   >>> d = {"type": "SomethingButNotGeo", "items": [1, 2, 3]}
+   >>> json = geojson.dumps(d, sort_keys=True)
+   >>> json
+   '{"items": [1, 2, 3], "type": "SomethingButNotGeo"}'
+
+   But in this case, "SomethingButNotGeo" isn't a GeoJSON type, so it is ignored.
+
+   This is mirrored by loading a round trip::
+
+   >>> obj = geojson.loads(json)
+   >>> geojson.dumps(obj, sort_keys=True)
+   '{"items": [1, 2, 3], "type": "SomethingButNotGeo"}'
+
+   >>> geojson.dumps(1)
+   '1'
+
+   >>> geojson.dumps("string")
+   '"string"'
+
+   >>> geojson.dumps([1, 2, 3])
+   '[1, 2, 3]'
+   
+   Something that gets recognised as GeoJSON, but isn't valid
+   >>> d = {"type": "Point", "members": [1, 2, 3]}
+
+   >>> json = geojson.dumps(d, sort_keys=True)
+   >>> json
+   '{"members": [1, 2, 3], "type": "Point"}'
+
+   Trying to use geojson.loads with something that looks like GeoJSON
+   will result in your returned JSON having the GeoJSON members::
+
+   >>> geojson.loads(json)
+   {"coordinates": [], "members": [1, 2, 3], "type": "Point"}

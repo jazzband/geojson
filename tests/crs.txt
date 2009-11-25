@@ -1,0 +1,20 @@
+CRS annotation
+--------------
+
+   >>> import geojson
+   >>> import geojson.crs
+
+   By default, no CRS information is present. One should assume WGS84.
+   >>> geojson.Point([0.0, 0.0])
+   {"coordinates": [0.0, 0.0], "type": "Point"}
+
+   Including crs
+   >>> crs = geojson.crs.Named(properties=dict(name="urn:ogc:def:crs:EPSG::3785"))
+   >>> point = geojson.Point([0.0, 0.0], crs=crs)
+   >>> point
+   {"coordinates": [0.0, 0.0], "crs": {"properties": {"name": "urn:ogc:def:crs:EPSG::3785"}, "type": "name"}, "type": "Point"}
+
+   >>> geojson.dumps(point, sort_keys=True)
+   '{"coordinates": [0.0, 0.0], "crs": {"properties": {"name": "urn:ogc:def:crs:EPSG::3785"}, "type": "name"}, "type": "Point"}'
+
+

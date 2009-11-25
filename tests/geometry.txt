@@ -27,12 +27,15 @@ A dictionary can satisfy the protocol
 
 
 geometry class
----------------------
+--------------
 
   >>> ls = geojson.geometry.LineString(((52.1, -34.131), (65.231, -34.234)))
 
-  >>> ls.__geo_interface__ # doctest: +ELLIPSIS
-  {'type': 'LineString', 'coordinates': ((52.100000000000001, -34.131), (65..., -34...))}
+  >>> isinstance(ls.__geo_interface__, geojson.GeoJSON) # doctest: +ELLIPSIS
+  True
+
+  >>> geojson.dumps(ls, sort_keys=True) # doctest: +ELLIPSIS
+  '{"coordinates": [[52..., -34...], [65..., -34...]], "type": "LineString"}'
 
   >>> ls.type
   'LineString'
@@ -48,7 +51,8 @@ geometry class
   Decoding
   >>> obj = geojson.loads(json) 
   >>> type(obj)
-  <type 'dict'>
+  <class 'geojson.geometry.LineString'>
+
   >>> geojson.dumps(obj, sort_keys=True) # doctest: +ELLIPSIS
   '{"coordinates": [[52..., -34.131], [65..., -34...]], "type": "LineString"}'
 
@@ -68,10 +72,13 @@ geometry class
 
   >>> coords = ((-1918145.0108183471, -4098018.9166399641), (-680004.67204747663, -3864394.3196185972))
 
-  >>> ls = geojson.geometry.LineString(coords, crs=Named(properties=dict(name='EPSG:4326')))
+  >>> ls = geojson.geometry.LineString(coords, crs=Named(properties=dict(name="EPSG:4326")))
 
-  >>> ls.__geo_interface__ # doctest: +ELLIPSIS
-  {'crs': {'type': 'name', 'properties': {'name': 'EPSG:4326'}}, 'type': 'LineString', 'coordinates': ((-1918145..., -4098018...), (-680004..., -3864394...))}
+  >>> isinstance(ls, geojson.GeoJSON) and hasattr(ls, "__geo_interface__")
+  True
+
+  >>> ls # doctest: +ELLIPSIS
+  {"coordinates": [[-1918145..., -4098018...], [-680004..., -3864394...]], "crs": {"properties": {"name": "EPSG:4326"}, "type": "name"}, "type": "LineString"}
 
   It satisfies the geometry protocol
 
@@ -82,7 +89,8 @@ geometry class
   Decoding
   >>> obj = geojson.loads(json) 
   >>> type(obj)
-  <type 'dict'>
+  <class 'geojson.geometry.LineString'>
+
   >>> geojson.dumps(obj, sort_keys=True) # doctest: +ELLIPSIS
   '{"coordinates": [[-1918145..., -4098018...], [-680004..., -3864394...]], "crs": {"properties": {"name": "EPSG:4326"}, "type": "name"}, "type": "LineString"}'
  

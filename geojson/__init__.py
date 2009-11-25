@@ -1,5 +1,4 @@
-from codec import dump, dumps, load, loads
-from codec import GeoJSONEncoder
+from codec import dump, dumps, load, loads, GeoJSONEncoder
 from geometry import Point, LineString, Polygon
 from geometry import MultiLineString, MultiPoint, MultiPolygon
 from geometry import GeometryCollection

@@ -23,7 +23,7 @@ A dictionary can satisfy the protocol
   
   >>> fcb = geojson.loads(json)
   >>> geojson.dumps(fcb, sort_keys=True)  # doctest: +ELLIPSIS
-  '{"features": [{"geometry": {"coordinates": [44..., 67...], "type": "Point"}, "id": "1", "type": "Feature"}], "type": "FeatureCollection"}'
+  '{"features": [{"geometry": {"coordinates": [44..., 67...], "type": "Point"}, "id": "1", "properties": {}, "type": "Feature"}], "type": "FeatureCollection"}'
 
 
 
@@ -31,9 +31,9 @@ GeoJSON types thmeselves satisfy the protocol (of course!)
 -----------------------------------------------------------
   
   >>> features = [geojson.Feature(id=1, geometry=geojson.Point(coordinates=(53.04781795911469, -4.10888671875)))]
-  >>> fco = geojson.FeatureCollection(features=features)
+  >>> fco = geojson.FeatureCollection(features)
   >>> fco.features  # doctest: +ELLIPSIS
-  [Feature(geometry={'type': 'Point', 'coordinates': (53..., -4...)}, properties={}, id=1)]
+  [{"geometry": {"coordinates": [53..., -4...], "type": "Point"}, "id": 1, "properties": {}, "type": "Feature"}]
 
 
   Encoding
@@ -47,10 +47,21 @@ GeoJSON types thmeselves satisfy the protocol (of course!)
   >>> hook = lambda ob: geojson.GeoJSON.to_instance(ob, geojson.feature)
   >>> fc = geojson.loads(json, object_hook=hook)
   >>> fc.features  # doctest: +ELLIPSIS
-  [Feature(geometry={'type': 'Point', 'coordinates': [53..., -4...]}, properties={}, id=1)]
+  [{"geometry": {"coordinates": [53..., -4...], "type": "Point"}, "id": 1, "properties": {}, "type": "Feature"}]
   
   >>> fc.features[0].geometry  # doctest: +ELLIPSIS
-  Point(coordinates=[53..., -4...])
+  {"coordinates": [53..., -4...], "type": "Point"}
+
+  >>> len(fc["features"])
+  1
+
+  >>> len(fc.features)
+  1
+
+  Convert GeoJSON to regular dict
+  >>> dfc = dict(fc)
+  >>> dfc["type"] == "FeatureCollection"
+  True
 
   >>> geometry = fc.features[0].geometry
   >>> geometry.coordinates  # doctest: +ELLIPSIS

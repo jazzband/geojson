@@ -4,38 +4,35 @@ import geojson
 import geojson.factory
 
 
-class GeoJSON(object):
+class GeoJSON(dict):
 
-    def __init__(self, **extra):
-        super(GeoJSON, self).__init__()
-        self.type = type(self).__name__
-        self.extra = extra
+    def __init__(self, iterable=(), **extra):
+        super(GeoJSON, self).__init__(iterable)
+        self["type"] = getattr(self, "type", type(self).__name__)
+        self.update(extra)
 
     def __repr__(self):
-        params = ", ".join("%s=%s" % (key, value) 
-                           for (key, value) in self
-                           if key != "type")
-        return "%s(%s)" % (self.type, params)                           
+        return geojson.dumps(self, sort_keys=True)
 
-    def __str__(self):
-        return str(self.__geo_interface__)
+    __str__ = __repr__
 
-    def __iter__(self):        
-        def iter_geo_interface(ob):
-            if not hasattr(ob, "__geo_interface__"):
-                return
-            for (key, value) in ob.__geo_interface__.items():
-                if hasattr(value, "__geo_interface__"):
-                    key, value = iter_geo_interface(value)
-                yield (key, value)
-        return iter_geo_interface(self)
+    def __setattr__(self, name, value):
+        self[name] = value
+
+    def __getattr__(self, name):
+        try:
+            v = self[name]
+        except KeyError:
+            raise AttributeError(name)
+        return v
+
+    def __delattr__(self, name):
+        del self[name]
 
     @property
     def __geo_interface__(self):
-        d = dict(**self.extra)
         if self.type != "GeoJSON":
-            d.update(type=self.type)
-        return d
+            return self
 
     @classmethod
     def to_instance(cls, ob, default=None, strict=False):
@@ -67,5 +64,7 @@ class GeoJSON(object):
                     msg %= (ob, invalid)
                     raise ValueError(msg)
         return instance
+
+    
 
 

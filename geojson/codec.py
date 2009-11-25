@@ -5,14 +5,17 @@
 # 
 # Contact: Sean Gillies, sgillies@frii.com
 # ============================================================================
-import simplejson
+try:
+    import json
+except ImportError:
+    import simplejson as json
     
 import geojson
 import geojson.factory
 from geojson.mapping import is_mapping, to_mapping, GEO_INTERFACE_MARKER
 
 
-class GeoJSONEncoder(simplejson.JSONEncoder):
+class GeoJSONEncoder(json.JSONEncoder):
 
     def default(self, obj):
         return geojson.factory.GeoJSON.to_instance(obj)
@@ -27,35 +30,36 @@ def _enforce_strict_numbers(obj):
 
 
 def dump(obj, fp, cls=GeoJSONEncoder, allow_nan=False, **kwargs):
-    return simplejson.dump(to_mapping(obj),
-                           fp, cls=cls, allow_nan=allow_nan, **kwargs)
+    return json.dump(to_mapping(obj),
+                     fp, cls=cls, allow_nan=allow_nan, **kwargs)
 
 
 def dumps(obj, cls=GeoJSONEncoder, allow_nan=False, **kwargs):
-    return simplejson.dumps(to_mapping(obj),
-                            cls=cls, allow_nan=allow_nan, **kwargs)
+    return json.dumps(to_mapping(obj),
+                      cls=cls, allow_nan=allow_nan, **kwargs)
 
 
 def load(fp,
-         cls=simplejson.JSONDecoder,
+         cls=json.JSONDecoder,
          parse_constant=_enforce_strict_numbers,
          object_hook=geojson.base.GeoJSON.to_instance,
          **kwargs):
-    return simplejson.load(fp,
-                           cls=cls, object_hook=object_hook,
-                           parse_constant=parse_constant,
-                           **kwargs)
+    return json.load(fp,
+                     cls=cls, object_hook=object_hook,
+                     parse_constant=parse_constant,
+                     **kwargs)
 
 
 def loads(s,
-          cls=simplejson.JSONDecoder,
+          cls=json.JSONDecoder,
           parse_constant=_enforce_strict_numbers,
           object_hook=geojson.base.GeoJSON.to_instance,
           **kwargs):
-    return simplejson.loads(s,
-                            cls=cls, object_hook=object_hook,
-                            parse_constant=parse_constant,
-                            **kwargs)
+    return json.loads(s,
+                      cls=cls, object_hook=object_hook,
+                      parse_constant=parse_constant,
+                      **kwargs)
+
 
 # Backwards compatibility
 PyGFPEncoder = GeoJSONEncoder

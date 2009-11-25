@@ -29,7 +29,7 @@ class SimpleWebFeature(object):
 def createSimpleWebFeature(o):
     """Create an instance of SimpleWebFeature from a dict, o. If o does not
     match a Python feature object, simply return o. This function serves as a 
-    simplejson decoder hook. See coding.load()."""
+    json decoder hook. See coding.load()."""
     try:
         id = o['id']
         g = o['geometry']

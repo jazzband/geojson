@@ -29,6 +29,7 @@ interface. Here's an example of a round-trip through the GeoJSON format::
 
 
 The geometry classes interoperate with Shapely via the geo interface::
+
     >>> x = None
     ... try:
     ...     from shapely.geometry import asShape

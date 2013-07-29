@@ -60,7 +60,7 @@ Encoding objects with __geo_interface__
 
   >>> feature_dict = geojson.loads(json)
   >>> geojson.dumps(feature_dict, sort_keys=True)  # doctest: +ELLIPSIS
-  '{"geometry": {"coordinates": [4.5324200000000001, -54.123100000000001], "type": "Point"}, "id": null, "properties": {}, "type": "Feature"}'
+  '{"geometry": {"coordinates": [4.53242, -54.1231], "type": "Point"}, "id": null, "properties": {}, "type": "Feature"}'
 
   - or to an object, via a factory. Here we'll create GeoJSON object.
 

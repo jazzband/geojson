@@ -1,6 +1,8 @@
 geojson: encode/decode geodata
 ==============================
 
+.. image:: https://travis-ci.org/frewsxcv/geojson.png   :target: https://travis-ci.org/frewsxcv/geojson
+
 This package contains:
 
 - The reference implementation of the Python geo interface:

@@ -2,14 +2,14 @@
 # GeoJSON. Copyright (C) 2007 Sean C. Gillies
 #
 # See ../LICENSE.txt
-# 
+#
 # Contact: Sean Gillies, sgillies@frii.com
 # ============================================================================
 import json
-    
+
 import geojson
 import geojson.factory
-from geojson.mapping import is_mapping, to_mapping, GEO_INTERFACE_MARKER
+from geojson.mapping import to_mapping
 
 
 class GeoJSONEncoder(json.JSONEncoder):

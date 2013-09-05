@@ -11,6 +11,9 @@ if sys.version_info[:2] not in [(2, 6), (2, 7)]:
                      "at this time. Python 3.x support is coming soon.\n")
     exit(1)
 
+# Get around this issue: http://bugs.python.org/issue15881
+# Appears to be a problem in older versions of Python 2.6 and 2.7
+import multiprocessing  # NOQA
 
 setup(
     name="geojson",

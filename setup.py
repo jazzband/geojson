@@ -5,8 +5,6 @@ readme_text = open("README.txt", "rb").read()
 version = open("VERSION.txt", "rb").read().strip()
 
 deps = ["setuptools"]
-if sys.version_info[:2] <= (2, 6):
-    deps.append("simplejson")
 
 
 setup(name="geojson",

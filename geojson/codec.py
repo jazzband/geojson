@@ -5,10 +5,7 @@
 # 
 # Contact: Sean Gillies, sgillies@frii.com
 # ============================================================================
-try:
-    import json
-except ImportError:
-    import simplejson as json
+import json
     
 import geojson
 import geojson.factory

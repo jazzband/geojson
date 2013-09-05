@@ -1,18 +1,23 @@
 geojson: encode/decode geodata
 ==============================
 
+.. image:: https://travis-ci.org/frewsxcv/geojson.png?branch=master
+   :target: https://travis-ci.org/frewsxcv/geojson
+
 This package contains:
 
-* The reference implementation of the Python geo interface:
+- The reference implementation of the Python geo interface:
 
   https://gist.github.com/2217756
 
-* Functions for encoding and decoding GeoJSON (http://geojson.org) formatted
+- Functions for encoding and decoding GeoJSON_ formatted
   data.
 
 geojson provides geometry, feature, and collection classes, and supports
 pickle-style dump and load of objects that provide the lab's Python geo
-interface. Here's an example of a round-trip through the GeoJSON format::
+interface. Here's an example of a round-trip through the GeoJSON format:
+
+.. code:: python
 
   >>> import geojson
   >>> p = geojson.Point([0.0, 0.0])
@@ -28,7 +33,10 @@ interface. Here's an example of a round-trip through the GeoJSON format::
   {"coordinates": [0..., 0...], "type": "Point"}
 
 
-The geometry classes interoperate with Shapely via the geo interface::
+The geometry classes interoperate with Shapely via the geo interface:
+
+.. code:: python
+
   >>> x = None
   ... try:
   ...     from shapely.geometry import asShape
@@ -42,3 +50,5 @@ The geometry classes interoperate with Shapely via the geo interface::
   ... else:
   ...    x is None
   True
+
+.. _GeoJSON: http://geojson.org/

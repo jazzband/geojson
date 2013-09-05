@@ -1,7 +1,7 @@
 import sys
 from setuptools import setup
 
-readme_text = open("README.txt", "rb").read()
+readme_text = open("README.rst", "rb").read()
 version = open("VERSION.txt", "rb").read().strip()
 
 deps = ["setuptools"]

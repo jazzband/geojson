@@ -6,6 +6,11 @@ version = open("VERSION.txt", "rb").read().strip()
 
 deps = ["setuptools"]
 
+if sys.version_info[:2] not in [(2, 6), (2, 7)]:
+    sys.stderr.write("Sorry, only Python 2.6 and Python 2.7 are supported "
+                     "at this time. Python 3.x support is coming soon.\n")
+    exit(1)
+
 
 setup(name="geojson",
       version =version,

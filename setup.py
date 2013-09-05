@@ -27,9 +27,10 @@ setup(
     packages=["geojson"],
     package_dir={"geojson": "geojson"},
     package_data={"geojson": ["VERSION.txt"]},
-    tests_require=["nose==1.3.0"],
+    setup_requires=["nose==1.3.0"],
+    tests_require=["nose==1.3.0", "coverage==3.6"],
     install_requires=deps,
-    test_suite="tests.test_suite",
+    test_suite="nose.collector",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",

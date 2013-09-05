@@ -2,7 +2,7 @@
 # GeoJSON. Copyright (C) 2007 Sean C. Gillies
 #
 # See ../LICENSE.txt
-# 
+#
 # Contact: Sean Gillies, sgillies@frii.com
 # ============================================================================
 
@@ -12,7 +12,6 @@ interface.
 """
 
 from geojson.base import GeoJSON
-import geojson.geometry 
 
 
 class Feature(GeoJSON):
@@ -36,8 +35,3 @@ class FeatureCollection(GeoJSON):
     def __init__(self, features, **extra):
         super(FeatureCollection, self).__init__(**extra)
         self["features"] = features
-
-
-    
-   
-

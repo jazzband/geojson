@@ -1,7 +1,5 @@
-
-from geojson.mapping import is_mapping, to_mapping
 import geojson
-import geojson.factory
+from geojson.mapping import to_mapping
 
 
 class GeoJSON(dict):
@@ -37,7 +35,7 @@ class GeoJSON(dict):
     @classmethod
     def to_instance(cls, ob, default=None, strict=False):
         """Encode a GeoJSON dict into an GeoJSON object.
-        
+
         Assumes the caller knows that the dict should satisfy a GeoJSON type.
         """
         if ob is None and default is not None:
@@ -64,7 +62,3 @@ class GeoJSON(dict):
                     msg %= (ob, invalid)
                     raise ValueError(msg)
         return instance
-
-    
-
-

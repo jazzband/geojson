@@ -19,7 +19,7 @@ class Named(CoordinateReferenceSystem):
 
 
 class Linked(CoordinateReferenceSystem):
-    
+
     def __init__(self, properties=None, **extra):
         super(Linked, self).__init__(properties=properties, **extra)
         self["type"] = "link"
@@ -28,5 +28,3 @@ class Linked(CoordinateReferenceSystem):
 class Default(object):
 
     """GeoJSON default, long/lat WGS84, is not serialized."""
-
-

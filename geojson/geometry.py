@@ -29,28 +29,33 @@ class GeometryCollection(GeoJSON):
     def __init__(self, geometries=None, **extra):
         super(GeometryCollection, self).__init__(**extra)
         self["geometries"] = geometries or []
-            
+
 
 # Marker classes.
 
-class Point(Geometry): pass
+class Point(Geometry):
+    pass
 
 
-class MultiPoint(Geometry): pass
+class MultiPoint(Geometry):
+    pass
 
 
-class LineString(MultiPoint):  pass
-    
-    
-class MultiLineString(Geometry): pass 
+class LineString(MultiPoint):
+    pass
 
 
-class Polygon(Geometry): pass
+class MultiLineString(Geometry):
+    pass
 
 
-class MultiPolygon(Geometry): pass
+class Polygon(Geometry):
+    pass
 
 
-class Default(object): 
+class MultiPolygon(Geometry):
+    pass
 
-    """GeoJSON default.""" 
+
+class Default(object):
+    """GeoJSON default."""

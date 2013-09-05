@@ -12,24 +12,25 @@ if sys.version_info[:2] not in [(2, 6), (2, 7)]:
     exit(1)
 
 
-setup(name="geojson",
-      version =version,
-      description="Encoder/decoder for simple GIS features",
-      license="BSD",
-      keywords="gis geography json",
-      author="Sean Gillies",
-      author_email="sgillies@frii.com",
-      maintainer="Sean Gillies",
-      maintainer_email="sgillies@frii.com",
-      url="http://trac.gispython.org/lab/wiki/GeoJSON",
-      long_description=readme_text,
-      packages =["geojson"],
-      package_dir={"geojson": "geojson"},
-      package_data={"geojson": ["VERSION.txt"]},
-      tests_require=["nose==1.3.0"],
-      install_requires=deps,
-      test_suite="tests.test_suite",
-      classifiers=[
+setup(
+    name="geojson",
+    version=version,
+    description="Encoder/decoder for simple GIS features",
+    license="BSD",
+    keywords="gis geography json",
+    author="Sean Gillies",
+    author_email="sgillies@frii.com",
+    maintainer="Sean Gillies",
+    maintainer_email="sgillies@frii.com",
+    url="http://trac.gispython.org/lab/wiki/GeoJSON",
+    long_description=readme_text,
+    packages=["geojson"],
+    package_dir={"geojson": "geojson"},
+    package_data={"geojson": ["VERSION.txt"]},
+    tests_require=["nose==1.3.0"],
+    install_requires=deps,
+    test_suite="tests.test_suite",
+    classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
@@ -37,4 +38,5 @@ setup(name="geojson",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Topic :: Scientific/Engineering :: GIS",
-        ])
+    ]
+)

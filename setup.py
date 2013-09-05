@@ -26,7 +26,7 @@ setup(name="geojson",
       packages =["geojson"],
       package_dir={"geojson": "geojson"},
       package_data={"geojson": ["VERSION.txt"]},
-      tests_require=["nose>=0.11"],
+      tests_require=["nose==1.3.0"],
       install_requires=deps,
       test_suite="tests.test_suite",
       classifiers=[

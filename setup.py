@@ -4,7 +4,6 @@ from setuptools import setup
 
 
 readme_text = io.open("README.rst", "r").read()
-version = io.open("VERSION.txt", "r").read().strip()
 
 deps = ["setuptools"]
 

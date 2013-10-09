@@ -52,3 +52,11 @@ The geometry classes interoperate with Shapely via the geo interface:
   True
 
 .. _GeoJSON: http://geojson.org/
+
+
+Credits
+-------
+
+* Sean Gillies <sgillies@frii.com>
+* Matthew Russell <matt@sanoodi.com>
+* Corey Farwell <coreyf@rwell.org>

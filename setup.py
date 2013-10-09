@@ -4,7 +4,6 @@ from setuptools import setup
 
 
 readme_text = io.open("README.rst", "r").read()
-version = io.open("VERSION.txt", "r").read().strip()
 
 deps = ["setuptools"]
 
@@ -20,7 +19,7 @@ import multiprocessing  # NOQA
 
 setup(
     name="geojson",
-    version=version,
+    version="1.0.1",
     description="Encoder/decoder for simple GIS features",
     license="BSD",
     keywords="gis geography json",
@@ -32,7 +31,7 @@ setup(
     long_description=readme_text,
     packages=["geojson"],
     package_dir={"geojson": "geojson"},
-    package_data={"geojson": ["VERSION.txt"]},
+    package_data={"geojson": ["*.rst"]},
     setup_requires=["nose==1.3.0"],
     tests_require=["nose==1.3.0", "coverage==3.6"],
     install_requires=deps,

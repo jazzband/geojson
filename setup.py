@@ -31,7 +31,7 @@ setup(
     long_description=readme_text,
     packages=["geojson"],
     package_dir={"geojson": "geojson"},
-    package_data={"geojson": ["VERSION.txt"]},
+    package_data={"geojson": ["*.rst"]},
     setup_requires=["nose==1.3.0"],
     tests_require=["nose==1.3.0", "coverage==3.6"],
     install_requires=deps,

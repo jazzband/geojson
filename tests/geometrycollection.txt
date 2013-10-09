@@ -20,7 +20,7 @@ A dictionary can satisfy the protocol
   Decoding
   
   >>> gcb = geojson.loads(json)
-  >>> geojson.dumps(gcb, sort_keys=True, encoding="ascii")  # doctest: +ELLIPSIS
+  >>> geojson.dumps(gcb, sort_keys=True)  # doctest: +ELLIPSIS
   '{"geometries": [{"coordinates": [44..., 67...], "type": "Point"}], "type": "GeometryCollection"}'
 
 

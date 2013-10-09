@@ -45,8 +45,8 @@ feature class
   The first feature
   >>> feature.properties['link']
   'http://example.org/features/1'
-  >>> feature.geometry  # doctest: +ELLIPSIS
-  {'type': 'Point', 'coordinates': [53..., -4...]}
+  >>> geojson.dumps(feature.geometry, sort_keys=True)  # doctest: +ELLIPSIS
+  '{"coordinates": [53..., -4...], "type": "Point"}'
 
   Encoding
 
@@ -68,8 +68,8 @@ feature class
   The first feature
   >>> feature.properties['link']
   'http://example.org/features/1'
-  >>> feature.geometry  # doctest: +ELLIPSIS
-  {'type': 'Point', 'coordinates': [53..., -4...]}
+  >>> geojson.dumps(feature.geometry, sort_keys=True)  # doctest: +ELLIPSIS
+  '{"coordinates": [53..., -4...], "type": "Point"}'
 
 Test the geo interface
 ----------------------

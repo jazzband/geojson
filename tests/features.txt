@@ -32,7 +32,7 @@ feature class
   >>> from geojson.examples import SimpleWebFeature
   >>> feature = SimpleWebFeature(id='1',
   ...             geometry={'type': 'Point', 'coordinates': [53.04781795911469, -4.10888671875]},
-  ...             title=u'Feature 1', summary=u'The first feature',
+  ...             title='Feature 1', summary='The first feature',
   ...             link='http://example.org/features/1')
 
   It satisfies the feature protocol

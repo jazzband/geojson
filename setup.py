@@ -6,9 +6,10 @@ version = open("VERSION.txt", "rb").read().strip()
 
 deps = ["setuptools"]
 
-if sys.version_info[:2] not in [(2, 6), (2, 7)]:
-    sys.stderr.write("Sorry, only Python 2.6 and Python 2.7 are supported "
-                     "at this time. Python 3.x support is coming soon.\n")
+if sys.version_info[:2] not in [(2, 6), (2, 7)] and \
+        sys.version_info[:1] not in [(3, )]:
+    sys.stderr.write("Sorry, only Python 2.6, 2.7, and 3.x are supported "
+                     "at this time.\n")
     exit(1)
 
 # Get around this issue: http://bugs.python.org/issue15881

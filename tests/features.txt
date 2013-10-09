@@ -85,7 +85,7 @@ Test the geo interface
   ...        return {"id": self.id, "properties": {"title": self.title}, "geometry": {"type": "Point", "coordinates": (self.x, self.y)}}
 
   >>> ob = Thingy('1', 'thingy one', -106.0, 40.0)
-  >>> ob.__geo_interface__['geometry']  # doctest: +ELLIPSIS
-  {'type': 'Point', 'coordinates': (-106..., 40...)}
+  >>> geojson.dumps(ob.__geo_interface__['geometry'], sort_keys=True)  # doctest: +ELLIPSIS
+  '{"coordinates": [-106..., 40...], "type": "Point"}'
   >>> geojson.dumps(ob, sort_keys=True)  # doctest: +ELLIPSIS
   '{"geometry": {"coordinates": [-106..., 40...], "type": "Point"}, "id": "1", "properties": {"title": "thingy one"}}'

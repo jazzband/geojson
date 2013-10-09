@@ -45,7 +45,9 @@ Version 1.0 does not consider coordinate systems.
 The Simplest Possible Example
 -----------------------------
 
-Here is the simplest example of all 3 levels of the interface::
+Here is the simplest example of all 3 levels of the interface:
+
+.. code:: python
 
   # feature collection
   {'members': [
@@ -59,15 +61,21 @@ Here is the simplest example of all 3 levels of the interface::
   }
 
 What the Geo Interface does is allow feature collections to be adapted to PCL
-feature sources::
+feature sources:
+
+.. code:: python
 
   >>> pcl_source = IFeatureSource(data)
   
-features to be adapted for use with PCL like::
+features to be adapted for use with PCL like:
+
+.. code:: python
 
   >>> pcl_feature = IFeature(data['members'][0])
 
-and geometries to be adapted for use with Shapely::
+and geometries to be adapted for use with Shapely:
+
+.. code:: python
 
   >>> shapely_geom = asShape(data['members'][0]['geometry'])
 
@@ -77,7 +85,9 @@ Providing the Interface
 
 A Python object may provide the interface directly (as does the dict above), or
 expose an attribute named __geo_interface__ that directly provides the
-interface. The latter is inspired by the Numpy array interface. For example::
+interface. The latter is inspired by the Numpy array interface. For example:
+
+.. code:: python
 
   class Point(object):
       def __init__(self, x, y):

@@ -54,7 +54,7 @@ class GeoJSON(dict):
                     %r (geojson_factory: %r, cls: %r)
                     """ % (type_, geojson_factory, cls))
                 instance = geojson_factory(**d)
-            except (AttributeError, KeyError), invalid:
+            except (AttributeError, KeyError) as invalid:
                 if not strict:
                     instance = ob
                 else:

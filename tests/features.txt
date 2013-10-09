@@ -39,10 +39,10 @@ feature class
 
   >>> feature.id
   '1'
-  >>> feature.properties['title']
-  u'Feature 1'
-  >>> feature.properties['summary']
-  u'The first feature'
+  >>> print(feature.properties['title'])
+  Feature 1
+  >>> print(feature.properties['summary'])
+  The first feature
   >>> feature.properties['link']
   'http://example.org/features/1'
   >>> feature.geometry  # doctest: +ELLIPSIS

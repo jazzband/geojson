@@ -58,22 +58,22 @@ Custom objects can be decoded into a json structure containing valid geojson
   '{"description": "A nice bike ride around some mountains", "geometry": {"coordinates": [[1..., 2...], [2..., 3...]], "type": "LineString"}, "title": "Snowdonia circular", "type": "Feature"}'
 
   >>> r = geojson.loads(json) 
-  >>> print r["description"] 
+  >>> print(r["description"])
   A nice bike ride around some mountains
 
-  >>> print r["title"]
+  >>> print(r["title"])
   Snowdonia circular
 
-  >>> print r["type"]
+  >>> print(r["type"])
   Feature
 
   >>> r["geometry"]["coordinates"]# doctest: +ELLIPSIS
   [[1..., 2...], [2..., 3...]]
 
-  >>> print r["id"]
+  >>> print(r["id"])
   None
 
-  >>> print r["geometry"]["type"] 
+  >>> print(r["geometry"]["type"])
   LineString
 
   >>> r["properties"]

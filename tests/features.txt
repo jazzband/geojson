@@ -62,9 +62,9 @@ feature class
   <class 'geojson.examples.SimpleWebFeature'>
   >>> feature.id
   '1'
-  >>> print feature.properties['title']
+  >>> print(feature.properties['title'])
   Feature 1
-  >>> print feature.properties['summary']
+  >>> print(feature.properties['summary'])
   The first feature
   >>> feature.properties['link']
   'http://example.org/features/1'

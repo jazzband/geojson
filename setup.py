@@ -20,7 +20,7 @@ import multiprocessing  # NOQA
 
 setup(
     name="geojson",
-    version=version,
+    version="1.0.1",
     description="Encoder/decoder for simple GIS features",
     license="BSD",
     keywords="gis geography json",

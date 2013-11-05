@@ -1,6 +1,15 @@
 Changes
 =======
 
+1.0.4 (unreleased)
+------------------
+
+- Flake8 everything
+- Transition all documentation to reStructuredText
+- Start using Travis CI
+- Support Python 3
+- Fix broken testcase when run using Python 2.6
+
 1.0.3 (2009-11-25)
 ------------------
 

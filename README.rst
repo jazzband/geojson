@@ -1,8 +1,8 @@
 geojson: encode/decode geodata
 ==============================
 
-.. image:: https://travis-ci.org/frewsxcv/geojson.png?branch=master
-   :target: https://travis-ci.org/frewsxcv/geojson
+.. image:: https://travis-ci.org/frewsxcv/python-geojson.png?branch=master
+   :target: https://travis-ci.org/frewsxcv/python-geojson
 
 This package contains:
 

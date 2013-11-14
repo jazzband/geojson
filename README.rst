@@ -1,21 +1,55 @@
-geojson: encode/decode geodata
-==============================
+python-geojson
+==============
 
 .. image:: https://travis-ci.org/frewsxcv/python-geojson.png?branch=master
    :target: https://travis-ci.org/frewsxcv/python-geojson
 
+Python bindings for GeoJSON
 This package contains:
 
+- Functions for encoding and decoding GeoJSON_ formatted data.
 - The reference implementation of the Python geo interface:
 
-  https://gist.github.com/2217756
+geojson provides geometry, feature, and collection classes, and supports pickle-style dump and load of objects that provide the lab's Python geo interface. Here's an example of a round-trip through the GeoJSON format:
 
-- Functions for encoding and decoding GeoJSON_ formatted
-  data.
 
-geojson provides geometry, feature, and collection classes, and supports
-pickle-style dump and load of objects that provide the lab's Python geo
-interface. Here's an example of a round-trip through the GeoJSON format:
+Encoding/decoding GeoJSON
+-------------------------
+
+
+Shortcuts for creating GeoJSON items
+------------------------------------
+
+Point
+~~~~~
+
+LineString
+~~~~~~~~~~
+
+Polygon
+~~~~~~~
+
+MultiPoint
+~~~~~~~~~~
+
+MultiLineString
+~~~~~~~~~~~~~~~
+
+MultiPolygon
+~~~~~~~~~~~~
+
+GeometryCollection
+~~~~~~~~~~~~~~~~~~
+
+Feature
+~~~~~~~
+
+FeatureCollection
+~~~~~~~~~~~~~~~~~
+
+
+
+
 
 .. code:: python
 
@@ -51,7 +85,11 @@ The geometry classes interoperate with Shapely via the geo interface:
   ...    x is None
   True
 
-.. _GeoJSON: http://geojson.org/
+
+Geo interface
+-------------
+
+  https://gist.github.com/2217756
 
 
 Credits
@@ -60,3 +98,6 @@ Credits
 * Sean Gillies <sgillies@frii.com>
 * Matthew Russell <matt@sanoodi.com>
 * Corey Farwell <coreyf@rwell.org>
+
+
+.. _GeoJSON: http://geojson.org/

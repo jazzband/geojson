@@ -8,7 +8,7 @@ This library contains:
 
 - Classes for all GeoJSON Objects
 - Functions for encoding and decoding GeoJSON_ formatted data
-- An implementation of the Python `__geo_interface__ Specification`
+- An implementation of the Python `__geo_interface__ Specification`_
 
 Installation
 ------------

@@ -214,8 +214,6 @@ Custom classes
 
 This encoding/decoding functionality shown in the previous can be extended to custom classes using the interface described by the `__geo_interface__ Specification`_.
 
-.. _\_\_geo\_interface\_\_ Specification: http://google.com
-
 .. code:: python
 
   >>> import geojson
@@ -244,3 +242,4 @@ Credits
 
 .. _GeoJSON: http://geojson.org/
 .. _The GeoJSON Format Specification: http://www.geojson.org/geojson-spec.html
+.. _\_\_geo\_interface\_\_ Specification: https://gist.github.com/sgillies/2217756

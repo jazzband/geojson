@@ -185,7 +185,7 @@ General information about FeatureCollection can be found in `Section 2.3`_ withi
 GeoJSON encoding/decoding
 -------------------------
 
-All of the GeoJSON Objects implemented in this library can be encoded and decoded into raw GeoJSON with the ``geosjon.dump``, ``geojson.dumps``, ``geojson.load``, and ``geojson.loads`` methods.
+All of the GeoJSON Objects implemented in this library can be encoded and decoded into raw GeoJSON with the ``geosjon.dump``, ``geojson.dumps``, ``geojson.load``, and ``geojson.loads`` functions.
 
 .. code:: python
 

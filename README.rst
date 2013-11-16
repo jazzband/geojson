@@ -196,10 +196,10 @@ All of the GeoJSON Objects implemented in this library can be encoded and decode
   >>> my_point  # doctest: +ELLIPSIS
   {"coordinates": [43.2..., -1.53...], "type": "Point"}
 
-  >>> dump = geojson.dumps(my_point)
+  >>> dump = geojson.dumps(my_point, sort_keys=True)
 
   >>> dump  # doctest: +ELLIPSIS
-  '{"type": "Point", "coordinates": [43.2..., -1.53...]}'
+  '{"coordinates": [43.2..., -1.53...], "type": "Point"}'
 
   >>> geojson.loads(dump)  # doctest: +ELLIPSIS
   {"coordinates": [43.2..., -1.53...], "type": "Point"}
@@ -226,8 +226,8 @@ This encoding/decoding functionality shown in the previous can be extended to cu
 
   >>> point_instance = MyPoint(52.235, -19.234)
 
-  >>> geojson.dumps(point_instance)  # doctest: +ELLIPSIS
-  '{"type": "Point", "coordinates": [52.23..., -19.23...]}'
+  >>> geojson.dumps(point_instance, sort_keys=True)  # doctest: +ELLIPSIS
+  '{"coordinates": [52.23..., -19.23...], "type": "Point"}'
 
 Credits
 -------

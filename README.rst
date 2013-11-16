@@ -12,6 +12,13 @@ This package contains:
 
 geojson provides geometry, feature, and collection classes, and supports pickle-style dump and load of objects that provide the lab's Python geo interface. Here's an example of a round-trip through the GeoJSON format:
 
+Installation
+------------
+
+.. code::
+
+  pip install geojson
+
 GeoJSON Objects
 ---------------
 

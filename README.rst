@@ -4,13 +4,11 @@ python-geojson
 .. image:: https://travis-ci.org/frewsxcv/python-geojson.png?branch=master
    :target: https://travis-ci.org/frewsxcv/python-geojson
 
-Python bindings for GeoJSON
-This package contains:
+This library contains:
 
-- Functions for encoding and decoding GeoJSON_ formatted data.
-- The reference implementation of the Python geo interface:
-
-geojson provides geometry, feature, and collection classes, and supports pickle-style dump and load of objects that provide the lab's Python geo interface. Here's an example of a round-trip through the GeoJSON format:
+- Classes for all GeoJSON Objects
+- Functions for encoding and decoding GeoJSON_ formatted data
+- An implementation of the Python `__geo_interface__ Specification`
 
 Installation
 ------------

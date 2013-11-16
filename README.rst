@@ -21,7 +21,7 @@ python-geojson is compatible with Python 2.6, 2.7, 3.2, and 3.3. It is listed on
 
   pip install geojson
 
-.. _PyPi as geojson: https://pypi.python.org/pypi/geojson/
+.. _PyPi as 'geojson': https://pypi.python.org/pypi/geojson/
 .. _pip: http://www.pip-installer.org
 
 GeoJSON Objects

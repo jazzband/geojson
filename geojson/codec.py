@@ -1,10 +1,3 @@
-# ============================================================================
-# GeoJSON. Copyright (C) 2007 Sean C. Gillies
-#
-# See ../LICENSE.txt
-#
-# Contact: Sean Gillies, sgillies@frii.com
-# ============================================================================
 import json
 
 import geojson

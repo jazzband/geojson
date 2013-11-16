@@ -15,7 +15,7 @@ geojson provides geometry, feature, and collection classes, and supports pickle-
 Installation
 ------------
 
-python-geojson is compatible with Python 2.6, 2.7, 3.2, and 3.3. It is listed on `PyPi as geojson`_. The recommended way to install is via pip_:
+python-geojson is compatible with Python 2.6, 2.7, 3.2, and 3.3. It is listed on `PyPi as 'geojson'`_. The recommended way to install is via pip_:
 
 .. code::
 

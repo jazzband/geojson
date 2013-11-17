@@ -1,7 +1,7 @@
 Changes
 =======
 
-1.0.4 (unreleased)
+1.0.4 (2013-11-16)
 ------------------
 
 - Flake8 everything

@@ -1,6 +1,11 @@
 Changes
 =======
 
+1.0.5 (2013-11-16)
+------------------
+
+- Remove warning about RSTs in test/ upon install
+
 1.0.4 (2013-11-16)
 ------------------
 

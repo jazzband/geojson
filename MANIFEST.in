@@ -1,2 +1,2 @@
 include *.rst
-recursive-include tests *.rst *.txt *.py
+recursive-include tests *.txt *.py

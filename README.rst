@@ -142,7 +142,7 @@ GeometryCollection
 
 General information about GeometryCollection can be found in `Section 2.1.8`_ and `Appendix A: GeometryCollection`_ within `The GeoJSON Format Specification`_.
 
-.. _Section 2.1.8: http://www.geojson.org/geojson-spec.html#geometrycollection
+.. _Section 2.1.8: http://www.geojson.org/geojson-spec.html#geometry-collection
 .. _Appendix A\: GeometryCollection: http://www.geojson.org/geojson-spec.html#geometrycollection
 
 Feature

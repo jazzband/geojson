@@ -100,8 +100,16 @@ Polygon
 
   >>> from geojson import Polygon
 
-  >>> Polygon([(2.38, 57.322), (23.194, -20.28), (-120.43, 19.15)])  # doctest: +ELLIPSIS
-  {"coordinates": [[2.3..., 57.32...], [23.19..., -20.2...], [-120.4..., 19.1...]], "type": "Polygon"}
+  >>> # no hole within polygon
+  >>> Polygon(([(2.38, 57.322), (23.194, -20.28), (-120.43, 19.15), (2.38, 57.322)],))  # doctest: +ELLIPSIS
+  {"coordinates": [[[2.3..., 57.32...], [23.19..., -20.2...], [-120.4..., 19.1...]]], "type": "Polygon"}
+
+  >>> # hole within polygon
+  >>> Polygon((
+  ...     [(2.38, 57.322), (23.194, -20.28), (-120.43, 19.15), (2.38, 57.322)],
+  ...     [(-5.21, 23.51), (15.21, -10.81), (-20.51, 1.51), (-5.21, 23.51)]
+  ... ))  # doctest: +ELLIPSIS
+  {"coordinates": [[[2.3..., 57.32...], [23.19..., -20.2...], [-120.4..., 19.1...]], [[-5.2..., 23.5...], [15.2..., -10.8...], [-20.5..., 1.5...], [-5.2..., 23.5...]]], "type": "Polygon"}
 
 General information about Polygon can be found in `Section 2.1.6`_ and `Appendix A: Polygon`_ within `The GeoJSON Format Specification`_.
 
@@ -116,10 +124,10 @@ MultiPolygon
   >>> from geojson import MultiPolygon
 
   >>> MultiPolygon([
-  ...     [(3.78, 9.28), (-130.91, 1.52), (35.12, 72.234)],
-  ...     [(23.18, -34.29), (-1.31, -4.61), (3.41, 77.91)]
+  ...     ([(3.78, 9.28), (-130.91, 1.52), (35.12, 72.234), (3.78, 9.28)],),
+  ...     ([(23.18, -34.29), (-1.31, -4.61), (3.41, 77.91), (23.18, -34.29)],)
   ... ])  # doctest: +ELLIPSIS
-  {"coordinates": [[[3.7..., 9.2...], [-130.9..., 1.5...], [35.1..., 72.23...]], [[23.1..., -34.2...], [-1.3..., -4.6...], [3.4..., 77.9...]]], "type": "MultiPolygon"}
+  {"coordinates": [[[[3.7..., 9.2...], [-130.9..., 1.5...], [35.1..., 72.23...]]], [[[23.1..., -34.2...], [-1.3..., -4.6...], [3.4..., 77.9...]]]], "type": "MultiPolygon"}
 
 General information about MultiPolygon can be found in `Section 2.1.7`_ and `Appendix A: MultiPolygon`_ within `The GeoJSON Format Specification`_.
 

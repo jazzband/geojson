@@ -17,7 +17,7 @@ import multiprocessing  # NOQA
 
 setup(
     name="geojson",
-    version="1.0.5",
+    version="1.0.6",
     description="Python bindings and utilities for GeoJSON",
     license="BSD",
     keywords="gis geography json",

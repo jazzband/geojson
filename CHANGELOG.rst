@@ -1,6 +1,12 @@
 Changes
 =======
 
+1.0.6 (2014-01-18)
+------------------
+
+- Update README.rst documentation (fix errors, add examples)
+- Allow simplejson to be used again
+
 1.0.5 (2013-11-16)
 ------------------
 

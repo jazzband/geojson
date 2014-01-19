@@ -1,7 +1,10 @@
 import sys
 import geojson
 
-import json
+try:
+    import simplejson as json
+except ImportError:
+    import json
 from collections import MutableMapping
 is_mapping = lambda obj: isinstance(obj, MutableMapping)
 mapping_base = MutableMapping

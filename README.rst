@@ -160,7 +160,7 @@ Feature
 
   >>> from geojson import Feature, Point
 
-  >>> my_point = Point((-3.68, 40.4))
+  >>> my_point = Point((-3.68, 40.41))
 
   >>> Feature(geometry=my_point)  # doctest: +ELLIPSIS
   {"geometry": {"coordinates": [-3.68..., 40.4...], "type": "Point"}, "id": null, "properties": {}, "type": "Feature"}

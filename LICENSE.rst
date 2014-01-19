@@ -1,4 +1,4 @@
-Copyright © 2013, Corey Farwell
+Copyright © 2014, contributors of python-geojson
 
 All rights reserved.
 

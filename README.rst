@@ -238,6 +238,11 @@ This encoding/decoding functionality shown in the previous can be extended to cu
   >>> geojson.dumps(point_instance, sort_keys=True)  # doctest: +ELLIPSIS
   '{"coordinates": [52.23..., -19.23...], "type": "Point"}'
 
+Development
+-----------
+
+To build this project, run `python setup.py build`. To run the unit tests, run `python setup.py nosetests`.
+
 Credits
 -------
 

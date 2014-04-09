@@ -30,9 +30,7 @@ setup(
     packages=["geojson"],
     package_dir={"geojson": "geojson"},
     package_data={"geojson": ["*.rst"]},
-    tests_require=["nose>=1.3.0", "coverage==3.7.1"],
     install_requires=["setuptools"],
-    test_suite="nose.collector",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",

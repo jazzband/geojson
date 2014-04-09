@@ -241,7 +241,7 @@ This encoding/decoding functionality shown in the previous can be extended to cu
 Development
 -----------
 
-To build this project, run :code:`python setup.py build`. To run the unit tests, run :code:`python setup.py nosetests`.
+To build this project, run :code:`python setup.py build`. To run the unit tests, run :code:`sh runtests.sh`.
 
 Credits
 -------

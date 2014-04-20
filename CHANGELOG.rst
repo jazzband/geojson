@@ -1,6 +1,14 @@
 Changes
 =======
 
+1.0.7 (2014-04-19)
+------------------
+
+- Compatibility with Python 3.4
+- Remove nose dependency
+- Convert doctests to unittests
+- Run tests using runtests.sh
+
 1.0.6 (2014-01-18)
 ------------------
 

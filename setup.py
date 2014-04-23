@@ -1,9 +1,16 @@
+import doctest
 import sys
 import io
+import unittest
 from setuptools import setup
 
 
 readme_text = io.open("README.rst", "r").read()
+
+def test_suite():
+    suite = unittest.TestLoader().discover("tests")
+    suite.addTest(doctest.DocFileSuite("README.rst"))
+    return suite
 
 if sys.version_info[:2] not in [(2, 6), (2, 7)] and \
         sys.version_info[:1] not in [(3, )]:
@@ -31,6 +38,7 @@ setup(
     package_dir={"geojson": "geojson"},
     package_data={"geojson": ["*.rst"]},
     install_requires=["setuptools"],
+    test_suite="setup.test_suite",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",

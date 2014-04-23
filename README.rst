@@ -3,6 +3,8 @@ python-geojson
 
 .. image:: https://travis-ci.org/frewsxcv/python-geojson.png?branch=master
    :target: https://travis-ci.org/frewsxcv/python-geojson
+.. image:: https://coveralls.io/repos/frewsxcv/python-geojson/badge.png?branch=enable-coveralls
+   :target: https://coveralls.io/r/frewsxcv/python-geojson?branch=enable-coveralls 
 
 This library contains:
 
@@ -241,7 +243,7 @@ This encoding/decoding functionality shown in the previous can be extended to cu
 Development
 -----------
 
-To build this project, run :code:`python setup.py build`. To run the unit tests, run :code:`sh runtests.sh`.
+To build this project, run :code:`python setup.py build`. To run the unit tests, run :code:`python setup.py test`.
 
 Credits
 -------

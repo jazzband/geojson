@@ -12,6 +12,12 @@ This library contains:
 - Classes for all GeoJSON Objects
 - An implementation of the Python `__geo_interface__ Specification`_
 
+**Table of Contents**
+
+.. contents::
+   :backlinks: none
+   :local:
+
 Installation
 ------------
 

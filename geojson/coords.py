@@ -4,7 +4,7 @@ def coords(obj):
     """Yield all coordinate coordinate tuples from a geometry or feature."""
     if isinstance(obj, (tuple, list)):
         coordinates = obj
-    elif obj.has_key('geometry'):
+    elif 'geometry' in obj:
         coordinates = obj['geometry']['coordinates']
     else:
         coordinates = obj.get('coordinates', obj)

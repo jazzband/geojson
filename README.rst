@@ -3,8 +3,8 @@ python-geojson
 
 .. image:: https://travis-ci.org/frewsxcv/python-geojson.png?branch=master
    :target: https://travis-ci.org/frewsxcv/python-geojson
-.. image:: https://coveralls.io/repos/frewsxcv/python-geojson/badge.png?branch=enable-coveralls
-   :target: https://coveralls.io/r/frewsxcv/python-geojson?branch=enable-coveralls 
+.. image:: https://coveralls.io/repos/frewsxcv/python-geojson/badge.png
+   :target: https://coveralls.io/r/frewsxcv/python-geojson
 
 This library contains:
 

@@ -15,9 +15,15 @@ class GeoJSON(dict):
     __str__ = __repr__
 
     def __setattr__(self, name, value):
+        """
+        Permit dictionary items to be set like object attributes
+        """
         self[name] = value
 
     def __getattr__(self, name):
+        """
+        Permit dictionary items to be retrieved like object attributes
+        """
         try:
             v = self[name]
         except KeyError:
@@ -25,6 +31,9 @@ class GeoJSON(dict):
         return v
 
     def __delattr__(self, name):
+        """
+        Permit dictionary items to be deleted like object attributes
+        """
         del self[name]
 
     @property

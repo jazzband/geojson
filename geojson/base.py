@@ -25,10 +25,9 @@ class GeoJSON(dict):
         Permit dictionary items to be retrieved like object attributes
         """
         try:
-            v = self[name]
+            return self[name]
         except KeyError:
             raise AttributeError(name)
-        return v
 
     def __delattr__(self, name):
         """

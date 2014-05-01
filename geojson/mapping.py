@@ -19,11 +19,14 @@ def is_mapping(obj):
 
 def to_mapping(obj):
     mapping = getattr(obj, GEO_INTERFACE_MARKER, None)
-    if mapping is None:
-        if is_mapping(obj):
-            mapping = obj
-        elif isinstance(obj, geojson.GeoJSON):
-            mapping = dict(obj)
-        else:
-            mapping = json.loads(json.dumps(obj))
-    return mapping
+
+    if mapping is not None:
+        return mapping
+
+    if is_mapping(obj):
+        return obj
+
+    if isinstance(obj, geojson.GeoJSON):
+        return dict(obj)
+
+    return json.loads(json.dumps(obj))

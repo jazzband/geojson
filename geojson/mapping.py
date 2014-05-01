@@ -1,11 +1,12 @@
-import geojson
-
-
+from collections import MutableMapping
 try:
     import simplejson as json
 except ImportError:
     import json
-from collections import MutableMapping
+
+import geojson
+
+
 is_mapping = lambda obj: isinstance(obj, MutableMapping)
 mapping_base = MutableMapping
 

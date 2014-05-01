@@ -18,9 +18,8 @@ def to_mapping(obj):
     if mapping is None:
         if is_mapping(obj):
             mapping = obj
+        elif isinstance(obj, geojson.GeoJSON):
+            mapping = dict(obj)
         else:
-            if isinstance(obj, geojson.GeoJSON):
-                mapping = dict(obj)
-            else:
-                mapping = json.loads(json.dumps(obj))
+            mapping = json.loads(json.dumps(obj))
     return mapping

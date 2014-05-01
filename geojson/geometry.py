@@ -18,9 +18,8 @@ class Geometry(GeoJSON):
         for coord in coords:
             if isinstance(coord, (list, tuple)):
                 self.clean_coordinates(coord)
-            else:
-                if not isinstance(coord, (float, int, Decimal)):
-                    raise ValueError("%r is not JSON compliant number", coord)
+            elif not isinstance(coord, (float, int, Decimal)):
+                raise ValueError("%r is not JSON compliant number", coord)
 
 
 class GeometryCollection(GeoJSON):

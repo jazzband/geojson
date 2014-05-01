@@ -7,11 +7,14 @@ except ImportError:
 import geojson
 
 
-is_mapping = lambda obj: isinstance(obj, MutableMapping)
 mapping_base = MutableMapping
 
 
 GEO_INTERFACE_MARKER = "__geo_interface__"
+
+
+def is_mapping(obj):
+    return isinstance(obj, MutableMapping)
 
 
 def to_mapping(obj):

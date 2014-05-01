@@ -1,5 +1,5 @@
-import sys
 import geojson
+
 
 try:
     import simplejson as json

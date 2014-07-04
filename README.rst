@@ -204,7 +204,7 @@ Visualize the result of the example above `here <https://gist.github.com/frewsxc
 GeoJSON encoding/decoding
 -------------------------
 
-All of the GeoJSON Objects implemented in this library can be encoded and decoded into raw GeoJSON with the ``geosjon.dump``, ``geojson.dumps``, ``geojson.load``, and ``geojson.loads`` functions.
+All of the GeoJSON Objects implemented in this library can be encoded and decoded into raw GeoJSON with the ``geojson.dump``, ``geojson.dumps``, ``geojson.load``, and ``geojson.loads`` functions.
 
 .. code:: python
 

@@ -52,7 +52,13 @@ class GeoJSON(dict):
             instance = ob
         else:
             mapping = to_mapping(ob)
-            d = dict((str(k), mapping[k]) for k in mapping)
+            d = {}
+            for k in mapping:
+                try:
+                    str_key = str(k)
+                except (UnicodeEncodeError):
+                    str_key = unicode(k)
+                d[str_key] = mapping[k]
             try:
                 type_ = d.pop("type")
                 geojson_factory = getattr(geojson.factory, type_)

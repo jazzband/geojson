@@ -1,3 +1,4 @@
+from io import BytesIO
 import unittest
 
 import geojson
@@ -21,6 +22,11 @@ class FeaturesTest(unittest.TestCase):
         o = geojson.loads(json)
         output = geojson.dumps(o, sort_keys=True)
         self.assertEqual(output, '{"geometry": {"coordinates": [53, -4], "type": "Point"}, "id": "1", "properties": {"title": "Dict 1"}, "type": "Feature"}')
+
+    def test_unicode_properties(self):
+        with open("tests/data.geojson") as file_:
+            obj = geojson.load(file_)
+        geojson.dumps(obj)
 
     def test_feature_class(self):
         """

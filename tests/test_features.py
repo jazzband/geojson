@@ -46,7 +46,7 @@ class FeaturesTest(unittest.TestCase):
         self.assertEqual(geojson.dumps(feature, sort_keys=True), '{"geometry": {"coordinates": [53, -4], "type": "Point"}, "id": "1", "properties": {"link": "http://example.org/features/1", "summary": "The first feature", "title": "Feature 1"}, "type": "Feature"}')
 
         # Decoding
-        factory = geojson.examples.createSimpleWebFeature 
+        factory = geojson.examples.createSimpleWebFeature
         json = '{"geometry": {"type": "Point", "coordinates": [53, -4]}, "id": "1", "properties": {"summary": "The first feature", "link": "http://example.org/features/1", "title": "Feature 1"}}'
         feature = geojson.loads(json, object_hook=factory, encoding="utf-8")
         self.assertEqual(repr(type(feature)), "<class 'geojson.examples.SimpleWebFeature'>")

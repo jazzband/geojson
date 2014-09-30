@@ -249,10 +249,10 @@ This encoding/decoding functionality shown in the previous can be extended to cu
 Helpful utilities
 -----------------
 
-geojson.utils.coords
-~~~~~~~~~~~~~~~~~~~~
+coords
+~~~~~~
 
-`coords` yields all coordinate tuples from a geometry or feature object.
+`geojson.utils.coords` yields all coordinate tuples from a geometry or feature object.
 
 .. code:: python
 
@@ -265,10 +265,10 @@ geojson.utils.coords
   >>> list(geojson.utils.coords(my_feature))  # doctest: +ELLIPSIS
   [(-152.62..., 51.21...), (5.21..., 10.69...)]
 
-geojson.utils.map_coords
-~~~~~~~~~~~~~~~~~~~~~~~~
+map_coords
+~~~~~~~~~~
 
-`map_coords` maps a function over all coordinate tuples and returns a geometry of the same type. Useful for translating a geometry in space or flipping coordinate order.
+`geojson.utils.map_coords` maps a function over all coordinate tuples and returns a geometry of the same type. Useful for translating a geometry in space or flipping coordinate order.
 
 .. code:: python
 

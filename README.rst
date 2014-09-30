@@ -246,6 +246,37 @@ This encoding/decoding functionality shown in the previous can be extended to cu
   >>> geojson.dumps(point_instance, sort_keys=True)  # doctest: +ELLIPSIS
   '{"coordinates": [52.23..., -19.23...], "type": "Point"}'
 
+Helpful utilities
+-----------------
+
+`geojson.utils.coords`
+~~~~~~~~~~~~~~~~~~~~~~
+
+`coords` yields all coordinate tuples from a geometry or feature object.
+
+.. code:: python
+
+  >>> import geojson
+
+  >>> my_line = LineString([(-152.62, 51.21), (5.21, 10.69)])
+
+  >>> my_feature = geojson.Feature(geometry=my_line)
+
+  >>> list(geojson.utils.coords(my_feature))  # doctest: +ELLIPSIS
+  [(-152.62..., 51.21...), (5.21..., 10.69...)]
+
+`geojson.utils.map_coords`
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`map_coords` maps a function over all coordinate tuples and returns a geometry of the same type. Useful for translating a geometry in space or flipping coordinate order.
+
+.. code:: python
+
+  >>> import geojson
+
+  >>> geojson.utils.map_coords(lambda x: x/2, geojson.Point((-115.81, 37.24)))  # doctest: +ELLIPSIS
+  {'type': 'Point', 'coordinates': (-57.905..., 18.62...)}
+
 Development
 -----------
 

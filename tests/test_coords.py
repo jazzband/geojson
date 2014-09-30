@@ -1,7 +1,7 @@
 import unittest
 
 import geojson
-from geojson.coords import coords, map_coords
+from geojson.utils import coords, map_coords
 
 
 class CoordsTestCase(unittest.TestCase):

@@ -1,8 +1,8 @@
 Changes
 =======
 
-1.0.8 (TBD)
------------
+1.0.8 (2014-09-30)
+------------------
 
 - Fix bug where unicode keys don't get decoded properly
 - Add coords and map_coords utilities

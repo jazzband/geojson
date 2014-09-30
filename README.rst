@@ -252,7 +252,7 @@ Helpful utilities
 coords
 ~~~~~~
 
-`geojson.utils.coords` yields all coordinate tuples from a geometry or feature object.
+:code:`geojson.utils.coords` yields all coordinate tuples from a geometry or feature object.
 
 .. code:: python
 
@@ -268,7 +268,7 @@ coords
 map_coords
 ~~~~~~~~~~
 
-`geojson.utils.map_coords` maps a function over all coordinate tuples and returns a geometry of the same type. Useful for translating a geometry in space or flipping coordinate order.
+:code:`geojson.utils.map_coords` maps a function over all coordinate tuples and returns a geometry of the same type. Useful for translating a geometry in space or flipping coordinate order.
 
 .. code:: python
 

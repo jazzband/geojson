@@ -3,7 +3,8 @@ import io
 from setuptools import setup
 
 
-readme_text = io.open("README.rst").read()
+with io.open("README.rst") as readme_file:
+    readme_text = readme_file.read()
 
 def test_suite():
     import doctest

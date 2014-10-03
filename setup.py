@@ -1,6 +1,7 @@
-import sys
 import io
 from setuptools import setup
+import sys
+
 
 
 with io.open("README.rst") as readme_file:

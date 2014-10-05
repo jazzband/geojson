@@ -14,10 +14,11 @@ class Geometry(GeoJSON):
         if crs:
             self["crs"] = self.to_instance(crs, strict=True)
 
-    def clean_coordinates(self, coords):
+    @classmethod
+    def clean_coordinates(cls, coords):
         for coord in coords:
             if isinstance(coord, (list, tuple)):
-                self.clean_coordinates(coord)
+                cls.clean_coordinates(coord)
             elif not isinstance(coord, (float, int, Decimal)):
                 raise ValueError("%r is not JSON compliant number" % coord)
 

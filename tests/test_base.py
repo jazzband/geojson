@@ -12,11 +12,11 @@ class TypePropertyTestCase(unittest.TestCase):
     def test_type_property(self):
         json_str = '{"type": "Feature", "geometry": null, "id": 1, "properties": {"type": "é"}}'
         geojson_obj = geojson.loads(json_str)
-        self.assertIsInstance(geojson_obj, geojson.GeoJSON)
+        self.assertTrue(isinstance(geojson_obj, geojson.GeoJSON))
 
         json_str = '{"type": "Feature", "geometry": null, "id": 1, "properties": {"type": null}}'
         geojson_obj = geojson.loads(json_str)
-        self.assertIsInstance(geojson_obj, geojson.GeoJSON)
+        self.assertTrue(isinstance(geojson_obj, geojson.GeoJSON))
 
 
 class OperatorOverloadingTestCase(unittest.TestCase):

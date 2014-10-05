@@ -66,7 +66,7 @@ class GeoJSON(dict):
                 except (UnicodeEncodeError):
                     # If the type contains non-ascii characters, we can assume
                     # it's not a valid GeoJSON type
-                    raise AttributeError(u"{} is not a GeoJSON type".format(
+                    raise AttributeError(u"{0} is not a GeoJSON type".format(
                         unicode(type_)))
                 geojson_factory = getattr(geojson.factory, type_)
                 if not issubclass(geojson_factory, GeoJSON):

@@ -25,6 +25,13 @@ class TypePropertyTestCase(unittest.TestCase):
         self.assertTrue(isinstance(geojson_obj, geojson.GeoJSON))
         self.assertTrue("type" in geojson_obj.properties)
 
+    def test_type_property_reserved(self):
+        json_str = '{"type": "Feature", "geometry": null, "id": 1, "properties": {"type": "Feature"}}'
+        geojson_obj = geojson.loads(json_str)
+        self.assertTrue(isinstance(geojson_obj, geojson.GeoJSON))
+        self.assertFalse(isinstance(geojson_obj.properties, geojson.GeoJSON))
+        self.assertEqual(1, len(geojson_obj.properties.keys()))
+        self.assertTrue("type" in geojson_obj.properties)
 
 class OperatorOverloadingTestCase(unittest.TestCase):
     """

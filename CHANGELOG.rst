@@ -1,6 +1,11 @@
 Changes
 =======
 
+1.0.9
+-----
+
+- Fix bug where unicode/non-string properties with a 'type' key cause a crash
+
 1.0.8 (2014-09-30)
 ------------------
 

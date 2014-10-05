@@ -12,9 +12,8 @@ def coords(obj):
         if isinstance(e, (float, int)):
             yield tuple(coordinates)
             break
-        else:
-            for f in coords(e):
-                yield f
+        for f in coords(e):
+            yield f
 
 def map_coords(func, obj):
     """Return coordinates, mapped pair-wise using the provided function."""

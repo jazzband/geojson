@@ -7,21 +7,21 @@ class CRSTest(unittest.TestCase):
 
     def setUp(self):
         self.crs = geojson.crs.Named(
-            properties = {
+            properties={
                 "name": "urn:ogc:def:crs:EPSG::3785",
             }
         )
 
     def test_crs_repr(self):
         actual = repr(self.crs)
-        expected = '{"properties": {"name": "urn:ogc:def:crs:EPSG::3785"}, ' \
-                   '"type": "name"}'
+        expected = ('{"properties": {"name": "urn:ogc:def:crs:EPSG::3785"},'
+                    ' "type": "name"}')
         self.assertEqual(actual, expected)
 
     def test_crs_encode(self):
         actual = geojson.dumps(self.crs, sort_keys=True)
-        expected = '{"properties": {"name": "urn:ogc:def:crs:EPSG::3785"}, ' \
-                   '"type": "name"}'
+        expected = ('{"properties": {"name": "urn:ogc:def:crs:EPSG::3785"},'
+                    ' "type": "name"}')
         self.assertEqual(actual, expected)
 
     def test_crs_decode(self):

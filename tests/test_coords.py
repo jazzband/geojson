@@ -20,7 +20,8 @@ class CoordsTestCase(unittest.TestCase):
     def test_multipolygon(self):
         g = geojson.MultiPolygon([
             ([(3.78, 9.28), (-130.91, 1.52), (35.12, 72.234), (3.78, 9.28)],),
-            ([(23.18, -34.29), (-1.31, -4.61), (3.41, 77.91), (23.18, -34.29)],)])
+            ([(23.18, -34.29), (-1.31, -4.61),
+              (3.41, 77.91), (23.18, -34.29)],)])
         itr = coords(g)
         pairs = list(itr)
         self.assertEqual(pairs[0], (3.78, 9.28))
@@ -41,7 +42,7 @@ class CoordsTestCase(unittest.TestCase):
 
     def test_map_polygon(self):
         g = geojson.Polygon([
-            [(3.78, 9.28), (-130.91, 1.52), (35.12, 72.234), (3.78, 9.28)],])
+            [(3.78, 9.28), (-130.91, 1.52), (35.12, 72.234), (3.78, 9.28)], ])
         result = map_coords(lambda x: x, g)
         self.assertEqual(result['type'], 'Polygon')
         self.assertEqual(result['coordinates'][0][0], (3.78, 9.28))
@@ -50,7 +51,8 @@ class CoordsTestCase(unittest.TestCase):
     def test_map_multipolygon(self):
         g = geojson.MultiPolygon([
             ([(3.78, 9.28), (-130.91, 1.52), (35.12, 72.234), (3.78, 9.28)],),
-            ([(23.18, -34.29), (-1.31, -4.61), (3.41, 77.91), (23.18, -34.29)],)])
+            ([(23.18, -34.29), (-1.31, -4.61),
+              (3.41, 77.91), (23.18, -34.29)],)])
         result = map_coords(lambda x: x, g)
         self.assertEqual(result['type'], 'MultiPolygon')
         self.assertEqual(result['coordinates'][0][0][0], (3.78, 9.28))

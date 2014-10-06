@@ -5,5 +5,11 @@ from geojson.feature import Feature, FeatureCollection
 from geojson.base import GeoJSON
 from geojson.crs import Named, Linked
 
+__all__ = ([Point, LineString, Polygon] +
+           [MultiLineString, MultiPoint, MultiPolygon] +
+           [GeometryCollection] +
+           [Feature, FeatureCollection] +
+           [GeoJSON])
+
 name = Named
 link = Linked

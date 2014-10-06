@@ -72,28 +72,19 @@ class EncodingDecodingTest(unittest.TestCase):
         self.restaurant1 = Restaurant1(self.name, self.latlng)
         self.restaurant2 = Restaurant2(self.name, self.latlng)
 
-        self.restaurant_str = (
-            '{'
-                '"coordinates": [-54, 4], '
-                '"type": "Point"'
-            '}'
-        )
+        self.restaurant_str = ('{"coordinates": [-54, 4],'
+                               ' "type": "Point"}')
 
         self.restaurant_feature1 = RestaurantFeature1(self.name, self.latlng)
         self.restaurant_feature2 = RestaurantFeature2(self.name, self.latlng)
 
-        self.restaurant_feature_str = (
-            '{'
-                '"geometry": {'
-                    '"coordinates": [-54, 4], '
-                    '"type": "Point"'
-                '}, '
-                '"id": null, '
-                '"properties": {"name": "In N Out Burger"}, '
-                '"type": "Feature"'
-            '}'
-        )
-
+        self.restaurant_feature_str = ('{"geometry":'
+                                       ' {"coordinates": [-54, 4],'
+                                       ' "type": "Point"},'
+                                       ' "id": null,'
+                                       ' "properties":'
+                                       ' {"name": "In N Out Burger"},'
+                                       ' "type": "Feature"}')
 
     def test_encode(self):
         """

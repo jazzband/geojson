@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import geojson
 from geojson.mapping import to_mapping
 
@@ -54,11 +56,7 @@ class GeoJSON(dict):
             mapping = to_mapping(ob)
             d = {}
             for k in mapping:
-                try:
-                    str_key = str(k)
-                except (UnicodeEncodeError):
-                    str_key = unicode(k)
-                d[str_key] = mapping[k]
+                d[k] = mapping[k]
             try:
                 type_ = d.pop("type")
                 try:
@@ -67,8 +65,7 @@ class GeoJSON(dict):
                     # If the type contains non-ascii characters, we can assume
                     # it's not a valid GeoJSON type
                     raise AttributeError(
-                        unicode("{0} is not a GeoJSON type").format(
-                        unicode(type_)))
+                        "{0} is not a GeoJSON type").format(type_)
                 geojson_factory = getattr(geojson.factory, type_)
                 if not issubclass(geojson_factory, GeoJSON):
                     raise TypeError("""\

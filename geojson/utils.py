@@ -1,5 +1,6 @@
 """Coordinate utility functions."""
 
+
 def coords(obj):
     """Yield all coordinate coordinate tuples from a geometry or feature."""
     if isinstance(obj, (tuple, list)):
@@ -15,6 +16,7 @@ def coords(obj):
         for f in coords(e):
             yield f
 
+
 def map_coords(func, obj):
     """Return coordinates, mapped pair-wise using the provided function."""
     if obj['type'] == 'Point':
@@ -24,12 +26,12 @@ def map_coords(func, obj):
     elif obj['type'] in ['MultiLineString', 'Polygon']:
         coordinates = [[
             tuple(map(func, c)) for c in curve]
-                for curve in obj['coordinates']]
+            for curve in obj['coordinates']]
     elif obj['type'] == 'MultiPolygon':
         coordinates = [[[
             tuple(map(func, c)) for c in curve]
-                for curve in part]
-                    for part in obj['coordinates']]
+            for curve in part]
+            for part in obj['coordinates']]
     else:
         raise ValueError("Invalid geometry object %s" % repr(obj))
     return {'type': obj['type'], 'coordinates': coordinates}

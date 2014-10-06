@@ -290,6 +290,7 @@ Credits
 * Sean Gillies <sgillies@frii.com>
 * Matthew Russell <matt@sanoodi.com>
 * Corey Farwell <coreyf@rwell.org>
+* Blake Grotewold <hello@grotewold.me>
 
 
 .. _GeoJSON: http://geojson.org/

@@ -14,7 +14,8 @@ install:
 before_script:
    flake8 .
 script: 
-   coverage run --source=geojson setup.py test
+   - coverage run --branch --source=geojson setup.py test
+   - coverage xml
 after_success:
    - coveralls
    - codecov

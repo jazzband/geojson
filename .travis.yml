@@ -9,7 +9,6 @@ python:
    - "pypy3"
 install:
    - pip install flake8
-   - pip install coveralls
    - pip install codecov
 before_script:
    flake8 .
@@ -17,5 +16,4 @@ script:
    - coverage run --branch --source=geojson setup.py test
    - coverage xml
 after_success:
-   - coveralls
    - codecov

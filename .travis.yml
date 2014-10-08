@@ -12,7 +12,7 @@ install:
    - pip install codecov
 before_script:
    flake8 .
-script: 
+script:
    - coverage run --branch --source=geojson setup.py test
    - coverage xml
 after_success:

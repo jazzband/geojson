@@ -1,7 +1,7 @@
 python-geojson
 ==============
 
-.. image:: https://travis-ci.org/frewsxcv/python-geojson.png?branch=master
+.. image:: https://travis-ci.org/frewsxcv/python-geojson.svg?branch=master
    :target: https://travis-ci.org/frewsxcv/python-geojson
 .. image:: https://codecov.io/github/frewsxcv/python-geojson/coverage.svg?branch=master
    :target: https://codecov.io/github/frewsxcv/python-geojson?branch=master

@@ -74,10 +74,9 @@ class GeoJSON(dict):
                     """ % (type_, geojson_factory, cls))
                 instance = geojson_factory(**d)
             except (AttributeError, KeyError) as invalid:
-                if not strict:
-                    instance = ob
-                else:
+                if strict:
                     msg = "Cannot coerce %r into a valid GeoJSON structure: %s"
                     msg %= (ob, invalid)
                     raise ValueError(msg)
+                instance = ob
         return instance

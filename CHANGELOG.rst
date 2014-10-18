@@ -1,6 +1,11 @@
 Changes
 =======
 
+1.0.10
+------
+
+- I will no longer attempt to maintain compatibility with Python 2.6. It has reached end of life and should not be used anymore.
+
 1.0.9 (2014-10-05)
 ------------------
 

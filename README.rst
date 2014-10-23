@@ -1,9 +1,9 @@
 python-geojson
 ==============
 
-.. image:: https://travis-ci.org/frewsxcv/python-geojson.svg?branch=master
+.. image:: https://img.shields.io/travis/frewsxcv/python-geojson.svg
    :target: https://travis-ci.org/frewsxcv/python-geojson
-.. image:: https://codecov.io/github/frewsxcv/python-geojson/coverage.svg?branch=master
+.. image:: https://img.shields.io/codecov/c/github/frewsxcv/python-geojson.svg
    :target: https://codecov.io/github/frewsxcv/python-geojson?branch=master
 
 This library contains:

@@ -2,6 +2,9 @@ from geojson.base import GeoJSON
 
 
 class CoordinateReferenceSystem(GeoJSON):
+    """
+    Represents a CRS.
+    """
 
     def __init__(self, properties=None, **extra):
         super(CoordinateReferenceSystem, self).__init__(**extra)
@@ -9,6 +12,9 @@ class CoordinateReferenceSystem(GeoJSON):
 
 
 class Named(CoordinateReferenceSystem):
+    """
+    Represents a named CRS.
+    """
 
     def __init__(self, properties=None, **extra):
         super(Named, self).__init__(properties=properties, **extra)
@@ -19,6 +25,9 @@ class Named(CoordinateReferenceSystem):
 
 
 class Linked(CoordinateReferenceSystem):
+    """
+    Represents a linked CRS.
+    """
 
     def __init__(self, properties=None, **extra):
         super(Linked, self).__init__(properties=properties, **extra)

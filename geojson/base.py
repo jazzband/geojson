@@ -5,8 +5,19 @@ from geojson.mapping import to_mapping
 
 
 class GeoJSON(dict):
+    """
+    A class representing a GeoJSON object.
+    """
 
     def __init__(self, iterable=(), **extra):
+        """
+        Initialises a GeoJSON object
+
+        :param iterable: iterable from which to draw the content of the GeoJSON object.
+        :type iterable: dict, array, tuple
+        :return: a GeoJSON object
+        :rtype: GeoJSON
+        """
         super(GeoJSON, self).__init__(iterable)
         self["type"] = getattr(self, "type", type(self).__name__)
         self.update(extra)
@@ -16,25 +27,38 @@ class GeoJSON(dict):
 
     __str__ = __repr__
 
-    def __setattr__(self, name, value):
-        """
-        Permit dictionary items to be set like object attributes
-        """
-        self[name] = value
-
     def __getattr__(self, name):
         """
         Permit dictionary items to be retrieved like object attributes
+
+        :param name: attribute name
+        :type name: str, int
+        :return: dictionary value
         """
         try:
             return self[name]
         except KeyError:
             raise AttributeError(name)
 
+    def __setattr__(self, name, value):
+        """
+        Permit dictionary items to be set like object attributes.
+
+        :param name: key of item to be set
+        :type name: str
+        :param value: value to set item to
+        """
+
+        self[name] = value
+
     def __delattr__(self, name):
         """
         Permit dictionary items to be deleted like object attributes
+
+        :param name: key of item to be deleted
+        :type name: str
         """
+
         del self[name]
 
     @property
@@ -45,8 +69,21 @@ class GeoJSON(dict):
     @classmethod
     def to_instance(cls, ob, default=None, strict=False):
         """Encode a GeoJSON dict into an GeoJSON object.
-
         Assumes the caller knows that the dict should satisfy a GeoJSON type.
+
+        :param cls: Dict containing the elements to be encoded into a GeoJSON object.
+        :type cls: dict
+        :param ob: GeoJSON object into which to encode the dict provided in `cls`.
+        :type ob: GeoJSON
+        :param default: A default instance to append the content of the dict to if none is provided.
+        :type default: GeoJSON
+        :param strict: Raise error if unable to coerce particular keys or attributes to a valid GeoJSON structure.
+        :type strict: bool
+        :return: A GeoJSON object with the dict's elements as its constituents.
+        :rtype: GeoJSON
+        :raises TypeError: If the input dict contains items that are not valid GeoJSON types.
+        :raises UnicodeEncodeError: If the input dict contains items of a type that contain non-ASCII characters.
+        :raises AttributeError: If the input dict contains items that are not valid GeoJSON types.
         """
         if ob is None and default is not None:
             instance = default()

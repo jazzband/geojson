@@ -7,7 +7,22 @@ class SimpleWebFeature(object):
 
     def __init__(self, id=None, geometry=None, title=None, summary=None,
                  link=None):
-        """Initialize."""
+        """
+        Initialises a SimpleWebFeature from the parameters provided.
+
+        :param id: Identifier assigned to the object.
+        :type id: int, str
+        :param geometry: The geometry on which the object is based.
+        :type geometry: Geometry
+        :param title: Name of the object
+        :type title: str
+        :param summary: Short summary associated with the object.
+        :type summary: str
+        :param link: Link associated with the object.
+        :type link: str
+        :return: A SimpleWebFeature object
+        :rtype: SimpleWebFeature
+        """
         self.id = id
         self.geometry = geometry
         self.properties = {}
@@ -26,11 +41,23 @@ class SimpleWebFeature(object):
     __geo_interface__ = property(as_dict)
 
 
-def createSimpleWebFeature(o):
     """Create an instance of SimpleWebFeature from a dict, o. If o does not
     match a Python feature object, simply return o. This function serves as a
     json decoder hook. See coding.load()."""
-    try:
+
+
+def createSimpleWebFeature(o):
+    """
+    Create an instance of SimpleWebFeature from a dict, o. If o does not
+    match a Python feature object, simply return o. This function serves as a
+    json decoder hook. See coding.load().
+
+    :param o: A dict to create the SimpleWebFeature from.
+    :type o: dict
+    :return: A SimpleWebFeature from the dict provided.
+    :rtype: SimpleWebFeature
+    """
+     try:
         id = o['id']
         g = o['geometry']
         p = o['properties']

@@ -9,6 +9,15 @@ class Geometry(GeoJSON):
     """
 
     def __init__(self, coordinates=None, crs=None, **extra):
+        """
+        Initialises a Geometry object.
+
+        :param coordinates: Coordinates of the Geometry object.
+        :type coordinates: tuple
+        :param crs: CRS
+        :type crs: CRS object
+        """
+
         super(Geometry, self).__init__(**extra)
         self["coordinates"] = coordinates or []
         self.clean_coordinates(self["coordinates"])
@@ -61,4 +70,6 @@ class MultiPolygon(Geometry):
 
 
 class Default(object):
-    """GeoJSON default."""
+   """
+   GeoJSON default object.
+   """

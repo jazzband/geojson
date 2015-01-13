@@ -4,8 +4,9 @@ from geojson.base import GeoJSON
 
 
 class Geometry(GeoJSON):
-
-    """A (WGS84) GIS geometry."""
+    """
+    Represents an abstract base class for a WGS84 geometry.
+    """
 
     def __init__(self, coordinates=None, crs=None, **extra):
         super(Geometry, self).__init__(**extra)
@@ -24,8 +25,9 @@ class Geometry(GeoJSON):
 
 
 class GeometryCollection(GeoJSON):
-
-    """A collection of (WGS84) GIS geometries."""
+    """
+    Represents an abstract base class for collections of WGS84 geometries.
+    """
 
     def __init__(self, geometries=None, **extra):
         super(GeometryCollection, self).__init__(**extra)

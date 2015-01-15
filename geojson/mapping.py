@@ -18,7 +18,8 @@ def is_mapping(obj):
     Checks if the object is an instance of MutableMapping.
 
     :param obj: Object to be checked.
-    :return: Truth value of whether the object is an instance of MutableMapping.
+    :return: Truth value of whether the object is an instance of
+    MutableMapping.
     :rtype: bool
     """
     return isinstance(obj, MutableMapping)

@@ -13,7 +13,8 @@ class GeoJSON(dict):
         """
         Initialises a GeoJSON object
 
-        :param iterable: iterable from which to draw the content of the GeoJSON object.
+        :param iterable: iterable from which to draw the content of the GeoJSON
+        object.
         :type iterable: dict, array, tuple
         :return: a GeoJSON object
         :rtype: GeoJSON
@@ -71,19 +72,26 @@ class GeoJSON(dict):
         """Encode a GeoJSON dict into an GeoJSON object.
         Assumes the caller knows that the dict should satisfy a GeoJSON type.
 
-        :param cls: Dict containing the elements to be encoded into a GeoJSON object.
+        :param cls: Dict containing the elements to be encoded into a GeoJSON
+        object.
         :type cls: dict
-        :param ob: GeoJSON object into which to encode the dict provided in `cls`.
+        :param ob: GeoJSON object into which to encode the dict provided in
+        `cls`.
         :type ob: GeoJSON
-        :param default: A default instance to append the content of the dict to if none is provided.
+        :param default: A default instance to append the content of the dict
+        to if none is provided.
         :type default: GeoJSON
-        :param strict: Raise error if unable to coerce particular keys or attributes to a valid GeoJSON structure.
+        :param strict: Raise error if unable to coerce particular keys or
+        attributes to a valid GeoJSON structure.
         :type strict: bool
         :return: A GeoJSON object with the dict's elements as its constituents.
         :rtype: GeoJSON
-        :raises TypeError: If the input dict contains items that are not valid GeoJSON types.
-        :raises UnicodeEncodeError: If the input dict contains items of a type that contain non-ASCII characters.
-        :raises AttributeError: If the input dict contains items that are not valid GeoJSON types.
+        :raises TypeError: If the input dict contains items that are not valid
+        GeoJSON types.
+        :raises UnicodeEncodeError: If the input dict contains items of a type
+        that contain non-ASCII characters.
+        :raises AttributeError: If the input dict contains items that are not
+        valid GeoJSON types.
         """
         if ob is None and default is not None:
             instance = default()
@@ -98,7 +106,7 @@ class GeoJSON(dict):
                 type_ = d.pop("type")
                 try:
                     type_ = str(type_)
-                except (UnicodeEncodeError):
+                except UnicodeEncodeError:
                     # If the type contains non-ascii characters, we can assume
                     # it's not a valid GeoJSON type
                     raise AttributeError(

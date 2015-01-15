@@ -40,10 +40,11 @@ class SimpleWebFeature(object):
 
     __geo_interface__ = property(as_dict)
 
-
-    """Create an instance of SimpleWebFeature from a dict, o. If o does not
+    """
+    Create an instance of SimpleWebFeature from a dict, o. If o does not
     match a Python feature object, simply return o. This function serves as a
-    json decoder hook. See coding.load()."""
+    json decoder hook. See coding.load().
+    """
 
 
 def createSimpleWebFeature(o):
@@ -57,7 +58,7 @@ def createSimpleWebFeature(o):
     :return: A SimpleWebFeature from the dict provided.
     :rtype: SimpleWebFeature
     """
-     try:
+    try:
         id = o['id']
         g = o['geometry']
         p = o['properties']

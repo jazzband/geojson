@@ -18,7 +18,7 @@ class Feature(GeoJSON):
         :param id: Feature identifier, such as a sequential number.
         :type id: str, int
         :param geometry: Geometry corresponding to the feature.
-        :param properties: Dict containing properties corresponding to the feature.
+        :param properties: Dict containing properties of the feature.
         :type properties: dict
         :return: Feature object
         :rtype: Feature

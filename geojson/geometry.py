@@ -70,6 +70,6 @@ class MultiPolygon(Geometry):
 
 
 class Default(object):
-   """
-   GeoJSON default object.
-   """
+    """
+    GeoJSON default object.
+    """

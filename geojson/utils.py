@@ -27,16 +27,16 @@ def coords(obj):
 
 def map_coords(func, obj):
     """
-    Returns the coordinates from a Geometry after applying the provided function to the tuples.
+    Returns the coordinates from a Geometry after applying the provided
+    function to the tuples.
 
     :param obj: A geometry or feature to extract the coordinates from.
-    :type obj: Point, LineString, MultiPoint, MultiLineString, Polygon, MultiPolygon
+    :type obj: Point, LineString, MultiPoint, MultiLineString, Polygon,
+    MultiPolygon
     :return: The result of applying the function to each coordinate array.
     :rtype: list
     :raises ValueError: if the provided object is not a Geometry.
     """
-
-
 
     if obj['type'] == 'Point':
         coordinates = tuple(map(func, obj['coordinates']))

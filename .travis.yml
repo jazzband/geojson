@@ -11,8 +11,8 @@ install:
    - pip install pep257
    - pip install codecov
 before_script:
-   flake8 .
-   pep257 .
+   - flake8 .
+   - pep257 .
 script:
    - coverage run --branch --source=geojson setup.py test
    - coverage xml

@@ -2,7 +2,15 @@
 
 
 def coords(obj):
-    """Yield all coordinate coordinate tuples from a geometry or feature."""
+    """
+    Yields the coordinates from a Feature or Geometry.
+
+    :param obj: A geometry or feature to extract the coordinates from."
+    :type obj: Feature, Geometry
+    :return: A generator with coordinate tuples from the geometry or feature.
+    :rtype: generator
+    """
+
     if isinstance(obj, (tuple, list)):
         coordinates = obj
     elif 'geometry' in obj:
@@ -18,7 +26,18 @@ def coords(obj):
 
 
 def map_coords(func, obj):
-    """Return coordinates, mapped pair-wise using the provided function."""
+    """
+    Returns the coordinates from a Geometry after applying the provided
+    function to the tuples.
+
+    :param obj: A geometry or feature to extract the coordinates from.
+    :type obj: Point, LineString, MultiPoint, MultiLineString, Polygon,
+    MultiPolygon
+    :return: The result of applying the function to each coordinate array.
+    :rtype: list
+    :raises ValueError: if the provided object is not a Geometry.
+    """
+
     if obj['type'] == 'Point':
         coordinates = tuple(map(func, obj['coordinates']))
     elif obj['type'] in ['LineString', 'MultiPoint']:

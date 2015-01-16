@@ -4,10 +4,20 @@ from geojson.base import GeoJSON
 
 
 class Geometry(GeoJSON):
-
-    """A (WGS84) GIS geometry."""
+    """
+    Represents an abstract base class for a WGS84 geometry.
+    """
 
     def __init__(self, coordinates=None, crs=None, **extra):
+        """
+        Initialises a Geometry object.
+
+        :param coordinates: Coordinates of the Geometry object.
+        :type coordinates: tuple
+        :param crs: CRS
+        :type crs: CRS object
+        """
+
         super(Geometry, self).__init__(**extra)
         self["coordinates"] = coordinates or []
         self.clean_coordinates(self["coordinates"])
@@ -24,8 +34,9 @@ class Geometry(GeoJSON):
 
 
 class GeometryCollection(GeoJSON):
-
-    """A collection of (WGS84) GIS geometries."""
+    """
+    Represents an abstract base class for collections of WGS84 geometries.
+    """
 
     def __init__(self, geometries=None, **extra):
         super(GeometryCollection, self).__init__(**extra)
@@ -59,4 +70,6 @@ class MultiPolygon(Geometry):
 
 
 class Default(object):
-    """GeoJSON default."""
+    """
+    GeoJSON default object.
+    """

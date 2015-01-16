@@ -8,9 +8,11 @@ python:
    - "pypy3"
 install:
    - pip install flake8
+   - pip install pep257
    - pip install codecov
 before_script:
    flake8 .
+   pep257 .
 script:
    - coverage run --branch --source=geojson setup.py test
    - coverage xml

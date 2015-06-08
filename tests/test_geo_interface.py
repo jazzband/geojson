@@ -46,7 +46,6 @@ class EncodingDecodingTest(unittest.TestCase):
                         'type': "Point",
                         'coordinates': self.latlng,
                     },
-                    'id': None,
                     'type': "Feature",
                     'properties': {
                         'name': self.name,
@@ -81,7 +80,6 @@ class EncodingDecodingTest(unittest.TestCase):
         self.restaurant_feature_str = ('{"geometry":'
                                        ' {"coordinates": [-54, 4],'
                                        ' "type": "Point"},'
-                                       ' "id": null,'
                                        ' "properties":'
                                        ' {"name": "In N Out Burger"},'
                                        ' "type": "Feature"}')

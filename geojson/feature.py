@@ -24,7 +24,8 @@ class Feature(GeoJSON):
         :rtype: Feature
         """
         super(Feature, self).__init__(**extra)
-        self["id"] = id
+        if id is not None:
+            self["id"] = id
         self["geometry"] = (self.to_instance(geometry, strict=True)
                             if geometry else None)
         self["properties"] = properties or {}

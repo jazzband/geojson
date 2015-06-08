@@ -171,10 +171,10 @@ Feature
   >>> my_point = Point((-3.68, 40.41))
 
   >>> Feature(geometry=my_point)  # doctest: +ELLIPSIS
-  {"geometry": {"coordinates": [-3.68..., 40.4...], "type": "Point"}, "id": null, "properties": {}, "type": "Feature"}
+  {"geometry": {"coordinates": [-3.68..., 40.4...], "type": "Point"}, "properties": {}, "type": "Feature"}
 
   >>> Feature(geometry=my_point, properties={"country": "Spain"})  # doctest: +ELLIPSIS
-  {"geometry": {"coordinates": [-3.68..., 40.4...], "type": "Point"}, "id": null, "properties": {"country": "Spain"}, "type": "Feature"}
+  {"geometry": {"coordinates": [-3.68..., 40.4...], "type": "Point"}, "properties": {"country": "Spain"}, "type": "Feature"}
 
   >>> Feature(geometry=my_point, id=27)  # doctest: +ELLIPSIS
   {"geometry": {"coordinates": [-3.68..., 40.4...], "type": "Point"}, "id": 27, "properties": {}, "type": "Feature"}
@@ -195,7 +195,7 @@ FeatureCollection
   >>> my_other_feature = Feature(geometry=Point((-80.234, -22.532)))
 
   >>> FeatureCollection([my_feature, my_other_feature])  # doctest: +ELLIPSIS
-  {"features": [{"geometry": {"coordinates": [1.643..., -19.12...], "type": "Point"}, "id": null, "properties": {}, "type": "Feature"}, {"geometry": {"coordinates": [-80.23..., -22.53...], "type": "Point"}, "id": null, "properties": {}, "type": "Feature"}], "type": "FeatureCollection"}
+  {"features": [{"geometry": {"coordinates": [1.643..., -19.12...], "type": "Point"}, "properties": {}, "type": "Feature"}, {"geometry": {"coordinates": [-80.23..., -22.53...], "type": "Point"}, "properties": {}, "type": "Feature"}], "type": "FeatureCollection"}
 
 Visualize the result of the example above `here <https://gist.github.com/frewsxcv/34513be6fb492771ef7b>`__. General information about FeatureCollection can be found in `Section 2.3`_ within `The GeoJSON Format Specification`_.
 

@@ -291,6 +291,7 @@ Credits
 * Matthew Russell <matt@sanoodi.com>
 * Corey Farwell <coreyf@rwell.org>
 * Blake Grotewold <hello@grotewold.me>
+* Zsolt Ero <zsolt.ero@gmail.com>
 
 
 .. _GeoJSON: http://geojson.org/

@@ -4,7 +4,7 @@ Changes
 1.1.0 (2015-06-08)
 ------------------
 
-- Stop outputting invalid GeoJSON value id=null on Geometries
+- Stop outputting invalid GeoJSON value id=null on Features
 
   - https://github.com/frewsxcv/python-geojson/pull/53
 

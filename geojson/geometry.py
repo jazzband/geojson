@@ -29,7 +29,7 @@ class Geometry(GeoJSON):
         for coord in coords:
             if isinstance(coord, (list, tuple)):
                 cls.clean_coordinates(coord)
-            elif not isinstance(coord, (float, int, Decimal)):
+            elif not isinstance(coord, (float, int, Decimal, long)):
                 raise ValueError("%r is not JSON compliant number" % coord)
 
 

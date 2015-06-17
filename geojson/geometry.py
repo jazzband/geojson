@@ -2,7 +2,6 @@ from decimal import Decimal
 
 from geojson.base import GeoJSON
 
-
 class Geometry(GeoJSON):
     """
     Represents an abstract base class for a WGS84 geometry.
@@ -23,13 +22,19 @@ class Geometry(GeoJSON):
         self.clean_coordinates(self["coordinates"])
         if crs:
             self["crs"] = self.to_instance(crs, strict=True)
+        
+        if (sys.version_info[0] == 3):
+            # Python 3.x has no long type
+            self.JSON_compliant_types = (float, int, Decimal)
+        else:
+            self.JSON_compliant_types = (float, int, Decimal, long)
 
     @classmethod
     def clean_coordinates(cls, coords):
         for coord in coords:
             if isinstance(coord, (list, tuple)):
                 cls.clean_coordinates(coord)
-            elif not isinstance(coord, (float, int, Decimal, long)):
+            elif not isinstance(coord, self.JSON_compliant_types):
                 raise ValueError("%r is not JSON compliant number" % coord)
 
 

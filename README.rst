@@ -279,6 +279,19 @@ map_coords
   >>> geojson.dumps(new_point, sort_keys=True)  # doctest: +ELLIPSIS
   '{"coordinates": [-57.905..., 18.62...], "type": "Point"}'
 
+validation
+~~~~~~~~~~
+:code:`geojson.IsValid` provides validation of GeoJSON objects.
+
+.. code:: python
+
+  >>> import geojson
+
+  >>> geojson.IsValid(geojson.Point((-3.68, 40.41)))
+  '{"valid": "yes", "message":""}'
+  >> geojson.IsValid(geojson.Point((-3.68, 40.41, 5.552)))
+  '{"valid": "no", "message": "the "coordinates" member must be a single position"}'
+
 Development
 -----------
 
@@ -292,6 +305,7 @@ Credits
 * Corey Farwell <coreyf@rwell.org>
 * Blake Grotewold <hello@grotewold.me>
 * Zsolt Ero <zsolt.ero@gmail.com>
+* Sergey Romanov <xxsmotur@gmail.com>
 
 
 .. _GeoJSON: http://geojson.org/

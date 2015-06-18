@@ -13,4 +13,5 @@ __all__ = ([dump, dumps, load, loads, GeoJSONEncoder] +
            [MultiLineString, MultiPoint, MultiPolygon] +
            [GeometryCollection] +
            [Feature, FeatureCollection] +
-           [GeoJSON])
+           [GeoJSON] +
+           [IsValid])

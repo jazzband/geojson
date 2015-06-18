@@ -13,7 +13,7 @@ class Geometry(GeoJSON):
         # Python 3.x has no long type
         JSON_compliant_types = (float, int, Decimal)
     else:
-        JSON_compliant_types = (float, int, Decimal, long)
+        JSON_compliant_types = (float, int, Decimal, long) # noqa
 
     def __init__(self, coordinates=None, crs=None, **extra):
         """

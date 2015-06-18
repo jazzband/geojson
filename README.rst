@@ -287,10 +287,12 @@ validation
 
   >>> import geojson
 
-  >>> geojson.IsValid(geojson.Point((-3.68, 40.41)))
-  '{"valid": "yes", "message":""}'
-  >> geojson.IsValid(geojson.Point((-3.68, 40.41, 5.552)))
-  '{"valid": "no", "message": "the "coordinates" member must be a single position"}'
+  >>> validation = geojson.IsValid(geojson.Point((-3.68,40.41,25.14)))
+  >>> validation['valid']
+  'no'
+  >>> validation['message']
+  'the "coordinates" member must be a single position'
+
 
 Development
 -----------

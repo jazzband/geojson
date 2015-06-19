@@ -281,13 +281,13 @@ map_coords
 
 validation
 ~~~~~~~~~~
-:code:`geojson.IsValid` provides validation of GeoJSON objects.
+:code:`geojson.is_valid` provides validation of GeoJSON objects.
 
 .. code:: python
 
   >>> import geojson
 
-  >>> validation = geojson.IsValid(geojson.Point((-3.68,40.41,25.14)))
+  >>> validation = geojson.is_valid(geojson.Point((-3.68,40.41,25.14)))
   >>> validation['valid']
   'no'
   >>> validation['message']

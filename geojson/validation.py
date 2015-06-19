@@ -1,7 +1,7 @@
 import geojson
 
 
-def IsValid(obj):
+def is_valid(obj):
     """ IsValid provides validation for GeoJSON objects
         All of error messages obtained from the offical site
         http://geojson.org/geojson-spec.html

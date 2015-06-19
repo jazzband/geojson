@@ -49,11 +49,11 @@ def IsValid(obj):
     if isinstance(obj, geojson.Polygon):
         coord = obj['coordinates']
         lengths = all([len(elem) >= 4 for elem in coord])
-        if lengths is not True:
+        if lengths is False:
             return output('LinearRing must contain with 4 or more positions')
 
         isring = all([elem[0] == elem[-1] for elem in coord])
-        if isring is not True:
+        if isring is False:
             return output('The first and last positions in LinearRing'
                           'must be equivalent')
 

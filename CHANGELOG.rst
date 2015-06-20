@@ -1,6 +1,13 @@
 Changes
 =======
 
+1.2.0 (2015-06-19)
+------------------
+
+- Utility function to validate GeoJSON objects
+
+  - https://github.com/frewsxcv/python-geojson/pull/56
+
 1.1.0 (2015-06-08)
 ------------------
 

@@ -11,9 +11,9 @@ class Geometry(GeoJSON):
 
     if sys.version_info[0] == 3:
         # Python 3.x has no long type
-        JSON_compliant_types = (float, int, Decimal)
+        __JSON_compliant_types = (float, int, Decimal)
     else:
-        JSON_compliant_types = (float, int, Decimal, long)  # noqa
+        __JSON_compliant_types = (float, int, Decimal, long)  # noqa
 
     def __init__(self, coordinates=None, crs=None, **extra):
         """
@@ -36,7 +36,7 @@ class Geometry(GeoJSON):
         for coord in coords:
             if isinstance(coord, (list, tuple)):
                 cls.clean_coordinates(coord)
-            elif not isinstance(coord, cls.JSON_compliant_types):
+            elif not isinstance(coord, cls.__JSON_compliant_types):
                 raise ValueError("%r is not JSON compliant number" % coord)
 
 

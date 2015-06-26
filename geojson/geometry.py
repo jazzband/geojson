@@ -1,7 +1,7 @@
+import sys
 from decimal import Decimal
 
 from geojson.base import GeoJSON
-import sys
 
 
 class Geometry(GeoJSON):

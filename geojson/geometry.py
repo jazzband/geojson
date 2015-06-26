@@ -9,7 +9,7 @@ class Geometry(GeoJSON):
     Represents an abstract base class for a WGS84 geometry.
     """
 
-    if (sys.version_info[0] == 3):
+    if sys.version_info[0] == 3:
         # Python 3.x has no long type
         JSON_compliant_types = (float, int, Decimal)
     else:

@@ -1,6 +1,13 @@
 Changes
 =======
 
+1.2.1 (2015-06-25)
+------------------
+
+- Encode long types correctly with Python 2.x
+
+  - https://github.com/frewsxcv/python-geojson/pull/57
+
 1.2.0 (2015-06-19)
 ------------------
 

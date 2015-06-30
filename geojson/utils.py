@@ -54,3 +54,61 @@ def map_coords(func, obj):
     else:
         raise ValueError("Invalid geometry object %s" % repr(obj))
     return {'type': obj['type'], 'coordinates': coordinates}
+
+
+def generate_random(featureType, numberFeatures = 1, numberVertices = 3, boundingBox = [-180.0, -90.0, 180.0, 90.0]):
+
+    from geojson import Point, LineString, Polygon, GeometryCollection
+    import random
+
+    lonMin = boundingBox[0]
+    lonMax = boundingBox[2]
+    def randomLon():
+        return random.randrange(lonMin,lonMax)
+
+    latMin = boundingBox[0]
+    latMax = boundingBox[2]
+    def randomLat():
+        return random.randrange(latMin,latMax)
+
+    def createPoint():
+        return Point((randomLon(), randomLat()))
+
+    def createLine():
+        coords = []
+        for i in range(0, numberVertices):
+            coords.append((randomLon(), randomLat()))
+        return LineString(coords)
+
+    def createPoly():
+        coords = []
+        for i in range(0, numberVertices):
+            coords.append((randomLon(), randomLat()))
+        blah = sorted(coords, key=lambda coord: coord[0])
+        blah2 = sorted(blah, key=lambda bla: bla[1])
+        firstVal = blah2[0]
+        blah2.append(firstVal)
+        return Polygon([blah2])
+
+
+    if numberFeatures > 1:
+        group = []
+        for i in range(0, numberFeatures):
+            if featureType == 'Point':
+                group.append(createPoint())
+            elif featureType == 'LineString':
+                group.append(createLine())
+            elif featureType == 'Polygon':
+                group.append(createPoly())
+
+        return GeometryCollection(group)
+
+    else:
+        if featureType == 'Point':
+            return createPoint()
+
+        if featureType == 'LineString':
+            return createLine()
+
+        if featureType == 'Polygon':
+            return createPoly()

@@ -56,7 +56,7 @@ def map_coords(func, obj):
     return {'type': obj['type'], 'coordinates': coordinates}
 
 
-def generate_random(featureType,numberFeatures=1,numberVertices=3,boundingBox=[-180.0,-90.0,180.0,90.0]):
+def generate_random(featureType, numberFeatures=1, numberVertices=3, boundingBox=[-180.0, -90.0, 180.0, 90.0]):
 
     from geojson import Point, LineString, Polygon, GeometryCollection
     import random
@@ -86,8 +86,8 @@ def generate_random(featureType,numberFeatures=1,numberVertices=3,boundingBox=[-
         coords = []
         for i in range(0, numberVertices):
             coords.append((randomLon(), randomLat()))
-        blah = sorted(coords, key=lambda lon: lon[0])
-        blah2 = sorted(coords, key=lambda bla: bla[1])
+        sorted(coords, key=lambda lon: lon[0])
+        sorted(coords, key=lambda bla: bla[1])
         firstVal = coords[0]
         coords.append(firstVal)
         return Polygon([coords])

@@ -56,20 +56,22 @@ def map_coords(func, obj):
     return {'type': obj['type'], 'coordinates': coordinates}
 
 
-def generate_random(featureType, numberFeatures = 1, numberVertices = 3, boundingBox = [-180.0, -90.0, 180.0, 90.0]):
+def generate_random(featureType,numberFeatures=1,numberVertices=3,boundingBox=[-180.0,-90.0,180.0,90.0]):
 
     from geojson import Point, LineString, Polygon, GeometryCollection
     import random
 
     lonMin = boundingBox[0]
     lonMax = boundingBox[2]
+
     def randomLon():
-        return random.randrange(lonMin,lonMax)
+        return random.randrange(lonMin, lonMax)
 
     latMin = boundingBox[0]
     latMax = boundingBox[2]
+
     def randomLat():
-        return random.randrange(latMin,latMax)
+        return random.randrange(latMin, latMax)
 
     def createPoint():
         return Point((randomLon(), randomLat()))
@@ -84,12 +86,11 @@ def generate_random(featureType, numberFeatures = 1, numberVertices = 3, boundin
         coords = []
         for i in range(0, numberVertices):
             coords.append((randomLon(), randomLat()))
-        blah = sorted(coords, key=lambda coord: coord[0])
-        blah2 = sorted(blah, key=lambda bla: bla[1])
-        firstVal = blah2[0]
-        blah2.append(firstVal)
-        return Polygon([blah2])
-
+        blah = sorted(coords, key=lambda lon: lon[0])
+        blah2 = sorted(coords, key=lambda bla: bla[1])
+        firstVal = coords[0]
+        coords.append(firstVal)
+        return Polygon([coords])
 
     if numberFeatures > 1:
         group = []

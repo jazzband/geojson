@@ -1,6 +1,17 @@
 Changes
 =======
 
+1.2.2 (2015-07-13)
+------------------
+
+- Fix tests by including test file into build
+
+  - https://github.com/frewsxcv/python-geojson/issues/61
+
+- Build universal wheels
+
+  - https://packaging.python.org/en/latest/distributing.html#universal-wheels
+
 1.2.1 (2015-06-25)
 ------------------
 

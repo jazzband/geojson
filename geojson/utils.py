@@ -60,14 +60,14 @@ def generate_random(featureType, numberFeatures=1,
                     numberVertices=3,
                     boundingBox=[-180.0, -90.0, 180.0, 90.0]):
     """
-    Generates random geojson features depending on the parameters 
+    Generates random geojson features depending on the parameters
     passed through.
 
     :param featureType: A geometry type
     :type string: Point, LineString, Polygon
     :param numberFeatures: The number of features that will be returned
     :type int: defaults to 1
-    :param numberVertices: The number vertices that 
+    :param numberVertices: The number vertices that
     a linestring or polygon will have
     :type int: defaults to 3
     :param boundingBox: A bounding box in which features will be restricted to
@@ -126,8 +126,8 @@ def generate_random(featureType, numberFeatures=1,
 
         for i in range(numberVertices):
             r_i = clip(random.gauss(aveRadius, spikeyness), 0, 2 * aveRadius)
-            x = ctrX + r_i*math.cos(angle)
-            y = ctrY + r_i*math.sin(angle)
+            x = ctrX + r_i * math.cos(angle)
+            y = ctrY + r_i * math.sin(angle)
             points.append((int(x), int(y)))
             angle = angle + angleSteps[i]
 
@@ -137,7 +137,7 @@ def generate_random(featureType, numberFeatures=1,
 
     def clip(x, min, max):
         if(min > max):
-            return x 
+            return x
         elif(x < min):
             return min
         elif(x > max):

@@ -71,7 +71,7 @@ def generate_random(featureType, numberFeatures=1,
     a linestring or polygon will have
     :type int: defaults to 3
     :param boundingBox: A bounding box in which features will be restricted to
-    :type string: defaults to the world - [-180.0, -90.0, 180.0, 90.0]
+    :type list: defaults to the world - [-180.0, -90.0, 180.0, 90.0]
     :return: The resulting random geojson object or geometry collection.
     :rtype: object
     :raises ValueError: if there is no featureType provided.
@@ -84,13 +84,13 @@ def generate_random(featureType, numberFeatures=1,
     lonMax = boundingBox[2]
 
     def randomLon():
-        return random.randrange(lonMin, lonMax)
+        return random.uniform(lonMin, lonMax)
 
     latMin = boundingBox[1]
     latMax = boundingBox[3]
 
     def randomLat():
-        return random.randrange(latMin, latMax)
+        return random.uniform(latMin, latMax)
 
     def createPoint():
         return Point((randomLon(), randomLat()))

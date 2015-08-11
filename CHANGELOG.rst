@@ -1,6 +1,13 @@
 Changes
 =======
 
+1.3.0 (2015-08-11)
+------------------
+
+- Add utility to generate geometries with random data
+
+  - https://github.com/frewsxcv/python-geojson/pull/60
+
 1.2.2 (2015-07-13)
 ------------------
 

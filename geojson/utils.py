@@ -56,8 +56,7 @@ def map_coords(func, obj):
     return {'type': obj['type'], 'coordinates': coordinates}
 
 
-def generate_random(featureType, numberFeatures=1,
-                    numberVertices=3,
+def generate_random(featureType, numberVertices=3,
                     boundingBox=[-180.0, -90.0, 180.0, 90.0]):
     """
     Generates random geojson features depending on the parameters
@@ -65,8 +64,6 @@ def generate_random(featureType, numberFeatures=1,
 
     :param featureType: A geometry type
     :type string: Point, LineString, Polygon
-    :param numberFeatures: The number of features that will be returned
-    :type int: defaults to 1
     :param numberVertices: The number vertices that
     a linestring or polygon will have
     :type int: defaults to 3
@@ -76,7 +73,7 @@ def generate_random(featureType, numberFeatures=1,
     :rtype: object
     :raises ValueError: if there is no featureType provided.
     """
-    from geojson import Point, LineString, Polygon, GeometryCollection
+    from geojson import Point, LineString, Polygon
     import random
     import math
 
@@ -145,24 +142,11 @@ def generate_random(featureType, numberFeatures=1,
         else:
             return x
 
-    if numberFeatures > 1:
-        group = []
-        for i in range(0, numberFeatures):
-            if featureType == 'Point':
-                group.append(createPoint())
-            elif featureType == 'LineString':
-                group.append(createLine())
-            elif featureType == 'Polygon':
-                group.append(createPoly())
+    if featureType == 'Point':
+        return createPoint()
 
-        return GeometryCollection(group)
+    if featureType == 'LineString':
+        return createLine()
 
-    else:
-        if featureType == 'Point':
-            return createPoint()
-
-        if featureType == 'LineString':
-            return createLine()
-
-        if featureType == 'Polygon':
-            return createPoly()
+    if featureType == 'Polygon':
+        return createPoly()

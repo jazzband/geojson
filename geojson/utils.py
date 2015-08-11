@@ -54,3 +54,99 @@ def map_coords(func, obj):
     else:
         raise ValueError("Invalid geometry object %s" % repr(obj))
     return {'type': obj['type'], 'coordinates': coordinates}
+
+
+def generate_random(featureType, numberVertices=3,
+                    boundingBox=[-180.0, -90.0, 180.0, 90.0]):
+    """
+    Generates random geojson features depending on the parameters
+    passed through.
+
+    :param featureType: A geometry type
+    :type string: Point, LineString, Polygon
+    :param numberVertices: The number vertices that
+    a linestring or polygon will have
+    :type int: defaults to 3
+    :param boundingBox: A bounding box in which features will be restricted to
+    :type list: defaults to the world - [-180.0, -90.0, 180.0, 90.0]
+    :return: The resulting random geojson object or geometry collection.
+    :rtype: object
+    :raises ValueError: if there is no featureType provided.
+    """
+    from geojson import Point, LineString, Polygon
+    import random
+    import math
+
+    lonMin = boundingBox[0]
+    lonMax = boundingBox[2]
+
+    def randomLon():
+        return random.uniform(lonMin, lonMax)
+
+    latMin = boundingBox[1]
+    latMax = boundingBox[3]
+
+    def randomLat():
+        return random.uniform(latMin, latMax)
+
+    def createPoint():
+        return Point((randomLon(), randomLat()))
+
+    def createLine():
+        coords = []
+        for i in range(0, numberVertices):
+            coords.append((randomLon(), randomLat()))
+        return LineString(coords)
+
+    def createPoly():
+        aveRadius = 60
+        ctrX = 0.1
+        ctrY = 0.2
+        irregularity = clip(0.1, 0, 1) * 2 * math.pi / numberVertices
+        spikeyness = clip(0.5, 0, 1) * aveRadius
+
+        angleSteps = []
+        lower = (2 * math.pi / numberVertices) - irregularity
+        upper = (2 * math.pi / numberVertices) + irregularity
+        sum = 0
+        for i in range(numberVertices):
+            tmp = random.uniform(lower, upper)
+            angleSteps.append(tmp)
+            sum = sum + tmp
+
+        k = sum / (2 * math.pi)
+        for i in range(numberVertices):
+            angleSteps[i] = angleSteps[i] / k
+
+        points = []
+        angle = random.uniform(0, 2 * math.pi)
+
+        for i in range(numberVertices):
+            r_i = clip(random.gauss(aveRadius, spikeyness), 0, 2 * aveRadius)
+            x = ctrX + r_i * math.cos(angle)
+            y = ctrY + r_i * math.sin(angle)
+            points.append((int(x), int(y)))
+            angle = angle + angleSteps[i]
+
+        firstVal = points[0]
+        points.append(firstVal)
+        return Polygon([points])
+
+    def clip(x, min, max):
+        if(min > max):
+            return x
+        elif(x < min):
+            return min
+        elif(x > max):
+            return max
+        else:
+            return x
+
+    if featureType == 'Point':
+        return createPoint()
+
+    if featureType == 'LineString':
+        return createLine()
+
+    if featureType == 'Polygon':
+        return createPoly()

@@ -293,6 +293,18 @@ validation
   >>> validation['message']
   'the "coordinates" member must be a single position'
 
+generate_random
+~~~~~~~~~~~~~~~
+
+:code:`geojson.utils.generate_random` yields a geometry type with random data
+
+.. code:: python
+
+  >>> import geojson
+
+  >>> geojson.utils.generate_random("LineString")  # doctest: +ELLIPSIS
+  {"coordinates": [...], "type": "LineString"}
+
 
 Development
 -----------

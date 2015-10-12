@@ -58,12 +58,17 @@ def is_valid(obj):
                           'must be equivalent')
 
     if isinstance(obj, geojson.MultiPolygon):
-        if checkListOfObjects(obj['coordinates'],
-                              lambda x: len(x) >= 4 and x[0] == x[-1]):
+        if checkListOfObjects(obj['coordinates'], lambda x: is_polygon(x)):
             return output('the "coordinates" member must be an array'
                           'of Polygon coordinate arrays')
 
     return output('')
+
+
+def is_polygon(coords):
+    lengths = all(len(elem) >= 4 for elem in coords)
+    isring = all(elem[0] == elem[-1] for elem in coords)
+    return lengths and isring
 
 
 def checkListOfObjects(coord, pred):

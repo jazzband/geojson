@@ -99,9 +99,11 @@ class TestValidationMultiPolygon(unittest.TestCase):
         self.assertEqual(is_valid(multipoly)['valid'], NO)
 
     def test_valid_multipolygon(self):
-        poly1 = [(2.38, 57.322), (23.194, -20.28),
-                 (-120.43, 19.15), (2.38, 57.322)]
-        poly2 = [(-5.34, 3.71), (28.74, 31.44), (28.55, 19.10), (-5.34, 3.71)]
-        poly3 = [(3.14, 23.17), (51.34, 27.14), (22, -18.11), (3.14, 23.17)]
+        poly1 = [[(2.38, 57.322), (23.194, -20.28),
+                  (-120.43, 19.15), (2.38, 57.322)]]
+        poly2 = [[(-5.34, 3.71), (28.74, 31.44),
+                  (28.55, 19.10), (-5.34, 3.71)]]
+        poly3 = [[(3.14, 23.17), (51.34, 27.14),
+                  (22, -18.11), (3.14, 23.17)]]
         multipoly = geojson.MultiPolygon([poly1, poly2, poly3])
         self.assertEqual(is_valid(multipoly)['valid'], YES)

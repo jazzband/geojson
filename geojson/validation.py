@@ -66,8 +66,8 @@ def is_valid(obj):
 
 
 def is_polygon(coords):
-    lengths = all([len(elem) >= 4 for elem in coords])
-    isring = all([elem[0] == elem[-1] for elem in coords])
+    lengths = all(len(elem) >= 4 for elem in coords)
+    isring = all(elem[0] == elem[-1] for elem in coords)
     return lengths and isring
 
 

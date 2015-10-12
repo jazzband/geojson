@@ -1,6 +1,13 @@
 Changes
 =======
 
+1.3.1 (2015-10-12)
+------------------
+
+- Fix validation bug for MultiPolygons
+
+  - https://github.com/frewsxcv/python-geojson/pull/63
+
 1.3.0 (2015-08-11)
 ------------------
 

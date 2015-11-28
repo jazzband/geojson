@@ -3,14 +3,14 @@ import geojson
 
 def is_valid(obj):
     """ IsValid provides validation for GeoJSON objects
-        All of error messages obtained from the offical site
+        All of error messages obtained from the official site
         http://geojson.org/geojson-spec.html
 
         Args:
             obj(geoJSON object): check validation
 
         Returns:
-            dict of two paremeters 'valid' and 'message'.
+            dict of two parameters 'valid' and 'message'.
             In the case if geoJSON object is valid, returns
             {valid: 'yes', message: ''}
             If json objects is not valid, returns
@@ -76,13 +76,12 @@ def checkListOfObjects(coord, pred):
         MultiLineString that each element of the list is valid geojson object.
         This is helpful method for IsValid.
 
-        Args:
-            coord(list): List of coordinates
-            pred(function): Predicate to check validation of each
-            member in the coord
-
-        Returns:
-            True if list contains valid objects, False otherwise
+    :param coord: List of coordinates
+    :type coord: list
+    :param pred: Predicate to check validation of each member in the coord
+    :type pred: function
+    :return: True if list contains valid objects, False otherwise
+    :rtype: bool
     """
     return not isinstance(coord, list) or not all([pred(ls) for ls in coord])
 
@@ -90,9 +89,8 @@ def checkListOfObjects(coord, pred):
 def output(message):
     """ Output result for IsValid
 
-        Args:
-            message - If message is not empty,
-            object is not valid
+   :param message: If message is not empty, object is not valid
+   :type message: str
     """
     result = {'valid': 'no', 'message': ''}
     if message != '':

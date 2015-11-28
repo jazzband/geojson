@@ -25,10 +25,7 @@ class SimpleWebFeature(object):
         """
         self.id = id
         self.geometry = geometry
-        self.properties = {}
-        self.properties['title'] = title
-        self.properties['summary'] = summary
-        self.properties['link'] = link
+        self.properties = {'title': title, 'summary': summary, 'link': link}
 
     def as_dict(self):
         return {
@@ -47,7 +44,7 @@ class SimpleWebFeature(object):
     """
 
 
-def createSimpleWebFeature(o):
+def create_simple_web_feature(o):
     """
     Create an instance of SimpleWebFeature from a dict, o. If o does not
     match a Python feature object, simply return o. This function serves as a

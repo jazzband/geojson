@@ -6,6 +6,7 @@ from geojson.geometry import GeometryCollection
 from geojson.feature import Feature, FeatureCollection
 from geojson.base import GeoJSON
 from geojson.validation import is_valid
+import geojson.factory as factory
 
 __all__ = ([dump, dumps, load, loads, GeoJSONEncoder] +
            [coords, map_coords] +
@@ -14,4 +15,5 @@ __all__ = ([dump, dumps, load, loads, GeoJSONEncoder] +
            [GeometryCollection] +
            [Feature, FeatureCollection] +
            [GeoJSON] +
-           [is_valid])
+           [is_valid],
+           [factory])

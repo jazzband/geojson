@@ -89,8 +89,8 @@ def checkListOfObjects(coord, pred):
 def output(message):
     """ Output result for IsValid
 
-   :param message: If message is not empty, object is not valid
-   :type message: str
+    :param message: If message is not empty, object is not valid
+    :type message: str
     """
     result = {'valid': 'no', 'message': ''}
     if message != '':

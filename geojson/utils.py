@@ -68,7 +68,8 @@ def generate_random(featureType, numberVertices=3,
 
     :param featureType: A geometry type
     :type featureType: Point, LineString, Polygon
-    :param numberVertices: The number vertices that a linestring or polygon will have
+    :param numberVertices: The number vertices that a linestring or polygon
+    will have
     :type numberVertices: int
     :param boundingBox: A bounding box in which features will be restricted to
     :type boundingBox: list

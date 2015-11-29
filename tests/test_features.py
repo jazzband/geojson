@@ -72,7 +72,7 @@ class FeaturesTest(unittest.TestCase):
         self.assertEqual(geojson.dumps(feature, sort_keys=True), json)
 
         # Decoding
-        factory = geojson.examples.createSimpleWebFeature
+        factory = geojson.examples.create_simple_web_feature
         json = ('{"geometry": {"type": "Point",'
                 ' "coordinates": [53, -4]},'
                 ' "id": "1",'

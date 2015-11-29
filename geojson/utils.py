@@ -30,6 +30,8 @@ def map_coords(func, obj):
     Returns the coordinates from a Geometry after applying the provided
     function to the tuples.
 
+    :param func: Function to apply to tuples
+    :type func: function
     :param obj: A geometry or feature to extract the coordinates from.
     :type obj: Point, LineString, MultiPoint, MultiLineString, Polygon,
     MultiPolygon
@@ -61,14 +63,16 @@ def generate_random(featureType, numberVertices=3,
     """
     Generates random geojson features depending on the parameters
     passed through.
+    The bounding box defaults to the world - [-180.0, -90.0, 180.0, 90.0].
+    The number of vertices defaults to 3.
 
     :param featureType: A geometry type
-    :type string: Point, LineString, Polygon
-    :param numberVertices: The number vertices that
-    a linestring or polygon will have
-    :type int: defaults to 3
+    :type featureType: Point, LineString, Polygon
+    :param numberVertices: The number vertices that a linestring or polygon
+    will have
+    :type numberVertices: int
     :param boundingBox: A bounding box in which features will be restricted to
-    :type list: defaults to the world - [-180.0, -90.0, 180.0, 90.0]
+    :type boundingBox: list
     :return: The resulting random geojson object or geometry collection.
     :rtype: object
     :raises ValueError: if there is no featureType provided.

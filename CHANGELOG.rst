@@ -1,6 +1,13 @@
 Changes
 =======
 
+1.3.2 (2016-01-28)
+------------------
+
+- Add __version__ and __version_info__ attributes
+
+  - https://github.com/frewsxcv/python-geojson/pull/74
+
 1.3.1 (2015-10-12)
 ------------------
 

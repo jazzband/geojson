@@ -1,10 +1,20 @@
 import io
 from setuptools import setup
 import sys
+import re
 
 
 with io.open("README.rst") as readme_file:
     readme_text = readme_file.read()
+
+VERSIONFILE = "geojson/_version.py"
+verstrline = open(VERSIONFILE, "rt").read()
+VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]"
+mo = re.search(VSRE, verstrline, re.M)
+if mo:
+    verstr = mo.group(1)
+else:
+    raise RuntimeError("Unable to find version string in %s." % (VERSIONFILE,))
 
 
 def test_suite():
@@ -30,7 +40,7 @@ import multiprocessing  # NOQA
 
 setup(
     name="geojson",
-    version="1.3.1",
+    version=verstr,
     description="Python bindings and utilities for GeoJSON",
     license="BSD",
     keywords="gis geography json",

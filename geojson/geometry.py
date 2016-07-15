@@ -2,6 +2,7 @@ import sys
 from decimal import Decimal
 
 from geojson.base import GeoJSON
+from geojson.validation import is_valid
 
 
 class Geometry(GeoJSON):
@@ -15,7 +16,7 @@ class Geometry(GeoJSON):
     else:
         __JSON_compliant_types = (float, int, Decimal, long)  # noqa
 
-    def __init__(self, coordinates=None, crs=None, **extra):
+    def __init__(self, coordinates=None, crs=None, validate=False, **extra):
         """
         Initialises a Geometry object.
 
@@ -28,6 +29,11 @@ class Geometry(GeoJSON):
         super(Geometry, self).__init__(**extra)
         self["coordinates"] = coordinates or []
         self.clean_coordinates(self["coordinates"])
+        if validate:
+            validation = is_valid(self)
+            if validation['valid'] == 'no':
+                raise ValueError('{}: {}'.format(
+                    validation['message'], coordinates))
         if crs:
             self["crs"] = self.to_instance(crs, strict=True)
 

@@ -1,6 +1,13 @@
 Changes
 =======
 
+1.3.3 (2016-07-21)
+------------------
+
+- Add validate parameter to GeoJSON constructors
+
+  - https://github.com/frewsxcv/python-geojson/pull/78
+
 1.3.2 (2016-01-28)
 ------------------
 

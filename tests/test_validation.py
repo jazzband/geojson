@@ -12,6 +12,27 @@ YES = 'yes'
 NO = 'no'
 
 
+class TestValidationGeometry(unittest.TestCase):
+
+    def test_invalid_geometry_with_validate(self):
+        self.assertRaises(
+            ValueError, geojson.Point, (10, 20, 30), validate=True)
+
+    def test_invalid_geometry_without_validate(self):
+        try:
+            geojson.Point((10, 20, 30))
+            geojson.Point((10, 20, 30), validate=False)
+        except ValueError:
+            self.fail("Point raised ValueError unexpectedly")
+
+    def test_valid_geometry(self):
+        try:
+            geojson.Point((10, 20), validate=True)
+            geojson.Point((10, 20), validate=False)
+        except ValueError:
+            self.fail("Point raised ValueError unexpectedly")
+
+
 class TestValidationGeoJSONObject(unittest.TestCase):
 
     def test_invalid_jsonobject(self):

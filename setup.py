@@ -28,6 +28,7 @@ def test_suite():
     suite.addTest(doctest.DocFileSuite("README.rst"))
     return suite
 
+
 if sys.version_info[:2] not in [(2, 6), (2, 7)] and \
         sys.version_info[:1] not in [(3, )]:
     sys.stderr.write("Sorry, only Python 2.7, and 3.x are supported "
@@ -68,6 +69,7 @@ setup(
         "Programming Language :: Python :: 3.2",
         "Programming Language :: Python :: 3.3",
         "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
         "Topic :: Scientific/Engineering :: GIS",
     ]
 )

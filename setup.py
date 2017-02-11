@@ -54,7 +54,7 @@ setup(
     packages=["geojson"],
     package_dir={"geojson": "geojson"},
     package_data={"geojson": ["*.rst"]},
-    install_requires=["setuptools"],
+    install_requires=[],
     test_suite="setup.test_suite",
     classifiers=[
         "Development Status :: 5 - Production/Stable",

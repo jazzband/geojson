@@ -1,6 +1,13 @@
 Changes
 =======
 
+1.3.4 (2017-02-11)
+------------------
+
+- Remove runtime dependency on setuptools
+
+  - https://github.com/frewsxcv/python-geojson/pull/90
+
 1.3.3 (2016-07-21)
 ------------------
 

@@ -70,7 +70,8 @@ class TestValidationMultipoint(unittest.TestCase):
 
     def test_invalid_multipoint(self):
         mpoint = geojson.MultiPoint(
-            [(3.5887,), (3.5887, 10.44558), (2.5555, 3.887, 4.56), (2.44, 3.44, 2.555, 4.56)])
+            [(3.5887,), (3.5887, 10.44558),
+             (2.5555, 3.887, 4.56), (2.44, 3.44, 2.555, 4.56)])
         self.assertEqual(is_valid(mpoint)['valid'], NO)
 
     def test_valid_multipoint(self):

@@ -16,7 +16,7 @@ class TestValidationGeometry(unittest.TestCase):
 
     def test_invalid_geometry_with_validate(self):
         self.assertRaises(
-            ValueError, geojson.Point, (10, 20, 30), validate=True)
+            ValueError, geojson.Point, (10, 20, 30, 40), validate=True)
 
     def test_invalid_geometry_without_validate(self):
         try:
@@ -29,6 +29,13 @@ class TestValidationGeometry(unittest.TestCase):
         try:
             geojson.Point((10, 20), validate=True)
             geojson.Point((10, 20), validate=False)
+        except ValueError:
+            self.fail("Point raised ValueError unexpectedly")
+
+    def test_valid_geometry_with_elevation(self):
+        try:
+            geojson.Point((10, 20, 30), validate=True)
+            geojson.Point((10, 20, 30), validate=False)
         except ValueError:
             self.fail("Point raised ValueError unexpectedly")
 
@@ -47,11 +54,15 @@ class TestValidationGeoJSONObject(unittest.TestCase):
 class TestValidationPoint(unittest.TestCase):
 
     def test_invalid_point(self):
-        point = geojson.Point((10, 20, 30))
+        point = geojson.Point((10, 20, 30, 40))
         self.assertEqual(is_valid(point)['valid'], NO)
 
     def test_valid_point(self):
         point = geojson.Point((-3.68, 40.41))
+        self.assertEqual(is_valid(point)['valid'], YES)
+
+    def test_valid_point_with_elevation(self):
+        point = geojson.Point((-3.68, 40.41, 3.45))
         self.assertEqual(is_valid(point)['valid'], YES)
 
 
@@ -59,11 +70,15 @@ class TestValidationMultipoint(unittest.TestCase):
 
     def test_invalid_multipoint(self):
         mpoint = geojson.MultiPoint(
-            [(3.5887, 10.44558), (2.5555, 3.887), (2.44, 3.44, 2.555)])
+            [(3.5887,), (3.5887, 10.44558), (2.5555, 3.887, 4.56), (2.44, 3.44, 2.555, 4.56)])
         self.assertEqual(is_valid(mpoint)['valid'], NO)
 
     def test_valid_multipoint(self):
         mpoint = geojson.MultiPoint([(10, 20), (30, 40)])
+        self.assertEqual(is_valid(mpoint)['valid'], YES)
+
+    def test_valid_multipoint_with_elevation(self):
+        mpoint = geojson.MultiPoint([(10, 20, 30), (30, 40, 50)])
         self.assertEqual(is_valid(mpoint)['valid'], YES)
 
 

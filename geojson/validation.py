@@ -26,11 +26,11 @@ def is_valid(obj):
         return output('this is not GeoJSON object')
 
     if isinstance(obj, geojson.Point):
-        if len(obj['coordinates']) != 2:
+        if len(obj['coordinates']) not in (2, 3):
             return output('the "coordinates" member must be a single position')
 
     if isinstance(obj, geojson.MultiPoint):
-        if checkListOfObjects(obj['coordinates'], lambda x: len(x) == 2):
+        if checkListOfObjects(obj['coordinates'], lambda x: len(x) in (2, 3)):
             return output(
                 'the "coordinates" member must be an array of positions'
             )

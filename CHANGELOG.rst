@@ -1,6 +1,13 @@
 Changes
 =======
 
+1.3.5 (2017-04-24)
+------------------
+
+- Changed the validator to allow elevation
+
+  - https://github.com/frewsxcv/python-geojson/pull/92
+
 1.3.4 (2017-02-11)
 ------------------
 

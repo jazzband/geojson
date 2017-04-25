@@ -35,7 +35,7 @@ GeoJSON Objects
 
 This library implements all the `GeoJSON Objects`_ described in `The GeoJSON Format Specification`_.
 
-.. _GeoJSON Objects: http://www.geojson.org/geojson-spec.html#geojson-objects
+.. _GeoJSON Objects: https://tools.ietf.org/html/rfc7946#section-3
 
 Point
 ~~~~~
@@ -47,10 +47,10 @@ Point
   >>> Point((-115.81, 37.24))  # doctest: +ELLIPSIS
   {"coordinates": [-115.8..., 37.2...], "type": "Point"}
 
-Visualize the result of the example above `here <https://gist.github.com/frewsxcv/b5768a857f5598e405fa>`__. General information about Point can be found in `Section 2.1.2`_ and `Appendix A: Point`_ within `The GeoJSON Format Specification`_.
+Visualize the result of the example above `here <https://gist.github.com/frewsxcv/b5768a857f5598e405fa>`__. General information about Point can be found in `Section 3.1.2`_ and `Appendix A: Points`_ within `The GeoJSON Format Specification`_.
 
-.. _Section 2.1.2: http://www.geojson.org/geojson-spec.html#point
-.. _Appendix A\: Point: http://www.geojson.org/geojson-spec.html#id2
+.. _Section 3.1.2: https://tools.ietf.org/html/rfc7946#section-3.1.2
+.. _Appendix A\: Points: https://tools.ietf.org/html/rfc7946#appendix-A.1
 
 MultiPoint
 ~~~~~~~~~~
@@ -62,10 +62,10 @@ MultiPoint
   >>> MultiPoint([(-155.52, 19.61), (-156.22, 20.74), (-157.97, 21.46)])  # doctest: +ELLIPSIS
   {"coordinates": [[-155.5..., 19.6...], [-156.2..., 20.7...], [-157.9..., 21.4...]], "type": "MultiPoint"}
 
-Visualize the result of the example above `here <https://gist.github.com/frewsxcv/be02025c1eb3aa2040ee>`__. General information about MultiPoint can be found in `Section 2.1.3`_ and `Appendix A: MultiPoint`_ within `The GeoJSON Format Specification`_.
+Visualize the result of the example above `here <https://gist.github.com/frewsxcv/be02025c1eb3aa2040ee>`__. General information about MultiPoint can be found in `Section 3.1.3`_ and `Appendix A: MultiPoints`_ within `The GeoJSON Format Specification`_.
 
-.. _Section 2.1.3: http://www.geojson.org/geojson-spec.html#multipoint
-.. _Appendix A\: MultiPoint: http://www.geojson.org/geojson-spec.html#id5
+.. _Section 3.1.3: https://tools.ietf.org/html/rfc7946#section-3.1.3
+.. _Appendix A\: MultiPoints: https://tools.ietf.org/html/rfc7946#appendix-A.4
 
 
 LineString
@@ -78,10 +78,10 @@ LineString
   >>> LineString([(8.919, 44.4074), (8.923, 44.4075)])  # doctest: +ELLIPSIS
   {"coordinates": [[8.91..., 44.407...], [8.92..., 44.407...]], "type": "LineString"}
 
-Visualize the result of the example above `here <https://gist.github.com/frewsxcv/758563182ca49ce8e8bb>`__. General information about LineString can be found in `Section 2.1.4`_ and `Appendix A: LineString`_ within `The GeoJSON Format Specification`_.
+Visualize the result of the example above `here <https://gist.github.com/frewsxcv/758563182ca49ce8e8bb>`__. General information about LineString can be found in `Section 3.1.4`_ and `Appendix A: LineStrings`_ within `The GeoJSON Format Specification`_.
 
-.. _Section 2.1.4: http://www.geojson.org/geojson-spec.html#linestring
-.. _Appendix A\: LineString: http://www.geojson.org/geojson-spec.html#id3
+.. _Section 3.1.4: https://tools.ietf.org/html/rfc7946#section-3.1.4
+.. _Appendix A\: LineStrings: https://tools.ietf.org/html/rfc7946#appendix-A.2
 
 MultiLineString
 ~~~~~~~~~~~~~~~
@@ -96,10 +96,10 @@ MultiLineString
   ... ])  # doctest: +ELLIPSIS
   {"coordinates": [[[3.7..., 9.2...], [-130.9..., 1.52...]], [[23.1..., -34.2...], [-1.3..., -4.6...], [3.4..., 77.9...]]], "type": "MultiLineString"}
 
-Visualize the result of the example above `here <https://gist.github.com/frewsxcv/20b6522d8242ede00bb3>`__. General information about MultiLineString can be found in `Section 2.1.5`_ and `Appendix A: MultiLineString`_ within `The GeoJSON Format Specification`_.
+Visualize the result of the example above `here <https://gist.github.com/frewsxcv/20b6522d8242ede00bb3>`__. General information about MultiLineString can be found in `Section 3.1.5`_ and `Appendix A: MultiLineStrings`_ within `The GeoJSON Format Specification`_.
 
-.. _Section 2.1.5: http://www.geojson.org/geojson-spec.html#multilinestring
-.. _Appendix A\: MultiLineString: http://www.geojson.org/geojson-spec.html#id6
+.. _Section 3.1.5: https://tools.ietf.org/html/rfc7946#section-3.1.5
+.. _Appendix A\: MultiLineStrings: https://tools.ietf.org/html/rfc7946#appendix-A.5
 
 Polygon
 ~~~~~~~
@@ -119,10 +119,10 @@ Polygon
   ... ])  # doctest: +ELLIPSIS
   {"coordinates": [[[2.3..., 57.32...], [23.19..., -20.2...], [-120.4..., 19.1...]], [[-5.2..., 23.5...], [15.2..., -10.8...], [-20.5..., 1.5...], [-5.2..., 23.5...]]], "type": "Polygon"}
 
-Visualize the results of the example above `here <https://gist.github.com/frewsxcv/b2f5c31c10e399a63679>`__. General information about Polygon can be found in `Section 2.1.6`_ and `Appendix A: Polygon`_ within `The GeoJSON Format Specification`_.
+Visualize the results of the example above `here <https://gist.github.com/frewsxcv/b2f5c31c10e399a63679>`__. General information about Polygon can be found in `Section 3.1.6`_ and `Appendix A: Polygons`_ within `The GeoJSON Format Specification`_.
 
-.. _Section 2.1.6: http://www.geojson.org/geojson-spec.html#polygon
-.. _Appendix A\: Polygon: http://www.geojson.org/geojson-spec.html#id4
+.. _Section 3.1.6: https://tools.ietf.org/html/rfc7946#section-3.1.6
+.. _Appendix A\: Polygons: https://tools.ietf.org/html/rfc7946#appendix-A.3
 
 MultiPolygon
 ~~~~~~~~~~~~
@@ -137,10 +137,10 @@ MultiPolygon
   ... ])  # doctest: +ELLIPSIS
   {"coordinates": [[[[3.7..., 9.2...], [-130.9..., 1.5...], [35.1..., 72.23...]]], [[[23.1..., -34.2...], [-1.3..., -4.6...], [3.4..., 77.9...]]]], "type": "MultiPolygon"}
 
-Visualize the result of the example above `here <https://gist.github.com/frewsxcv/e0388485e28392870b74>`__. General information about MultiPolygon can be found in `Section 2.1.7`_ and `Appendix A: MultiPolygon`_ within `The GeoJSON Format Specification`_.
+Visualize the result of the example above `here <https://gist.github.com/frewsxcv/e0388485e28392870b74>`__. General information about MultiPolygon can be found in `Section 3.1.7`_ and `Appendix A: MultiPolygons`_ within `The GeoJSON Format Specification`_.
 
-.. _Section 2.1.7: http://www.geojson.org/geojson-spec.html#multipolygon
-.. _Appendix A\: MultiPolygon: http://www.geojson.org/geojson-spec.html#id7
+.. _Section 3.1.7: https://tools.ietf.org/html/rfc7946#section-3.1.7
+.. _Appendix A\: MultiPolygons: https://tools.ietf.org/html/rfc7946#appendix-A.6
 
 GeometryCollection
 ~~~~~~~~~~~~~~~~~~
@@ -156,10 +156,10 @@ GeometryCollection
   >>> GeometryCollection([my_point, my_line])  # doctest: +ELLIPSIS
   {"geometries": [{"coordinates": [23.53..., -63.1...], "type": "Point"}, {"coordinates": [[-152.6..., 51.2...], [5.2..., 10.6...]], "type": "LineString"}], "type": "GeometryCollection"}
 
-Visualize the result of the example above `here <https://gist.github.com/frewsxcv/6ec8422e97d338a101b0>`__. General information about GeometryCollection can be found in `Section 2.1.8`_ and `Appendix A: GeometryCollection`_ within `The GeoJSON Format Specification`_.
+Visualize the result of the example above `here <https://gist.github.com/frewsxcv/6ec8422e97d338a101b0>`__. General information about GeometryCollection can be found in `Section 3.1.8`_ and `Appendix A: GeometryCollections`_ within `The GeoJSON Format Specification`_.
 
-.. _Section 2.1.8: http://www.geojson.org/geojson-spec.html#geometry-collection
-.. _Appendix A\: GeometryCollection: http://www.geojson.org/geojson-spec.html#geometrycollection
+.. _Section 3.1.8: https://tools.ietf.org/html/rfc7946#section-3.1.8
+.. _Appendix A\: GeometryCollections: https://tools.ietf.org/html/rfc7946#appendix-A.7
 
 Feature
 ~~~~~~~
@@ -179,9 +179,9 @@ Feature
   >>> Feature(geometry=my_point, id=27)  # doctest: +ELLIPSIS
   {"geometry": {"coordinates": [-3.68..., 40.4...], "type": "Point"}, "id": 27, "properties": {}, "type": "Feature"}
 
-Visualize the results of the examples above `here <https://gist.github.com/frewsxcv/4488d30209d22685c075>`__. General information about Feature can be found in `Section 2.2`_ within `The GeoJSON Format Specification`_.
+Visualize the results of the examples above `here <https://gist.github.com/frewsxcv/4488d30209d22685c075>`__. General information about Feature can be found in `Section 3.2`_ within `The GeoJSON Format Specification`_.
 
-.. _Section 2.2: http://geojson.org/geojson-spec.html#feature-objects
+.. _Section 3.2: https://tools.ietf.org/html/rfc7946#section-3.2
 
 FeatureCollection
 ~~~~~~~~~~~~~~~~~
@@ -197,9 +197,9 @@ FeatureCollection
   >>> FeatureCollection([my_feature, my_other_feature])  # doctest: +ELLIPSIS
   {"features": [{"geometry": {"coordinates": [1.643..., -19.12...], "type": "Point"}, "properties": {}, "type": "Feature"}, {"geometry": {"coordinates": [-80.23..., -22.53...], "type": "Point"}, "properties": {}, "type": "Feature"}], "type": "FeatureCollection"}
 
-Visualize the result of the example above `here <https://gist.github.com/frewsxcv/34513be6fb492771ef7b>`__. General information about FeatureCollection can be found in `Section 2.3`_ within `The GeoJSON Format Specification`_.
+Visualize the result of the example above `here <https://gist.github.com/frewsxcv/34513be6fb492771ef7b>`__. General information about FeatureCollection can be found in `Section 3.3`_ within `The GeoJSON Format Specification`_.
 
-.. _Section 2.3: http://geojson.org/geojson-spec.html#feature-collection-objects
+.. _Section 3.3: https://tools.ietf.org/html/rfc7946#section-3.3
 
 GeoJSON encoding/decoding
 -------------------------
@@ -323,5 +323,5 @@ Credits
 
 
 .. _GeoJSON: http://geojson.org/
-.. _The GeoJSON Format Specification: http://www.geojson.org/geojson-spec.html
+.. _The GeoJSON Format Specification: https://tools.ietf.org/html/rfc7946
 .. _\_\_geo\_interface\_\_ Specification: https://gist.github.com/sgillies/2217756

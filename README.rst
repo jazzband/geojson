@@ -287,7 +287,7 @@ validation
 
   >>> import geojson
 
-  >>> validation = geojson.is_valid(geojson.Point((-3.68,40.41,25.14)))
+  >>> validation = geojson.is_valid(geojson.Point((-3.68,40.41,25.14,10.34)))
   >>> validation['valid']
   'no'
   >>> validation['message']

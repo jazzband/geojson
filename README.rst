@@ -21,7 +21,7 @@ This library contains:
 Installation
 ------------
 
-python-geojson is compatible with Python 2.6, 2.7, 3.2, 3.3, 3.4 and 3.5. It is listed on `PyPi as 'geojson'`_. The recommended way to install is via pip_:
+python-geojson is compatible with Python 2.6, 2.7, 3.3, 3.4, 3.5 and 3.6. It is listed on `PyPi as 'geojson'`_. The recommended way to install is via pip_:
 
 .. code::
 

@@ -125,3 +125,28 @@ class GeoJSON(dict):
                     raise ValueError(msg)
                 instance = ob
         return instance
+
+    @property
+    def is_valid(self):
+        return not self.errors()
+
+    def checkListErrors(self, checkFunc, lst):
+        """Validation helper function."""
+        # check for errors on each subitem, filter only subitems with errors
+        results = [checkFunc(i) for i in lst]
+        return [err for err in results if err]
+
+    def errors(self):
+        """Return validation errors (if any).
+        Implement in each subclass.
+        """
+
+        # make sure that each subclass implements it's own validation function
+        if self.__class__ != GeoJSON:
+            raise NotImplementedError(self.__class__)
+
+        # check for errors on own dict (self)
+        results = {key: obj.errors() for (key,obj) in self.iteritems()}
+        return {key: err for (key,err) in results.iteritems() if err}
+
+

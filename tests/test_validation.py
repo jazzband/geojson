@@ -7,11 +7,6 @@ import unittest
 
 import geojson
 
-is_valid = geojson.is_valid
-YES = 'yes'
-NO = 'no'
-
-
 class TestValidationGeometry(unittest.TestCase):
 
     def test_invalid_geometry_with_validate(self):
@@ -42,28 +37,24 @@ class TestValidationGeometry(unittest.TestCase):
 
 class TestValidationGeoJSONObject(unittest.TestCase):
 
-    def test_invalid_jsonobject(self):
-        obj = [1, 2, 3]
-        self.assertEqual(is_valid(obj)['valid'], NO)
-
     def test_valid_jsonobject(self):
         point = geojson.Point((-10.52, 2.33))
-        self.assertEqual(is_valid(point)['valid'], YES)
+        self.assertEqual(point.is_valid, True)
 
 
 class TestValidationPoint(unittest.TestCase):
 
     def test_invalid_point(self):
         point = geojson.Point((10, 20, 30, 40))
-        self.assertEqual(is_valid(point)['valid'], NO)
+        self.assertEqual(point.is_valid, False)
 
     def test_valid_point(self):
         point = geojson.Point((-3.68, 40.41))
-        self.assertEqual(is_valid(point)['valid'], YES)
+        self.assertEqual(point.is_valid, True)
 
     def test_valid_point_with_elevation(self):
         point = geojson.Point((-3.68, 40.41, 3.45))
-        self.assertEqual(is_valid(point)['valid'], YES)
+        self.assertEqual(point.is_valid, True)
 
 
 class TestValidationMultipoint(unittest.TestCase):
@@ -72,39 +63,39 @@ class TestValidationMultipoint(unittest.TestCase):
         mpoint = geojson.MultiPoint(
             [(3.5887,), (3.5887, 10.44558),
              (2.5555, 3.887, 4.56), (2.44, 3.44, 2.555, 4.56)])
-        self.assertEqual(is_valid(mpoint)['valid'], NO)
+        self.assertEqual(mpoint.is_valid, False)
 
     def test_valid_multipoint(self):
         mpoint = geojson.MultiPoint([(10, 20), (30, 40)])
-        self.assertEqual(is_valid(mpoint)['valid'], YES)
+        self.assertEqual(mpoint.is_valid, True)
 
     def test_valid_multipoint_with_elevation(self):
         mpoint = geojson.MultiPoint([(10, 20, 30), (30, 40, 50)])
-        self.assertEqual(is_valid(mpoint)['valid'], YES)
+        self.assertEqual(mpoint.is_valid, True)
 
 
 class TestValidationLineString(unittest.TestCase):
 
     def test_invalid_linestring(self):
         ls = geojson.LineString([(8.919, 44.4074)])
-        self.assertEqual(is_valid(ls)['valid'], NO)
+        self.assertEqual(ls.is_valid, False)
 
     def test_valid_linestring(self):
         ls = geojson.LineString([(10, 5), (4, 3)])
-        self.assertEqual(is_valid(ls)['valid'], YES)
+        self.assertEqual(ls.is_valid, True)
 
 
 class TestValidationMultiLineString(unittest.TestCase):
 
     def test_invalid_multilinestring(self):
         mls = geojson.MultiLineString([[(10, 5), (20, 1)], []])
-        self.assertEqual(is_valid(mls)['valid'], NO)
+        self.assertEqual(mls.is_valid, False)
 
     def test_valid_multilinestring(self):
         ls1 = [(3.75, 9.25), (-130.95, 1.52)]
         ls2 = [(23.15, -34.25), (-1.35, -4.65), (3.45, 77.95)]
         mls = geojson.MultiLineString([ls1, ls2])
-        self.assertEqual(is_valid(mls)['valid'], YES)
+        self.assertEqual(mls.is_valid, True)
 
 
 class TestValidationPolygon(unittest.TestCase):
@@ -112,17 +103,17 @@ class TestValidationPolygon(unittest.TestCase):
     def test_invalid_polygon(self):
         poly1 = geojson.Polygon(
             [[(2.38, 57.322), (23.194, -20.28), (-120.43, 19.15)]])
-        self.assertEqual(is_valid(poly1)['valid'], NO)
+        self.assertEqual(poly1.is_valid, False)
         poly2 = geojson.Polygon(
             [[(2.38, 57.322), (23.194, -20.28),
                 (-120.43, 19.15), (2.38, 57.323)]])
-        self.assertEqual(is_valid(poly2)['valid'], NO)
+        self.assertEqual(poly2.is_valid, False)
 
     def test_valid_polygon(self):
         poly = geojson.Polygon(
             [[(2.38, 57.322), (23.194, -20.28),
                 (-120.43, 19.15), (2.38, 57.322)]])
-        self.assertEqual(is_valid(poly)['valid'], YES)
+        self.assertEqual(poly.is_valid, True)
 
 
 class TestValidationMultiPolygon(unittest.TestCase):
@@ -133,7 +124,7 @@ class TestValidationMultiPolygon(unittest.TestCase):
         poly2 = [(2.38, 57.322), (23.194, -20.28),
                  (-120.43, 19.15), (2.38, 57.322)]
         multipoly = geojson.MultiPolygon([poly1, poly2])
-        self.assertEqual(is_valid(multipoly)['valid'], NO)
+        self.assertEqual(multipoly.is_valid, False)
 
     def test_valid_multipolygon(self):
         poly1 = [[(2.38, 57.322), (23.194, -20.28),
@@ -143,4 +134,4 @@ class TestValidationMultiPolygon(unittest.TestCase):
         poly3 = [[(3.14, 23.17), (51.34, 27.14),
                   (22, -18.11), (3.14, 23.17)]]
         multipoly = geojson.MultiPolygon([poly1, poly2, poly3])
-        self.assertEqual(is_valid(multipoly)['valid'], YES)
+        self.assertEqual(multipoly.is_valid, True)

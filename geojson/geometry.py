@@ -2,7 +2,6 @@ import sys
 from decimal import Decimal
 
 from geojson.base import GeoJSON
-from geojson.validation import is_valid
 
 
 class Geometry(GeoJSON):
@@ -30,10 +29,9 @@ class Geometry(GeoJSON):
         self["coordinates"] = coordinates or []
         self.clean_coordinates(self["coordinates"])
         if validate:
-            validation = is_valid(self)
-            if validation['valid'] == 'no':
-                raise ValueError('{}: {}'.format(
-                    validation['message'], coordinates))
+            errors = self.errors()
+            if errors:
+                raise ValueError('{}: {}'.format(errors, coordinates))
         if crs:
             self["crs"] = self.to_instance(crs, strict=True)
 
@@ -58,31 +56,52 @@ class GeometryCollection(GeoJSON):
 
 # Marker classes.
 
-class Point(Geometry):
-    pass
+def checkPoint(coord):
+    if len(coord) not in (2, 3):
+        return 'the "coordinates" member must be a single position'
 
+class Point(Geometry):
+    def errors(self):
+        return checkPoint(self['coordinates'])
 
 class MultiPoint(Geometry):
-    pass
+    def errors(self):
+        return self.checkListErrors(checkPoint, self['coordinates'])
 
+
+def checkLineString(coord):
+    if len(coord) < 2:
+        return 'the "coordinates" member must be an array of two or more positions'
 
 class LineString(MultiPoint):
-    pass
-
+    def errors(self):
+        return checkLineString(self['coordinates'])
 
 class MultiLineString(Geometry):
-    pass
+    def errors(self):
+        return self.checkListErrors(checkLineString, self['coordinates'])
 
+
+def checkPolygon(coord):
+    lengths = all([len(elem) >= 4 for elem in coord])
+    if lengths is False:
+        return 'LinearRing must contain with 4 or more positions'
+
+    isring = all([elem[0] == elem[-1] for elem in coord])
+    if isring is False:
+        return 'The first and last positions in LinearRing must be equivalent'
 
 class Polygon(Geometry):
-    pass
-
+    def errors(self):
+        return checkPolygon(self['coordinates'])
 
 class MultiPolygon(Geometry):
-    pass
+    def errors(self):
+        return self.checkListErrors(checkPolygon, self['coordinates'])
 
 
 class Default(object):
     """
     GeoJSON default object.
     """
+

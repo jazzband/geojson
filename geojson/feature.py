@@ -30,6 +30,9 @@ class Feature(GeoJSON):
                             if geometry else None)
         self["properties"] = properties or {}
 
+    def errors(self):
+        geo = self.get('geometry')
+        return geo.errors() if geo else None
 
 class FeatureCollection(GeoJSON):
     """
@@ -46,3 +49,7 @@ class FeatureCollection(GeoJSON):
         """
         super(FeatureCollection, self).__init__(**extra)
         self["features"] = features
+
+    def errors(self):
+        return self.checkListErrors(lambda x: x.errors(), self.features)
+

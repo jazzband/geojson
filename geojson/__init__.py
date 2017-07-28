@@ -5,7 +5,6 @@ from geojson.geometry import MultiLineString, MultiPoint, MultiPolygon
 from geojson.geometry import GeometryCollection
 from geojson.feature import Feature, FeatureCollection
 from geojson.base import GeoJSON
-from geojson.validation import is_valid
 from geojson._version import __version__, __version_info__
 
 __all__ = ([dump, dumps, load, loads, GeoJSONEncoder] +
@@ -15,5 +14,4 @@ __all__ = ([dump, dumps, load, loads, GeoJSONEncoder] +
            [GeometryCollection] +
            [Feature, FeatureCollection] +
            [GeoJSON] +
-           [is_valid] +
            [__version__, __version_info__])

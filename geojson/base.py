@@ -130,10 +130,10 @@ class GeoJSON(dict):
     def is_valid(self):
         return not self.errors()
 
-    def checkListErrors(self, checkFunc, lst):
+    def check_list_errors(self, checkFunc, lst):
         """Validation helper function."""
         # check for errors on each subitem, filter only subitems with errors
-        results = [checkFunc(i) for i in lst]
+        results = (checkFunc(i) for i in lst)
         return [err for err in results if err]
 
     def errors(self):

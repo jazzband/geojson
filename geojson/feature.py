@@ -51,5 +51,5 @@ class FeatureCollection(GeoJSON):
         self["features"] = features
 
     def errors(self):
-        return self.checkListErrors(lambda x: x.errors(), self.features)
+        return self.check_list_errors(lambda x: x.errors(), self.features)
 

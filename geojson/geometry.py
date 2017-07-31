@@ -56,33 +56,33 @@ class GeometryCollection(GeoJSON):
 
 # Marker classes.
 
-def checkPoint(coord):
+def check_point(coord):
     if len(coord) not in (2, 3):
         return 'the "coordinates" member must be a single position'
 
 class Point(Geometry):
     def errors(self):
-        return checkPoint(self['coordinates'])
+        return check_point(self['coordinates'])
 
 class MultiPoint(Geometry):
     def errors(self):
-        return self.checkListErrors(checkPoint, self['coordinates'])
+        return self.check_list_errors(check_point, self['coordinates'])
 
 
-def checkLineString(coord):
+def check_line_string(coord):
     if len(coord) < 2:
         return 'the "coordinates" member must be an array of two or more positions'
 
 class LineString(MultiPoint):
     def errors(self):
-        return checkLineString(self['coordinates'])
+        return check_line_string(self['coordinates'])
 
 class MultiLineString(Geometry):
     def errors(self):
-        return self.checkListErrors(checkLineString, self['coordinates'])
+        return self.check_list_errors(check_line_string, self['coordinates'])
 
 
-def checkPolygon(coord):
+def check_polygon(coord):
     lengths = all([len(elem) >= 4 for elem in coord])
     if lengths is False:
         return 'LinearRing must contain with 4 or more positions'
@@ -93,11 +93,11 @@ def checkPolygon(coord):
 
 class Polygon(Geometry):
     def errors(self):
-        return checkPolygon(self['coordinates'])
+        return check_polygon(self['coordinates'])
 
 class MultiPolygon(Geometry):
     def errors(self):
-        return self.checkListErrors(checkPolygon, self['coordinates'])
+        return self.check_list_errors(check_polygon, self['coordinates'])
 
 
 class Default(object):

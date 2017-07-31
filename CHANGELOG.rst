@@ -1,7 +1,7 @@
 Changes
 =======
 
-1.4.0 (2017-07-28)
+2.0.0 (2017-07-28)
 ------------------
 
 - Rewrite of validation mechanism.

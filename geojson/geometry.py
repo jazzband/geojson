@@ -83,7 +83,7 @@ class MultiLineString(Geometry):
 
 
 def check_polygon(coord):
-    lengths = all([len(elem) >= 4 for elem in coord])
+    lengths = all((len(elem) >= 4 for elem in coord))
     if lengths is False:
         return 'LinearRing must contain with 4 or more positions'
 

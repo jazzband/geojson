@@ -60,9 +60,11 @@ def check_point(coord):
     if len(coord) not in (2, 3):
         return 'the "coordinates" member must be a single position'
 
+
 class Point(Geometry):
     def errors(self):
         return check_point(self['coordinates'])
+
 
 class MultiPoint(Geometry):
     def errors(self):
@@ -71,11 +73,14 @@ class MultiPoint(Geometry):
 
 def check_line_string(coord):
     if len(coord) < 2:
-        return 'the "coordinates" member must be an array of two or more positions'
+        return ('the "coordinates" member must be an array of '
+                'two or more positions')
+
 
 class LineString(MultiPoint):
     def errors(self):
         return check_line_string(self['coordinates'])
+
 
 class MultiLineString(Geometry):
     def errors(self):
@@ -83,7 +88,7 @@ class MultiLineString(Geometry):
 
 
 def check_polygon(coord):
-    lengths = all((len(elem) >= 4 for elem in coord))
+    lengths = all(len(elem) >= 4 for elem in coord)
     if lengths is False:
         return 'LinearRing must contain with 4 or more positions'
 
@@ -91,9 +96,11 @@ def check_polygon(coord):
     if isring is False:
         return 'The first and last positions in LinearRing must be equivalent'
 
+
 class Polygon(Geometry):
     def errors(self):
         return check_polygon(self['coordinates'])
+
 
 class MultiPolygon(Geometry):
     def errors(self):
@@ -104,4 +111,3 @@ class Default(object):
     """
     GeoJSON default object.
     """
-

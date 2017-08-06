@@ -34,6 +34,7 @@ class Feature(GeoJSON):
         geo = self.get('geometry')
         return geo.errors() if geo else None
 
+
 class FeatureCollection(GeoJSON):
     """
     Represents a FeatureCollection, a set of multiple Feature objects.
@@ -52,4 +53,3 @@ class FeatureCollection(GeoJSON):
 
     def errors(self):
         return self.check_list_errors(lambda x: x.errors(), self.features)
-

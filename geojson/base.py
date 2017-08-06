@@ -146,7 +146,5 @@ class GeoJSON(dict):
             raise NotImplementedError(self.__class__)
 
         # check for errors on own dict (self)
-        results = {key: obj.errors() for (key,obj) in self.iteritems()}
-        return {key: err for (key,err) in results.iteritems() if err}
-
-
+        results = {key: obj.errors() for (key, obj) in self.iteritems()}
+        return {key: err for (key, err) in results.iteritems() if err}

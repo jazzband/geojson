@@ -7,6 +7,7 @@ import unittest
 
 import geojson
 
+
 class TestValidationGeometry(unittest.TestCase):
 
     def test_invalid_geometry_with_validate(self):

@@ -92,7 +92,7 @@ def check_polygon(coord):
     if lengths is False:
         return 'LinearRing must contain with 4 or more positions'
 
-    isring = all([elem[0] == elem[-1] for elem in coord])
+    isring = all(elem[0] == elem[-1] for elem in coord)
     if isring is False:
         return 'The first and last positions in LinearRing must be equivalent'
 

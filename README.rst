@@ -281,16 +281,25 @@ map_coords
 
 validation
 ~~~~~~~~~~
-:code:`geojson.is_valid` provides validation of GeoJSON objects.
+
+:code:`is_valid` property provides simple validation of GeoJSON objects.
 
 .. code:: python
 
   >>> import geojson
 
-  >>> validation = geojson.is_valid(geojson.Point((-3.68,40.41,25.14,10.34)))
-  >>> validation['valid']
-  'no'
-  >>> validation['message']
+  >>> obj = geojson.Point((-3.68,40.41,25.14,10.34))
+  >>> obj.is_valid
+  False
+
+:code:`errors` method provides collection of errors when validation GeoJSON objects.
+
+.. code:: python
+
+  >>> import geojson
+
+  >>> obj = geojson.Point((-3.68,40.41,25.14,10.34))
+  >>> obj.errors()
   'the "coordinates" member must be a single position'
 
 generate_random

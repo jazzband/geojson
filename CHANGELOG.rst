@@ -4,7 +4,9 @@ Changes
 2.0.0 (2017-07-28)
 ------------------
 
-- Rewrite of validation mechanism.
+- Rewrite of validation mechanism (breaking change).
+
+  - https://github.com/frewsxcv/python-geojson/pull/98
 
 1.3.5 (2017-04-24)
 ------------------

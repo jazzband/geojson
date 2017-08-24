@@ -145,7 +145,6 @@ class TestValidationGeometryCollection(unittest.TestCase):
         bad_poly = geojson.Polygon([[(2.38, 57.322), (23.194, -20.28),
                                    (-120.43, 19.15), (25.44, -17.91)]])
 
-
         geom_collection = geojson.GeometryCollection(
                 geometries=[point, bad_poly]
             )

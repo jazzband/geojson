@@ -136,3 +136,27 @@ class TestValidationMultiPolygon(unittest.TestCase):
                   (22, -18.11), (3.14, 23.17)]]
         multipoly = geojson.MultiPolygon([poly1, poly2, poly3])
         self.assertEqual(multipoly.is_valid, True)
+
+
+class TestValidationGeometryCollection(unittest.TestCase):
+
+    def test_invalid_geometrycollection(self):
+        point = geojson.Point((10, 20))
+        bad_poly = geojson.Polygon([[(2.38, 57.322), (23.194, -20.28),
+                                   (-120.43, 19.15), (25.44, -17.91)]])
+
+
+        geom_collection = geojson.GeometryCollection(
+                geometries=[point, bad_poly]
+            )
+        self.assertFalse(geom_collection.is_valid)
+
+    def test_valid_geometrycollection(self):
+        point = geojson.Point((10, 20))
+        poly = geojson.Polygon([[(2.38, 57.322), (23.194, -20.28),
+                                (-120.43, 19.15), (2.38, 57.322)]])
+
+        geom_collection = geojson.GeometryCollection(
+                geometries=[point, poly]
+            )
+        self.assertTrue(geom_collection.is_valid)

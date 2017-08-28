@@ -54,7 +54,11 @@ class GeometryCollection(GeoJSON):
         self["geometries"] = geometries or []
 
     def errors(self):
-        return any(list(geom.errors() for geom in self['geometries']))
+        return [geom.errors() for geom in self['geometries']]
+
+    @property
+    def is_valid(self):
+        return not any(self.errors())
 
 
 # Marker classes.

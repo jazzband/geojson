@@ -53,6 +53,10 @@ class GeometryCollection(GeoJSON):
         super(GeometryCollection, self).__init__(**extra)
         self["geometries"] = geometries or []
 
+    def errors(self):
+        errors = [geom.errors() for geom in self['geometries']]
+        return [err for err in errors if err]
+
 
 # Marker classes.
 

@@ -1,6 +1,13 @@
 Changes
 =======
 
+2.1.0 (2017-08-29)
+------------------
+
+- Implement validation for GeometryCollection
+
+  - https://github.com/frewsxcv/python-geojson/pull/102
+
 2.0.0 (2017-07-28)
 ------------------
 

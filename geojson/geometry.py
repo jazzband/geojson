@@ -57,6 +57,7 @@ class GeometryCollection(GeoJSON):
         errors = [geom.errors() for geom in self['geometries']]
         return [err for err in errors if err]
 
+
 # Marker classes.
 
 def check_point(coord):

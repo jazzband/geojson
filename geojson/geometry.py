@@ -55,6 +55,12 @@ class Geometry(GeoJSON):
                 raise ValueError("%r is not a JSON compliant number" % coord)
         return new_coords
 
+    def __getitem__(self, key):
+        try:
+            return self.get("coordinates", ())[key]
+        except (KeyError, TypeError, IndexError):
+            return super().__getitem__(key)
+
 
 class GeometryCollection(GeoJSON):
     """
@@ -68,6 +74,12 @@ class GeometryCollection(GeoJSON):
     def errors(self):
         errors = [geom.errors() for geom in self['geometries']]
         return [err for err in errors if err]
+
+    def __getitem__(self, key):
+        try:
+            return self.get("geometries", ())[key]
+        except (KeyError, TypeError, IndexError):
+            return super().__getitem__(key)
 
 
 # Marker classes.

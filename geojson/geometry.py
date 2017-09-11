@@ -55,12 +55,6 @@ class Geometry(GeoJSON):
                 raise ValueError("%r is not a JSON compliant number" % coord)
         return new_coords
 
-    def __getitem__(self, key):
-        try:
-            return self.get("coordinates", ())[key]
-        except (KeyError, TypeError, IndexError):
-            return super(GeoJSON, self).__getitem__(key)
-
 
 class GeometryCollection(GeoJSON):
     """

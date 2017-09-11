@@ -37,6 +37,9 @@ This library implements all the `GeoJSON Objects`_ described in `The GeoJSON For
 
 .. _GeoJSON Objects: https://tools.ietf.org/html/rfc7946#section-3
 
+All objects (except `Feature`_, which doesn't have one) delegate numeric indexes to their contained array.
+
+All object keys can also be used as attributes.
 Point
 ~~~~~
 

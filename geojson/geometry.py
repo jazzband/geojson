@@ -4,16 +4,17 @@ from decimal import Decimal
 from geojson.base import GeoJSON
 
 
+if sys.version_info[0] == 3:
+    # Python 3.x has no long type
+    _JSON_compliant_types = (float, int, Decimal)
+else:
+    _JSON_compliant_types = (float, int, Decimal, long)  # noqa
+
+
 class Geometry(GeoJSON):
     """
     Represents an abstract base class for a WGS84 geometry.
     """
-
-    if sys.version_info[0] == 3:
-        # Python 3.x has no long type
-        __JSON_compliant_types = (float, int, Decimal)
-    else:
-        __JSON_compliant_types = (float, int, Decimal, long)  # noqa
 
     def __init__(self, coordinates=None, crs=None, validate=False, **extra):
         """
@@ -26,8 +27,8 @@ class Geometry(GeoJSON):
         """
 
         super(Geometry, self).__init__(**extra)
-        self["coordinates"] = coordinates or []
-        self.clean_coordinates(self["coordinates"])
+        self["coordinates"] = self.clean_coordinates(coordinates or [])
+
         if validate:
             errors = self.errors()
             if errors:
@@ -37,11 +38,19 @@ class Geometry(GeoJSON):
 
     @classmethod
     def clean_coordinates(cls, coords):
+        new_coords = []
+        if isinstance(coords, Point):
+            new_coords.append(coords)
         for coord in coords:
             if isinstance(coord, (list, tuple)):
-                cls.clean_coordinates(coord)
-            elif not isinstance(coord, cls.__JSON_compliant_types):
-                raise ValueError("%r is not JSON compliant number" % coord)
+                new_coords.append(cls.clean_coordinates(coord))
+            elif isinstance(coord, Geometry):
+                new_coords.append(coord['coordinates'])
+            elif isinstance(coord, _JSON_compliant_types):
+                new_coords.append(coord)
+            else:
+                raise ValueError("%r is not a JSON compliant number" % coord)
+        return new_coords
 
 
 class GeometryCollection(GeoJSON):
@@ -61,8 +70,13 @@ class GeometryCollection(GeoJSON):
 # Marker classes.
 
 def check_point(coord):
+    if not isinstance(coord, list):
+        return 'each position must be a list'
     if len(coord) not in (2, 3):
-        return 'the "coordinates" member must be a single position'
+        return 'a position must have exactly 2 or 3 values'
+    for num in coord:
+        if not isinstance(num, _JSON_compliant_types):
+            return "each value in a position must be a number"
 
 
 class Point(Geometry):
@@ -76,9 +90,15 @@ class MultiPoint(Geometry):
 
 
 def check_line_string(coord):
+    if not isinstance(coord, list):
+        return 'each line must be a list of positions'
     if len(coord) < 2:
         return ('the "coordinates" member must be an array of '
                 'two or more positions')
+    for pos in coord:
+        error = check_point(pos)
+        if error:
+            return error
 
 
 class LineString(MultiPoint):

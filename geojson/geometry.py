@@ -59,7 +59,7 @@ class Geometry(GeoJSON):
         try:
             return self.get("coordinates", ())[key]
         except (KeyError, TypeError, IndexError):
-            return super().__getitem__(key)
+            return super(GeoJSON, self).__getitem__(key)
 
 
 class GeometryCollection(GeoJSON):
@@ -79,7 +79,7 @@ class GeometryCollection(GeoJSON):
         try:
             return self.get("geometries", ())[key]
         except (KeyError, TypeError, IndexError):
-            return super().__getitem__(key)
+            return super(GeoJSON, self).__getitem__(key)
 
 
 # Marker classes.

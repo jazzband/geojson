@@ -58,4 +58,4 @@ class FeatureCollection(GeoJSON):
         try:
             return self.get("features", ())[key]
         except (KeyError, TypeError, IndexError):
-            return super().__getitem__(key)
+            return super(GeoJSON, self).__getitem__(key)

@@ -39,8 +39,8 @@ class Geometry(GeoJSON):
     @classmethod
     def clean_coordinates(cls, coords):
         new_coords = []
-        if isinstance(coords, Point):
-            new_coords.append(coords)
+        if isinstance(coords, Geometry):
+            coords = [coords]
         for coord in coords:
             if isinstance(coord, (list, tuple)):
                 new_coords.append(cls.clean_coordinates(coord))

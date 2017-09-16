@@ -78,6 +78,7 @@ def generate_random(featureType, numberVertices=3,
     :rtype: object
     :raises ValueError: if there is no featureType provided.
     """
+
     from geojson import Point, LineString, Polygon
     import random
     import math
@@ -98,10 +99,7 @@ def generate_random(featureType, numberVertices=3,
         return Point((randomLon(), randomLat()))
 
     def createLine():
-        coords = []
-        for i in range(0, numberVertices):
-            coords.append((randomLon(), randomLat()))
-        return LineString(coords)
+        return LineString([createPoint() for unused in range(numberVertices)])
 
     def createPoly():
         aveRadius = 60

@@ -129,3 +129,9 @@ class EncodingDecodingTest(unittest.TestCase):
         nested = expected['geometry']
         expected = self.restaurant1.__geo_interface__
         self.assertEqual(nested, expected)
+
+    def test_invalid(self):
+        with self.assertRaises(ValueError) as cm:
+            geojson.loads('{"type":"Point", "coordinates":[[-Infinity, 4]]}')
+
+        self.assertIn('is not JSON compliant', str(cm.exception))

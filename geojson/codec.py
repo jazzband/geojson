@@ -19,8 +19,7 @@ class GeoJSONEncoder(json.JSONEncoder):
 # Here the defaults are set to only permit valid JSON as per RFC 4267
 
 def _enforce_strict_numbers(obj):
-    if isinstance(obj, (int, float)):
-        raise ValueError("Number %r is not JSON compliant" % obj)
+    raise ValueError("Number %r is not JSON compliant" % obj)
 
 
 def dump(obj, fp, cls=GeoJSONEncoder, allow_nan=False, **kwargs):

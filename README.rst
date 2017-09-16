@@ -300,7 +300,7 @@ validation
 
   >>> obj = geojson.Point((-3.68,40.41,25.14,10.34))
   >>> obj.errors()
-  'the "coordinates" member must be a single position'
+  'a position must have exactly 2 or 3 values'
 
 generate_random
 ~~~~~~~~~~~~~~~

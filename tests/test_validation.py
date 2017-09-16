@@ -39,13 +39,13 @@ class TestValidationGeometry(unittest.TestCase):
         with self.assertRaises(ValueError) as cm:
             geojson.MultiPoint([5], validate=True)
 
-        self.assertIn('each position must be a list', cm.exception.message)
+        self.assertIn('each position must be a list', str(cm.exception))
 
     def test_not_number(self):
         with self.assertRaises(ValueError) as cm:
             geojson.MultiPoint([[1, '?']], validate=False)
 
-        self.assertIn('is not a JSON compliant number', cm.exception.message)
+        self.assertIn('is not a JSON compliant number', str(cm.exception))
 
 
 class TestValidationGeoJSONObject(unittest.TestCase):
@@ -94,13 +94,13 @@ class TestValidationLineString(unittest.TestCase):
             geojson.LineString([(8.919, 44.4074)], validate=True)
 
         self.assertIn('must be an array of two or more positions',
-                      cm.exception.message)
+                      str(cm.exception))
 
         with self.assertRaises(ValueError) as cm:
             geojson.LineString([(8.919, 44.4074), [3]], validate=True)
 
         self.assertIn('a position must have exactly 2 or 3 values',
-                      cm.exception.message)
+                      str(cm.exception))
 
     def test_valid_linestring(self):
         ls = geojson.LineString([(10, 5), (4, 3)])
@@ -114,7 +114,7 @@ class TestValidationMultiLineString(unittest.TestCase):
             geojson.MultiLineString([1], validate=True)
 
         self.assertIn('each line must be a list of positions',
-                      cm.exception.message)
+                      str(cm.exception))
 
         mls = geojson.MultiLineString([[(10, 5), (20, 1)], []])
         self.assertEqual(mls.is_valid, False)

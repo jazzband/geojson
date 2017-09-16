@@ -38,6 +38,9 @@ class Geometry(GeoJSON):
 
     @classmethod
     def clean_coordinates(cls, coords):
+        if isinstance(coords, cls):
+            return coords['coordinates']
+
         new_coords = []
         if isinstance(coords, Geometry):
             coords = [coords]
@@ -112,13 +115,19 @@ class MultiLineString(Geometry):
 
 
 def check_polygon(coord):
+    if not isinstance(coord, list):
+        return 'Each polygon must be a list of linear rings'
+
+    if not all(isinstance(elem, list) for elem in coord):
+        return "Each element of a polygon's coordinates must be a list"
+
     lengths = all(len(elem) >= 4 for elem in coord)
     if lengths is False:
-        return 'LinearRing must contain with 4 or more positions'
+        return 'Each linear ring must contain at least 4 positions'
 
     isring = all(elem[0] == elem[-1] for elem in coord)
     if isring is False:
-        return 'The first and last positions in LinearRing must be equivalent'
+        return 'The first and last positions in each linear ring must be equivalent'
 
 
 class Polygon(Geometry):

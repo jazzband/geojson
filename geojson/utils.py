@@ -5,7 +5,7 @@ def coords(obj):
     """
     Yields the coordinates from a Feature or Geometry.
 
-    :param obj: A geometry or feature to extract the coordinates from."
+    :param obj: A geometry or feature to extract the coordinates from.
     :type obj: Feature, Geometry
     :return: A generator with coordinate tuples from the geometry or feature.
     :rtype: generator

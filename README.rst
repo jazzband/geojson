@@ -314,6 +314,9 @@ generate_random
   >>> geojson.utils.generate_random("LineString")  # doctest: +ELLIPSIS
   {"coordinates": [...], "type": "LineString"}
 
+  >>> geojson.utils.generate_random("Polygon")  # doctest: +ELLIPSIS
+  {"coordinates": [...], "type": "Polygon"}
+
 
 Development
 -----------

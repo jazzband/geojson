@@ -194,8 +194,13 @@ FeatureCollection
 
   >>> my_other_feature = Feature(geometry=Point((-80.234, -22.532)))
 
-  >>> FeatureCollection([my_feature, my_other_feature])  # doctest: +ELLIPSIS
+  >>> feature_collection = FeatureCollection([my_feature, my_other_feature])
+
+  >>> feature_collection # doctest: +ELLIPSIS
   {"features": [{"geometry": {"coordinates": [1.643..., -19.12...], "type": "Point"}, "properties": {}, "type": "Feature"}, {"geometry": {"coordinates": [-80.23..., -22.53...], "type": "Point"}, "properties": {}, "type": "Feature"}], "type": "FeatureCollection"}
+
+  >>> feature_collection.errors()
+  []
 
 Visualize the result of the example above `here <https://gist.github.com/frewsxcv/34513be6fb492771ef7b>`__. General information about FeatureCollection can be found in `Section 3.3`_ within `The GeoJSON Format Specification`_.
 

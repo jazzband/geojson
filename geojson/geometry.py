@@ -77,9 +77,6 @@ def check_point(coord):
         return 'each position must be a list'
     if len(coord) not in (2, 3):
         return 'a position must have exactly 2 or 3 values'
-    for num in coord:
-        if not isinstance(num, _JSON_compliant_types):
-            return "each value in a position must be a number"
 
 
 class Point(Geometry):
@@ -127,7 +124,7 @@ def check_polygon(coord):
 
     isring = all(elem[0] == elem[-1] for elem in coord)
     if isring is False:
-        return 'The first and last positions in each linear ring must be equivalent'
+        return 'Each linear ring must end where it started'
 
 
 class Polygon(Geometry):

@@ -129,6 +129,12 @@ class TestValidationMultiLineString(unittest.TestCase):
 class TestValidationPolygon(unittest.TestCase):
 
     def test_invalid_polygon(self):
+        with self.assertRaises(ValueError) as cm:
+            geojson.Polygon([1], validate=True)
+
+        self.assertIn("Each element of a polygon's coordinates must be a list",
+                      str(cm.exception))
+
         poly1 = geojson.Polygon(
             [[(2.38, 57.322), (23.194, -20.28), (-120.43, 19.15)]])
         self.assertEqual(poly1.is_valid, False)
@@ -147,6 +153,12 @@ class TestValidationPolygon(unittest.TestCase):
 class TestValidationMultiPolygon(unittest.TestCase):
 
     def test_invalid_multipolygon(self):
+        with self.assertRaises(ValueError) as cm:
+            geojson.MultiPolygon([1], validate=True)
+
+        self.assertIn("Each polygon must be a list of linear rings",
+                      str(cm.exception))
+
         poly1 = [(2.38, 57.322), (23.194, -20.28),
                  (-120.43, 19.15), (25.44, -17.91)]
         poly2 = [(2.38, 57.322), (23.194, -20.28),

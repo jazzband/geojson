@@ -93,12 +93,14 @@ class TestValidationLineString(unittest.TestCase):
         with self.assertRaises(ValueError) as cm:
             geojson.LineString([(8.919, 44.4074)], validate=True)
 
-        self.assertIn('must be an array of two or more positions', cm.exception.message)
+        self.assertIn('must be an array of two or more positions',
+                      cm.exception.message)
 
         with self.assertRaises(ValueError) as cm:
             geojson.LineString([(8.919, 44.4074), [3]], validate=True)
 
-        self.assertIn('a position must have exactly 2 or 3 values', cm.exception.message)
+        self.assertIn('a position must have exactly 2 or 3 values',
+                      cm.exception.message)
 
     def test_valid_linestring(self):
         ls = geojson.LineString([(10, 5), (4, 3)])
@@ -111,7 +113,8 @@ class TestValidationMultiLineString(unittest.TestCase):
         with self.assertRaises(ValueError) as cm:
             geojson.MultiLineString([1], validate=True)
 
-        self.assertIn('each line must be a list of positions', cm.exception.message)
+        self.assertIn('each line must be a list of positions',
+                      cm.exception.message)
 
         mls = geojson.MultiLineString([[(10, 5), (20, 1)], []])
         self.assertEqual(mls.is_valid, False)

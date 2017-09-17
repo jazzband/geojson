@@ -97,8 +97,8 @@ class EncodingDecodingTest(unittest.TestCase):
         self.assertEqual(actual, self.restaurant_str)
 
         # Classes that don't implement geo interface should raise TypeError
-        self.assertRaises(
-            TypeError, geojson.dumps, self.restaurant_nogeo, sort_keys=True)
+        with self.assertRaises(TypeError):
+            geojson.dumps(self.restaurant_nogeo)
 
     def test_encode_nested(self):
         """

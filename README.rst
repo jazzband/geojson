@@ -37,9 +37,10 @@ This library implements all the `GeoJSON Objects`_ described in `The GeoJSON For
 
 .. _GeoJSON Objects: https://tools.ietf.org/html/rfc7946#section-3
 
-All objects (except `Feature`_, which doesn't have one) delegate numeric indexes to their contained array.
-
 All object keys can also be used as attributes.
+
+The objects contained in GeometryCollection and FeatureCollection can be indexed directly.
+
 Point
 ~~~~~
 
@@ -156,8 +157,16 @@ GeometryCollection
 
   >>> my_line = LineString([(-152.62, 51.21), (5.21, 10.69)])
 
-  >>> GeometryCollection([my_point, my_line])  # doctest: +ELLIPSIS
+  >>> geo_collection = GeometryCollection([my_point, my_line])
+
+  >>> geo_collection  # doctest: +ELLIPSIS
   {"geometries": [{"coordinates": [23.53..., -63.1...], "type": "Point"}, {"coordinates": [[-152.6..., 51.2...], [5.2..., 10.6...]], "type": "LineString"}], "type": "GeometryCollection"}
+
+  >>> geo_collection[1]
+  {"coordinates": [[-152.62, 51.21], [5.21, 10.69]], "type": "LineString"}
+
+  >>> geo_collection[0] == geo_collection.geometries[0]
+  True
 
 Visualize the result of the example above `here <https://gist.github.com/frewsxcv/6ec8422e97d338a101b0>`__. General information about GeometryCollection can be found in `Section 3.1.8`_ and `Appendix A: GeometryCollections`_ within `The GeoJSON Format Specification`_.
 
@@ -204,6 +213,9 @@ FeatureCollection
 
   >>> feature_collection.errors()
   []
+
+  >>> (feature_collection[0] == feature_collection['features'][0], feature_collection[1] == my_other_feature)
+  (True, True)
 
 Visualize the result of the example above `here <https://gist.github.com/frewsxcv/34513be6fb492771ef7b>`__. General information about FeatureCollection can be found in `Section 3.3`_ within `The GeoJSON Format Specification`_.
 

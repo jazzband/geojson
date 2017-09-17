@@ -11,7 +11,7 @@ from geojson.mapping import to_mapping
 class GeoJSONEncoder(json.JSONEncoder):
 
     def default(self, obj):
-        return geojson.factory.GeoJSON.to_instance(obj)
+        return geojson.factory.GeoJSON.to_instance(obj) # NOQA
 
 
 # Wrap the functions from json, providing encoder, decoders, and

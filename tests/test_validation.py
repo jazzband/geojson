@@ -7,33 +7,26 @@ import unittest
 
 import geojson
 
+INVALID_POS = (10, 20, 30, 40)
+VALID_POS = (10, 20)
+VALID_POS_WITH_ELEVATION = (10, 20, 30)
+
 
 class TestValidationGeometry(unittest.TestCase):
 
     def test_invalid_geometry_with_validate(self):
-        self.assertRaises(
-            ValueError, geojson.Point, (10, 20, 30, 40), validate=True)
+        with self.assertRaises(ValueError):
+            geojson.Point(INVALID_POS, validate=True)
 
     def test_invalid_geometry_without_validate(self):
-        try:
-            geojson.Point((10, 20, 30))
-            geojson.Point((10, 20, 30), validate=False)
-        except ValueError:
-            self.fail("Point raised ValueError unexpectedly")
+        geojson.Point(INVALID_POS)
+        geojson.Point(INVALID_POS, validate=False)
 
     def test_valid_geometry(self):
-        try:
-            geojson.Point((10, 20), validate=True)
-            geojson.Point((10, 20), validate=False)
-        except ValueError:
-            self.fail("Point raised ValueError unexpectedly")
+        geojson.Point(VALID_POS, validate=True)
 
     def test_valid_geometry_with_elevation(self):
-        try:
-            geojson.Point((10, 20, 30), validate=True)
-            geojson.Point((10, 20, 30), validate=False)
-        except ValueError:
-            self.fail("Point raised ValueError unexpectedly")
+        geojson.Point(VALID_POS_WITH_ELEVATION, validate=True)
 
     def test_not_sequence(self):
         with self.assertRaises(ValueError) as cm:

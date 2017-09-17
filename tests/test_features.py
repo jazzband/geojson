@@ -1,4 +1,7 @@
-from io import BytesIO  # NOQA
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 import unittest
 
 import geojson
@@ -36,7 +39,7 @@ class FeaturesTest(unittest.TestCase):
     def test_unicode_properties(self):
         with open("tests/data.geojson") as file_:
             obj = geojson.load(file_)
-        geojson.dumps(obj)
+        geojson.dump(obj, StringIO())
 
     def test_feature_class(self):
         """

@@ -57,3 +57,7 @@ class CoordsTestCase(unittest.TestCase):
         self.assertEqual(result['type'], 'MultiPolygon')
         self.assertEqual(result['coordinates'][0][0][0], (3.78, 9.28))
         self.assertEqual(result['coordinates'][-1][-1][-1], (23.18, -34.29))
+
+    def test_map_invalid(self):
+        with self.assertRaises(ValueError):
+            map_coords(lambda x: x, {"type": ""})

@@ -12,41 +12,45 @@ class StrictJsonTest(unittest.TestCase):
         """
         Ensure Error is raised when encoding nan
         """
-        unstrict = {
+        self._raises_on_dump({
             "type": "Point",
             "coordinates": (float("nan"), 1.0),
-        }
-        self.assertRaises(ValueError, geojson.dumps, unstrict)
+        })
 
     def test_encode_inf(self):
         """
         Ensure Error is raised when encoding inf or -inf
         """
-        unstrict = {
+        self._raises_on_dump({
             "type": "Point",
             "coordinates": (float("inf"), 1.0),
-        }
-        self.assertRaises(ValueError, geojson.dumps, unstrict)
+        })
 
-        unstrict = {
+        self._raises_on_dump({
             "type": "Point",
             "coordinates": (float("-inf"), 1.0),
-        }
-        self.assertRaises(ValueError, geojson.dumps, unstrict)
+        })
+
+    def _raises_on_dump(self, unstrict):
+        with self.assertRaises(ValueError):
+            geojson.dumps(unstrict)
 
     def test_decode_nan(self):
         """
         Ensure Error is raised when decoding NaN
         """
-        unstrict = '{"type": "Point", "coordinates": [1.0, NaN]}'
-        self.assertRaises(ValueError, geojson.loads, unstrict)
+        self._raises_on_load('{"type": "Point", "coordinates": [1.0, NaN]}')
 
     def test_decode_inf(self):
         """
         Ensure Error is raised when decoding Infinity or -Infinity
         """
-        unstrict = '{"type": "Point", "coordinates": [1.0, Infinity]}'
-        self.assertRaises(ValueError, geojson.loads, unstrict)
+        self._raises_on_load(
+            '{"type": "Point", "coordinates": [1.0, Infinity]}')
 
-        unstrict = '{"type": "Point", "coordinates": [1.0, -Infinity]}'
-        self.assertRaises(ValueError, geojson.loads, unstrict)
+        self._raises_on_load(
+            '{"type": "Point", "coordinates": [1.0, -Infinity]}')
+
+    def _raises_on_load(self, unstrict):
+        with self.assertRaises(ValueError):
+            geojson.loads(unstrict)

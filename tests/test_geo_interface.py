@@ -4,6 +4,7 @@ Encoding/decoding custom objects with __geo_interface__
 import unittest
 
 import geojson
+from geojson.mapping import to_mapping
 
 
 class EncodingDecodingTest(unittest.TestCase):
@@ -96,8 +97,8 @@ class EncodingDecodingTest(unittest.TestCase):
         self.assertEqual(actual, self.restaurant_str)
 
         # Classes that don't implement geo interface should raise TypeError
-        self.assertRaises(
-            TypeError, geojson.dumps, self.restaurant_nogeo, sort_keys=True)
+        with self.assertRaises(TypeError):
+            geojson.dumps(self.restaurant_nogeo)
 
     def test_encode_nested(self):
         """
@@ -129,3 +130,13 @@ class EncodingDecodingTest(unittest.TestCase):
         nested = expected['geometry']
         expected = self.restaurant1.__geo_interface__
         self.assertEqual(nested, expected)
+
+    def test_invalid(self):
+        with self.assertRaises(ValueError) as cm:
+            geojson.loads('{"type":"Point", "coordinates":[[-Infinity, 4]]}')
+
+        self.assertIn('is not JSON compliant', str(cm.exception))
+
+    def test_mapping(self):
+        self.assertEquals(to_mapping(geojson.Point([1, 2])),
+                          {"coordinates": [1, 2], "type": "Point"})

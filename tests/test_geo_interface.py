@@ -4,6 +4,7 @@ Encoding/decoding custom objects with __geo_interface__
 import unittest
 
 import geojson
+from geojson.mapping import to_mapping
 
 
 class EncodingDecodingTest(unittest.TestCase):
@@ -135,3 +136,7 @@ class EncodingDecodingTest(unittest.TestCase):
             geojson.loads('{"type":"Point", "coordinates":[[-Infinity, 4]]}')
 
         self.assertIn('is not JSON compliant', str(cm.exception))
+
+    def test_mapping(self):
+        self.assertEquals(to_mapping(geojson.Point([1, 2])),
+                          {"coordinates": [1, 2], "type": "Point"})

@@ -1,6 +1,13 @@
 Changes
 =======
 
+2.2.0 (2017-09-17)
+------------------
+
+- Allow constructing geojson objects from geojson objects
+
+  - https://github.com/frewsxcv/python-geojson/pull/104
+
 2.1.0 (2017-08-29)
 ------------------
 

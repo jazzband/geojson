@@ -69,6 +69,12 @@ class GeometryCollection(GeoJSON):
         errors = [geom.errors() for geom in self['geometries']]
         return [err for err in errors if err]
 
+    def __getitem__(self, key):
+        try:
+            return self.get("geometries", ())[key]
+        except (KeyError, TypeError, IndexError):
+            return super(GeoJSON, self).__getitem__(key)
+
 
 # Marker classes.
 

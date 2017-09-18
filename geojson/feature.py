@@ -53,3 +53,9 @@ class FeatureCollection(GeoJSON):
 
     def errors(self):
         return self.check_list_errors(lambda x: x.errors(), self.features)
+
+    def __getitem__(self, key):
+        try:
+            return self.get("features", ())[key]
+        except (KeyError, TypeError, IndexError):
+            return super(GeoJSON, self).__getitem__(key)

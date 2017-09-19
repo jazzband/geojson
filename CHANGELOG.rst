@@ -1,6 +1,14 @@
 Changes
 =======
 
+2.3.0 (2017-09-18)
+------------------
+
+- Add ``__getitem__`` methods to sequence-like objects
+
+  - https://github.com/frewsxcv/python-geojson/pull/103
+
+
 2.2.0 (2017-09-17)
 ------------------
 

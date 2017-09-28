@@ -143,3 +143,5 @@ class EncodingDecodingTest(unittest.TestCase):
 
     def test_GeoJSON(self):
         self.assertEquals(None, geojson.GeoJSON().__geo_interface__)
+
+        self.assertEquals({"type": "GeoJSON"}, to_mapping(geojson.GeoJSON()))

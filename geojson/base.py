@@ -112,11 +112,6 @@ class GeoJSON(dict):
                     raise AttributeError(
                         "{0} is not a GeoJSON type").format(type_)
                 geojson_factory = getattr(geojson.factory, type_)
-                if not issubclass(geojson_factory, GeoJSON):
-                    raise TypeError("""\
-                    Not a valid GeoJSON type:
-                    %r (geojson_factory: %r, cls: %r)
-                    """ % (type_, geojson_factory, cls))
                 instance = geojson_factory(**d)
             except (AttributeError, KeyError) as invalid:
                 if strict:
@@ -144,7 +139,3 @@ class GeoJSON(dict):
         # make sure that each subclass implements it's own validation function
         if self.__class__ != GeoJSON:
             raise NotImplementedError(self.__class__)
-
-        # check for errors on own dict (self)
-        results = {key: obj.errors() for (key, obj) in self.iteritems()}
-        return {key: err for (key, err) in results.iteritems() if err}

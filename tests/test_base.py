@@ -55,3 +55,21 @@ class OperatorOverloadingTestCase(unittest.TestCase):
     def test_delattr(self):
         del self.point.coordinates
         self.assertFalse(hasattr(self.point, 'coordinates'))
+
+
+class BaseTestCase(unittest.TestCase):
+
+    def test_to_instance(self):
+        FAKE = 'fake'
+        self.assertEquals(FAKE, geojson.GeoJSON.to_instance(
+            None, (lambda: FAKE)))
+
+        with self.assertRaises(ValueError):
+            geojson.GeoJSON.to_instance({"type": "Not GeoJSON"}, strict=True)
+
+    def test_errors(self):
+        class Fake(geojson.GeoJSON):
+            pass
+
+        with self.assertRaises(NotImplementedError):
+            Fake().errors()

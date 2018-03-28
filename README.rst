@@ -288,7 +288,7 @@ coords
 map_coords
 ~~~~~~~~~~
 
-:code:`geojson.utils.map_coords` maps a function over all coordinate tuples and returns a geometry of the same type. Useful for translating a geometry in space or flipping coordinate order.
+:code:`geojson.utils.map_coords` maps a function over all coordinate values and returns a geometry of the same type. Useful for scaling a geometry.
 
 .. code:: python
 
@@ -298,6 +298,34 @@ map_coords
 
   >>> geojson.dumps(new_point, sort_keys=True)  # doctest: +ELLIPSIS
   '{"coordinates": [-57.905..., 18.62...], "type": "Point"}'
+
+map_tuples
+~~~~~~~~~~
+
+:code:`geojson.utils.map_tuples` maps a function over all coordinates and returns a geometry of the same type. Useful for changing coordinate order or applying coordinate transforms.
+
+.. code:: python
+
+  >>> import geojson
+
+  >>> new_point = geojson.utils.map_tuples(lambda c: (c[1], c[0]), geojson.Point((-115.81, 37.24)))
+
+  >>> geojson.dumps(new_point, sort_keys=True)  # doctest: +ELLIPSIS
+  '{"coordinates": [37.24..., -115.81], "type": "Point"}'
+
+map_geometries
+~~~~~~~~~~
+
+:code:`geojson.utils.map_geometries` maps a function over each geometry in the input.
+
+.. code:: python
+
+  >>> import geojson
+
+  >>> new_point = geojson.utils.map_geometries(lambda g: geojson.MultiPoint([g["coordinates"]]), geojson.GeometryCollection([geojson.Point((-115.81, 37.24))])
+
+  >>> geojson.dumps(new_point, sort_keys=True)  # doctest: +ELLIPSIS
+  '{"coordinates": [[-115.81..., 37.24...]], "type": "MultiPoint"}'
 
 validation
 ~~~~~~~~~~

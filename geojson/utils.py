@@ -38,7 +38,7 @@ def map_coords(func, obj):
     :return: The result of applying the function to each dimension in the
     array.
     :rtype: list
-    :raises ValueError: if the provided object is not a Geometry.
+    :raises ValueError: if the provided object is not GeoJSON.
     """
 
     def tuple_func(coord):
@@ -57,7 +57,7 @@ def map_tuples(func, obj):
     :return: The result of applying the function to each dimension in the
     array.
     :rtype: list
-    :raises ValueError: if the provided object is not a Geometry.
+    :raises ValueError: if the provided object is not GeoJSON.
     """
 
     if obj['type'] == 'Point':
@@ -95,10 +95,10 @@ def map_geometries(func, obj):
     if obj['type'] in ['Point', 'LineString', 'MultiPoint', 'MultiLineString', 'Polygon', "MultiPolygon"]:
         return func(obj)
     elif obj['type'] == 'GeometryCollection':
-        geoms = [func(geom) for geom in obj['geometries']]
+        geoms = [func(geom) if geom else None for geom in obj['geometries']]
         return {'type': obj['type'], 'geometries': geoms}
     elif obj['type'] == 'Feature':
-        geom = func(obj['geometry'])
+        geom = func(obj['geometry']) if obj['geometry'] else None
         return {'type': obj['type'], 'geometry': geom, 'properties': obj['properties']}
     elif obj['type'] == 'FeatureCollection':
         feats = [map_geometries(func, feat) for feat in obj['features']]

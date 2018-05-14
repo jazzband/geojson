@@ -21,7 +21,7 @@ def test_suite():
     import doctest
     try:
         import unittest2 as unittest
-    except:
+    except ImportError:
         import unittest
 
     suite = unittest.TestLoader().discover("tests")

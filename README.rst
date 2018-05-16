@@ -322,10 +322,10 @@ map_geometries
 
   >>> import geojson
 
-  >>> new_point = geojson.utils.map_geometries(lambda g: geojson.MultiPoint([g["coordinates"]]), geojson.GeometryCollection([geojson.Point((-115.81, 37.24))])
+  >>> new_point = geojson.utils.map_geometries(lambda g: geojson.MultiPoint([g["coordinates"]]), geojson.GeometryCollection([geojson.Point((-115.81, 37.24))]))
 
-  >>> geojson.dumps(new_point, sort_keys=True)  # doctest: +ELLIPSIS
-  '{"coordinates": [[-115.81..., 37.24...]], "type": "MultiPoint"}'
+  >>> geojson.dumps(new_point, sort_keys=True)
+  '{"geometries": [{"coordinates": [[-115.81, 37.24]], "type": "MultiPoint"}], "type": "GeometryCollection"}'
 
 validation
 ~~~~~~~~~~

@@ -1,6 +1,13 @@
 Changes
 =======
 
+2.4.0 (2018-05-21)
+------------------
+
+- Additional functional maps for GeoJSON entities
+
+  - https://github.com/frewsxcv/python-geojson/pull/112
+
 2.3.0 (2017-09-18)
 ------------------
 

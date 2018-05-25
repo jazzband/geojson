@@ -21,7 +21,7 @@ class Geometry(GeoJSON):
         Initialises a Geometry object.
 
         :param coordinates: Coordinates of the Geometry object.
-        :type coordinates: tuple
+        :type coordinates: tuple or list of tuple
         :param crs: CRS
         :type crs: CRS object
         """

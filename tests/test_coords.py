@@ -27,6 +27,14 @@ class CoordsTestCase(unittest.TestCase):
         self.assertEqual(pairs[0], (3.78, 9.28))
         self.assertEqual(pairs[-1], (23.18, -34.29))
 
+    def test_featurecollection(self):
+        p1 = geojson.Feature(geometry=geojson.Point((-115.11, 37.11)))
+        p2 = geojson.Feature(geometry=geojson.Point((-115.22, 37.22)))
+        itr = coords(geojson.FeatureCollection([p1, p2]))
+        pairs = list(itr)
+        self.assertEqual(pairs[0], (-115.11, 37.11))
+        self.assertEqual(pairs[1], (-115.22, 37.22))
+
     def test_map_point(self):
         result = map_coords(lambda x: x, geojson.Point((-115.81, 37.24)))
         self.assertEqual(result['type'], 'Point')

@@ -10,19 +10,26 @@ def coords(obj):
     :return: A generator with coordinate tuples from the geometry or feature.
     :rtype: generator
     """
-
-    if isinstance(obj, (tuple, list)):
-        coordinates = obj
-    elif 'geometry' in obj:
-        coordinates = obj['geometry']['coordinates']
+    # Handle recursive case first
+    if 'features' in obj:
+        for f in obj['features']:
+            # For Python 2 compatibility
+            # See https://www.reddit.com/r/learnpython/comments/4rc15s/yield_from_and_python_27/
+            for c in coords(f):
+                yield c
     else:
-        coordinates = obj.get('coordinates', obj)
-    for e in coordinates:
-        if isinstance(e, (float, int)):
-            yield tuple(coordinates)
-            break
-        for f in coords(e):
-            yield f
+        if isinstance(obj, (tuple, list)):
+            coordinates = obj
+        elif 'geometry' in obj:
+            coordinates = obj['geometry']['coordinates']
+        else:
+            coordinates = obj.get('coordinates', obj)
+        for e in coordinates:
+            if isinstance(e, (float, int)):
+                yield tuple(coordinates)
+                break
+            for f in coords(e):
+                yield f
 
 
 def map_coords(func, obj):

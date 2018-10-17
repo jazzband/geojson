@@ -14,7 +14,7 @@ def coords(obj):
     if 'features' in obj:
         for f in obj['features']:
             # For Python 2 compatibility
-            # See https://www.reddit.com/r/learnpython/comments/4rc15s/yield_from_and_python_27/
+            # See https://www.reddit.com/r/learnpython/comments/4rc15s/yield_from_and_python_27/ # noqa: E501
             for c in coords(f):
                 yield c
     else:

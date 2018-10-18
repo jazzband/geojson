@@ -1,6 +1,13 @@
 Changes
 =======
 
+2.4.1 (2018-10-17)
+------------------
+
+- Allow ``FeatureCollections`` to be passed to ``coords``
+
+  - https://github.com/frewsxcv/python-geojson/pull/117
+
 2.4.0 (2018-05-21)
 ------------------
 

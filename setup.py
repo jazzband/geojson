@@ -49,7 +49,7 @@ setup(
     author_email="sgillies@frii.com",
     maintainer="Corey Farwell",
     maintainer_email="coreyf@rwell.org",
-    url="https://github.com/frewsxcv/python-geojson",
+    url="https://github.com/jazzband/python-geojson",
     long_description=readme_text,
     packages=["geojson"],
     package_dir={"geojson": "geojson"},

@@ -29,9 +29,10 @@ def test_suite():
     return suite
 
 
-if sys.version_info[:2] not in [(2, 6), (2, 7)] and \
-        sys.version_info[:1] not in [(3, )]:
-    sys.stderr.write("Sorry, only Python 2.7, and 3.x are supported "
+major_version, minor_version = sys.version_info[:2]
+if not ((major_version == 2 and minor_version == 7)
+        or (major_version == 3 and minor_version >= 5)):
+    sys.stderr.write("Sorry, only Python 2.7, 3.5, 3.6 and 3.7 are supported "
                      "at this time.\n")
     exit(1)
 
@@ -49,7 +50,7 @@ setup(
     author_email="sgillies@frii.com",
     maintainer="Corey Farwell",
     maintainer_email="coreyf@rwell.org",
-    url="https://github.com/frewsxcv/python-geojson",
+    url="https://github.com/jazzband/python-geojson",
     long_description=readme_text,
     packages=["geojson"],
     package_dir={"geojson": "geojson"},
@@ -66,7 +67,6 @@ setup(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",

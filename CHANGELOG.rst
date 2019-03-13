@@ -1,6 +1,14 @@
 Changes
 =======
 
+2.4.2 (2019-03-12)
+------------------
+
+- Tie Travis CI to jazzband instance
+- Remove EOL 3.3 and 3.4 version support
+
+  - https://github.com/jazzband/python-geojson/pull/120
+
 2.4.1 (2018-10-17)
 ------------------
 

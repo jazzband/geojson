@@ -314,7 +314,7 @@ map_tuples
   '{"coordinates": [37.24..., -115.81], "type": "Point"}'
 
 map_geometries
-~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 :code:`geojson.utils.map_geometries` maps a function over each geometry in the input.
 

@@ -1,19 +1,42 @@
-language: "python"
+language: python
 dist: xenial
 python:
-   - "2.7"
-   - "3.5"
-   - "3.6"
-   - "3.7"
-   - "pypy2.7-6.0"
-   - "pypy3.5-6.0"
+- 2.7
+- 3.5
+- 3.6
+- 3.7
+- pypy2.7-6.0
+- pypy3.5-6.0
 install:
-   - pip install flake8
-   - pip install codecov
-before_script:
-   flake8 .
+- pip install codecov
 script:
-   - coverage run --branch --source=geojson setup.py test
-   - coverage xml
+- coverage run --branch --source=geojson setup.py test
+- coverage xml
 after_success:
-   - codecov
+- codecov
+stages:
+- lint
+- test
+- deploy
+jobs:
+  include:
+  - stage: lint
+    env: TOXENV=flake8
+    python: 3.7
+    install: pip install flake8
+    script: flake8 .
+  - stage: deploy
+    env:
+    python: 3.7
+    install: skip
+    script: skip
+    deploy:
+      provider: pypi
+      server: https://jazzband.co/projects/python-geojson/upload
+      distributions: sdist bdist_wheel
+      user: jazzband
+      password:
+         secure: V2dsQfSMdChZ+G9w4cBcoa/Gmo/kJf2BMaN3sb7pDcAkTHuPYHppfSfj3vWDfpZFNobg8kTed4xjeYdKJ/oxFMpSGBWhGGpzQauzXO8n6LFXM44r/b5uXzyOyzdwwnjWXBn3NkubNU/n3dSjnRr9ZTeXGjiOGTPW1wAWjARJvgg=
+      on:
+        tags: true
+        repo: jazzband/python-geojson

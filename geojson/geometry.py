@@ -16,14 +16,12 @@ class Geometry(GeoJSON):
     Represents an abstract base class for a WGS84 geometry.
     """
 
-    def __init__(self, coordinates=None, crs=None, validate=False, **extra):
+    def __init__(self, coordinates=None, validate=False, **extra):
         """
         Initialises a Geometry object.
 
         :param coordinates: Coordinates of the Geometry object.
         :type coordinates: tuple or list of tuple
-        :param crs: CRS
-        :type crs: CRS object
         """
 
         super(Geometry, self).__init__(**extra)
@@ -33,8 +31,6 @@ class Geometry(GeoJSON):
             errors = self.errors()
             if errors:
                 raise ValueError('{}: {}'.format(errors, coordinates))
-        if crs:
-            self["crs"] = self.to_instance(crs, strict=True)
 
     @classmethod
     def clean_coordinates(cls, coords):

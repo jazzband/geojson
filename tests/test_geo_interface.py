@@ -139,7 +139,7 @@ class EncodingDecodingTest(unittest.TestCase):
 
     def test_mapping(self):
         self.assertEqual(to_mapping(geojson.Point([1, 2])),
-                          {"coordinates": [1, 2], "type": "Point"})
+                         {"coordinates": [1, 2], "type": "Point"})
 
     def test_GeoJSON(self):
         self.assertEqual(None, geojson.GeoJSON().__geo_interface__)

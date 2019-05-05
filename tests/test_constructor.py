@@ -30,4 +30,4 @@ class TestGeoJSONConstructor(unittest.TestCase):
         other = [[1, 1], [1, 2], [2, 1], [1, 1]]
         poly2 = geojson.Polygon([outer, other])
         self.assertEqual(geojson.MultiPolygon([poly, poly2]).coordinates,
-                          [[outer], [outer, other]])
+                         [[outer], [outer, other]])

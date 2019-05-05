@@ -11,9 +11,6 @@ except ImportError:
 import geojson
 
 
-mapping_base = MutableMapping
-
-
 GEO_INTERFACE_MARKER = "__geo_interface__"
 
 

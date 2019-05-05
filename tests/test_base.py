@@ -61,7 +61,7 @@ class BaseTestCase(unittest.TestCase):
 
     def test_to_instance(self):
         FAKE = 'fake'
-        self.assertEquals(FAKE, geojson.GeoJSON.to_instance(
+        self.assertEqual(FAKE, geojson.GeoJSON.to_instance(
             None, (lambda: FAKE)))
 
         with self.assertRaises(ValueError):

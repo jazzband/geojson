@@ -369,7 +369,9 @@ generate_random
 Development
 -----------
 
-To build this project, run :code:`python setup.py build`. To run the unit tests, run :code:`python setup.py test`.
+To build this project, run :code:`python setup.py build`.
+To run the unit tests, run :code:`python setup.py test`.
+To run the style checks, run :code:`flake8` (install `flake8` if needed).
 
 Credits
 -------

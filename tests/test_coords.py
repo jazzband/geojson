@@ -80,7 +80,10 @@ class CoordsTestCase(unittest.TestCase):
         result = map_tuples(lambda t: t, f)
         self.assertEqual(result['type'], 'Feature')
         self.assertEqual(result['id'], '0')
-        self.assertEqual(result['geometry']['coordinates'], (-77.1291115237051, 38.7993076720178))
+        self.assertEqual(
+            result['geometry']['coordinates'],
+            (-77.1291115237051, 38.7993076720178)
+        )
 
     def test_map_invalid(self):
         with self.assertRaises(ValueError):

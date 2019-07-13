@@ -67,23 +67,14 @@ class CoordsTestCase(unittest.TestCase):
         self.assertEqual(result['coordinates'][-1][-1][-1], (23.18, -34.29))
 
     def test_map_feature(self):
-        f = geojson.Feature(
-            id='0',
-            geometry=geojson.Point([-77.1291115237051, 38.7993076720178]),
-            properties={
-                'name': 'Van Dorn Street',
-                'marker-col': '#0000ff',
-                'marker-sym': 'rail-metro',
-                'line': 'blue',
-            },
+        g = geojson.Feature(
+            id='123',
+            geometry=geojson.Point([-115.81, 37.24])
         )
-        result = map_tuples(lambda t: t, f)
+        result = map_coords(lambda x: x, g)
         self.assertEqual(result['type'], 'Feature')
-        self.assertEqual(result['id'], '0')
-        self.assertEqual(
-            result['geometry']['coordinates'],
-            (-77.1291115237051, 38.7993076720178)
-        )
+        self.assertEqual(result['id'], '123')
+        self.assertEqual(result['geometry']['coordinates'], (-115.81, 37.24))
 
     def test_map_invalid(self):
         with self.assertRaises(ValueError):

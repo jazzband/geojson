@@ -119,15 +119,8 @@ def map_geometries(func, obj):
         geoms = [func(geom) if geom else None for geom in obj['geometries']]
         return {'type': obj['type'], 'geometries': geoms}
     elif obj['type'] == 'Feature':
-        geom = func(obj['geometry']) if obj['geometry'] else None
-        result = {
-            'type': obj['type'],
-            'geometry': geom,
-            'properties': obj['properties'],
-        }
-        if 'id' in obj:
-            result['id'] = obj['id']
-        return result
+        obj['geometry'] = func(obj['geometry']) if obj['geometry'] else None
+        return obj
     elif obj['type'] == 'FeatureCollection':
         feats = [map_geometries(func, feat) for feat in obj['features']]
         return {'type': obj['type'], 'features': feats}

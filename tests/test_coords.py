@@ -1,7 +1,7 @@
 import unittest
 
 import geojson
-from geojson.utils import coords, map_coords
+from geojson.utils import coords, map_coords, map_tuples
 
 
 class CoordsTestCase(unittest.TestCase):
@@ -65,6 +65,25 @@ class CoordsTestCase(unittest.TestCase):
         self.assertEqual(result['type'], 'MultiPolygon')
         self.assertEqual(result['coordinates'][0][0][0], (3.78, 9.28))
         self.assertEqual(result['coordinates'][-1][-1][-1], (23.18, -34.29))
+
+    def test_map_feature(self):
+        f = geojson.Feature(
+            id='0',
+            geometry=geojson.Point([-77.1291115237051, 38.7993076720178]),
+            properties={
+                'name': 'Van Dorn Street',
+                'marker-col': '#0000ff',
+                'marker-sym': 'rail-metro',
+                'line': 'blue',
+            },
+        )
+        result = map_tuples(lambda t: t, f)
+        self.assertEqual(result['type'], 'Feature')
+        self.assertEqual(result['id'], '0')
+        self.assertEqual(
+            result['geometry']['coordinates'],
+            (-77.1291115237051, 38.7993076720178)
+        )
 
     def test_map_invalid(self):
         with self.assertRaises(ValueError):

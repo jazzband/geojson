@@ -16,16 +16,21 @@ class Geometry(GeoJSON):
     Represents an abstract base class for a WGS84 geometry.
     """
 
-    def __init__(self, coordinates=None, validate=False, **extra):
+    def __init__(self, coordinates=None, validate=False, precision=6, **extra):
         """
         Initialises a Geometry object.
 
         :param coordinates: Coordinates of the Geometry object.
         :type coordinates: tuple or list of tuple
+        :param validate: If True, raise exception in presence of validation errors.
+        :type validate: boolean
+        :param precision: Number of decimal places for lat/lon coords.
+        :type precision: integer
         """
-
         super(Geometry, self).__init__(**extra)
-        self["coordinates"] = self.clean_coordinates(coordinates or [])
+        self["coordinates"] = [
+            round(coord, precision)
+            for coord in self.clean_coordinates(coordinates or [])]
 
         if validate:
             errors = self.errors()

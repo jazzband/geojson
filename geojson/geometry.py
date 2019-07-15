@@ -28,9 +28,8 @@ class Geometry(GeoJSON):
         :type precision: integer
         """
         super(Geometry, self).__init__(**extra)
-        self["coordinates"] = [
-            round(coord, precision)
-            for coord in self.clean_coordinates(coordinates or [])]
+        self["coordinates"] = self.clean_coordinates(
+            coordinates or [], precision)
 
         if validate:
             errors = self.errors()
@@ -38,7 +37,7 @@ class Geometry(GeoJSON):
                 raise ValueError('{}: {}'.format(errors, coordinates))
 
     @classmethod
-    def clean_coordinates(cls, coords):
+    def clean_coordinates(cls, coords, precision):
         if isinstance(coords, cls):
             return coords['coordinates']
 
@@ -47,11 +46,11 @@ class Geometry(GeoJSON):
             coords = [coords]
         for coord in coords:
             if isinstance(coord, (list, tuple)):
-                new_coords.append(cls.clean_coordinates(coord))
+                new_coords.append(cls.clean_coordinates(coord, precision))
             elif isinstance(coord, Geometry):
                 new_coords.append(coord['coordinates'])
             elif isinstance(coord, _JSON_compliant_types):
-                new_coords.append(coord)
+                new_coords.append(round(coord, precision))
             else:
                 raise ValueError("%r is not a JSON compliant number" % coord)
         return new_coords

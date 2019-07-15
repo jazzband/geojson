@@ -6,7 +6,6 @@ import unittest
 
 import geojson
 
-COORDINATES = [53.0, -4.0]
 
 class FeaturesTest(unittest.TestCase):
     def test_protocol(self):

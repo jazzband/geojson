@@ -22,7 +22,7 @@ class Geometry(GeoJSON):
 
         :param coordinates: Coordinates of the Geometry object.
         :type coordinates: tuple or list of tuple
-        :param validate: If True, raise exception in presence of validation errors.
+        :param validate: Raise exception if validation errors are present?
         :type validate: boolean
         :param precision: Number of decimal places for lat/lon coords.
         :type precision: integer

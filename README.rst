@@ -270,7 +270,7 @@ Default Precision
 ~~~~~~~~~~~~~~~~~
 
 GeoJSON Object-based classes in this package have an additional `precision` attribute which rounds off
-coordinates to 6 decimal places (roughly 0.1 meters) by default and can be customized per object.
+coordinates to 6 decimal places (roughly 0.1 meters) by default and can be customized per object instance.
 
 .. code:: python
 

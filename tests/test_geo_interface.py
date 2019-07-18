@@ -65,21 +65,21 @@ class EncodingDecodingTest(unittest.TestCase):
                     properties={'name': self.name})
 
         self.name = "In N Out Burger"
-        self.latlng = [-54, 4]
+        self.latlng = [-54.0, 4.0]
 
         self.restaurant_nogeo = Restaurant(self.name, self.latlng)
 
         self.restaurant1 = Restaurant1(self.name, self.latlng)
         self.restaurant2 = Restaurant2(self.name, self.latlng)
 
-        self.restaurant_str = ('{"coordinates": [-54, 4],'
+        self.restaurant_str = ('{"coordinates": [-54.0, 4.0],'
                                ' "type": "Point"}')
 
         self.restaurant_feature1 = RestaurantFeature1(self.name, self.latlng)
         self.restaurant_feature2 = RestaurantFeature2(self.name, self.latlng)
 
         self.restaurant_feature_str = ('{"geometry":'
-                                       ' {"coordinates": [-54, 4],'
+                                       ' {"coordinates": [-54.0, 4.0],'
                                        ' "type": "Point"},'
                                        ' "properties":'
                                        ' {"name": "In N Out Burger"},'
@@ -133,13 +133,13 @@ class EncodingDecodingTest(unittest.TestCase):
 
     def test_invalid(self):
         with self.assertRaises(ValueError) as cm:
-            geojson.loads('{"type":"Point", "coordinates":[[-Infinity, 4]]}')
+            geojson.loads('{"type":"Point", "coordinates":[[-Infinity, 4.0]]}')
 
         self.assertIn('is not JSON compliant', str(cm.exception))
 
     def test_mapping(self):
-        self.assertEqual(to_mapping(geojson.Point([1, 2])),
-                         {"coordinates": [1, 2], "type": "Point"})
+        self.assertEqual(to_mapping(geojson.Point([1.0, 2.0])),
+                         {"coordinates": [1.0, 2.0], "type": "Point"})
 
     def test_GeoJSON(self):
         self.assertEqual(None, geojson.GeoJSON().__geo_interface__)

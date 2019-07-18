@@ -15,13 +15,13 @@ class FeaturesTest(unittest.TestCase):
         f = {
             'type': 'Feature',
             'id': '1',
-            'geometry': {'type': 'Point', 'coordinates': [53, -4]},
+            'geometry': {'type': 'Point', 'coordinates': [53.0, -4.0]},
             'properties': {'title': 'Dict 1'},
         }
 
         json = geojson.dumps(f, sort_keys=True)
         self.assertEqual(json, '{"geometry":'
-                               ' {"coordinates": [53, -4],'
+                               ' {"coordinates": [53.0, -4.0],'
                                ' "type": "Point"},'
                                ' "id": "1",'
                                ' "properties": {"title": "Dict 1"},'
@@ -30,7 +30,7 @@ class FeaturesTest(unittest.TestCase):
         o = geojson.loads(json)
         output = geojson.dumps(o, sort_keys=True)
         self.assertEqual(output, '{"geometry":'
-                                 ' {"coordinates": [53, -4],'
+                                 ' {"coordinates": [53.0, -4.0],'
                                  ' "type": "Point"},'
                                  ' "id": "1",'
                                  ' "properties": {"title": "Dict 1"},'
@@ -49,7 +49,7 @@ class FeaturesTest(unittest.TestCase):
         from geojson.examples import SimpleWebFeature
         feature = SimpleWebFeature(
             id='1',
-            geometry={'type': 'Point', 'coordinates': [53, -4]},
+            geometry={'type': 'Point', 'coordinates': [53.0, -4.0]},
             title='Feature 1', summary='The first feature',
             link='http://example.org/features/1'
         )
@@ -61,10 +61,10 @@ class FeaturesTest(unittest.TestCase):
         self.assertEqual(feature.properties['link'],
                          'http://example.org/features/1')
         self.assertEqual(geojson.dumps(feature.geometry, sort_keys=True),
-                         '{"coordinates": [53, -4], "type": "Point"}')
+                         '{"coordinates": [53.0, -4.0], "type": "Point"}')
 
         # Encoding
-        json = ('{"geometry": {"coordinates": [53, -4],'
+        json = ('{"geometry": {"coordinates": [53.0, -4.0],'
                 ' "type": "Point"},'
                 ' "id": "1",'
                 ' "properties":'
@@ -77,7 +77,7 @@ class FeaturesTest(unittest.TestCase):
         # Decoding
         factory = geojson.examples.create_simple_web_feature
         json = ('{"geometry": {"type": "Point",'
-                ' "coordinates": [53, -4]},'
+                ' "coordinates": [53.0, -4.0]},'
                 ' "id": "1",'
                 ' "properties": {"summary": "The first feature",'
                 ' "link": "http://example.org/features/1",'
@@ -91,7 +91,7 @@ class FeaturesTest(unittest.TestCase):
         self.assertEqual(feature.properties['link'],
                          'http://example.org/features/1')
         self.assertEqual(geojson.dumps(feature.geometry, sort_keys=True),
-                         '{"coordinates": [53, -4], "type": "Point"}')
+                         '{"coordinates": [53.0, -4.0], "type": "Point"}')
 
     def test_geo_interface(self):
         class Thingy(object):
@@ -108,12 +108,12 @@ class FeaturesTest(unittest.TestCase):
                          "geometry": {"type": "Point",
                                       "coordinates": (self.x, self.y)}})
 
-        ob = Thingy('1', 'thingy one', -106, 40)
+        ob = Thingy('1', 'thingy one', -106.0, 40.0)
         self.assertEqual(geojson.dumps(ob.__geo_interface__['geometry'],
                                        sort_keys=True),
-                         '{"coordinates": [-106, 40], "type": "Point"}')
+                         '{"coordinates": [-106.0, 40.0], "type": "Point"}')
         self.assertEqual(geojson.dumps(ob, sort_keys=True),
-                         ('{"geometry": {"coordinates": [-106, 40],'
+                         ('{"geometry": {"coordinates": [-106.0, 40.0],'
                           ' "type": "Point"},'
                           ' "id": "1",'
                           ' "properties": {"title": "thingy one"}}'))

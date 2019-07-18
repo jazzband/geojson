@@ -3,11 +3,17 @@ import unittest
 import geojson
 from geojson.utils import coords, map_coords
 
+TOO_PRECISE = (1.12341234, -2.12341234)
+
 
 class CoordsTestCase(unittest.TestCase):
     def test_point(self):
         itr = coords(geojson.Point((-115.81, 37.24)))
         self.assertEqual(next(itr), (-115.81, 37.24))
+
+    def test_point_rounding(self):
+        itr = coords(geojson.Point(TOO_PRECISE))
+        self.assertEqual(next(itr), tuple([round(c, 6) for c in TOO_PRECISE]))
 
     def test_dict(self):
         itr = coords({'type': 'Point', 'coordinates': [-115.81, 37.24]})

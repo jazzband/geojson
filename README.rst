@@ -266,6 +266,22 @@ This encoding/decoding functionality shown in the previous can be extended to cu
   >>> geojson.dumps(point_instance, sort_keys=True)  # doctest: +ELLIPSIS
   '{"coordinates": [52.23..., -19.23...], "type": "Point"}'
 
+Default Precision
+~~~~~~~~~~~~~~~~~
+
+GeoJSON Object-based classes in this package have an additional `precision` attribute which rounds off
+coordinates to 6 decimal places (roughly 0.1 meters) by default and can be customized per object instance.
+
+.. code:: python
+
+  >>> from geojson import Point
+
+  >>> Point((-115.123412341234, 37.123412341234))  # rounded to 6 decimal places by default
+  {"coordinates": [-115.123412, 37.123412], "type": "Point"}
+
+  >>> Point((-115.12341234, 37.12341234), precision=8)  # rounded to 8 decimal places
+  {"coordinates": [-115.12341234, 37.12341234], "type": "Point"}
+
 Helpful utilities
 -----------------
 

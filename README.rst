@@ -49,7 +49,7 @@ Point
   >>> from geojson import Point
 
   >>> Point((-115.81, 37.24))  # doctest: +ELLIPSIS
-  {"coordinates": [-115.81, 37.24], "type": "Point"}
+  {"coordinates": [-115.8..., 37.2...], "type": "Point"}
 
 Visualize the result of the example above `here <https://gist.github.com/frewsxcv/b5768a857f5598e405fa>`__. General information about Point can be found in `Section 3.1.2`_ and `Appendix A: Points`_ within `The GeoJSON Format Specification`_.
 
@@ -64,7 +64,7 @@ MultiPoint
   >>> from geojson import MultiPoint
 
   >>> MultiPoint([(-155.52, 19.61), (-156.22, 20.74), (-157.97, 21.46)])  # doctest: +ELLIPSIS
-  {"coordinates": [[-155.52, 19.61], [-156.22, 20.74], [-157.97, 21.46]], "type": "MultiPoint"}
+  {"coordinates": [[-155.5..., 19.6...], [-156.2..., 20.7...], [-157.9..., 21.4...]], "type": "MultiPoint"}
 
 Visualize the result of the example above `here <https://gist.github.com/frewsxcv/be02025c1eb3aa2040ee>`__. General information about MultiPoint can be found in `Section 3.1.3`_ and `Appendix A: MultiPoints`_ within `The GeoJSON Format Specification`_.
 

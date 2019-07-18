@@ -398,6 +398,7 @@ Credits
 * Blake Grotewold <hello@grotewold.me>
 * Zsolt Ero <zsolt.ero@gmail.com>
 * Sergey Romanov <xxsmotur@gmail.com>
+* Ray Riga <ray@strongoutput.com>
 
 
 .. _GeoJSON: http://geojson.org/

@@ -1,6 +1,26 @@
 Changes
 =======
 
+2.5.0 (2019-07-18)
+------------------
+
+- Add "precision" parameter to GeoJSON Object classes with default precision of 6 (0.1m)
+
+  - https://github.com/jazzband/python-geojson/pull/131
+
+- Fix bug where `map_geometries()` util was not preserving Feature IDs
+
+  - https://github.com/jazzband/python-geojson/pull/128
+  - https://github.com/jazzband/python-geojson/pull/130
+
+- Remove `crs` module and features to conform to official WGS84-only GeoJSON spec
+
+  - https://github.com/jazzband/python-geojson/pull/124
+
+- Set up semi-automatic PyPi releases via Travis/Jazzband
+
+  - https://github.com/jazzband/python-geojson/pull/123
+
 2.4.2 (2019-03-12)
 ------------------
 

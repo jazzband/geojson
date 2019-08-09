@@ -50,7 +50,7 @@ setup(
     author_email="sgillies@frii.com",
     maintainer="Ray Riga",
     maintainer_email="ray@strongoutput.com",
-    url="https://github.com/jazzband/python-geojson",
+    url="https://github.com/jazzband/geojson",
     long_description=readme_text,
     packages=["geojson"],
     package_dir={"geojson": "geojson"},

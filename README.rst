@@ -1,10 +1,10 @@
 python-geojson
 ==============
 
-.. image:: https://img.shields.io/travis/jazzband/python-geojson.svg
-   :target: https://travis-ci.org/jazzband/python-geojson
-.. image:: https://img.shields.io/codecov/c/github/jazzband/python-geojson.svg
-   :target: https://codecov.io/github/jazzband/python-geojson?branch=master
+.. image:: https://img.shields.io/travis/jazzband/geojson.svg
+   :target: https://travis-ci.org/jazzband/geojson
+.. image:: https://img.shields.io/codecov/c/github/jazzband/geojson.svg
+   :target: https://codecov.io/github/jazzband/geojson?branch=master
 
 This library contains:
 

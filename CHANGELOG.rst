@@ -6,20 +6,20 @@ Changes
 
 - Add "precision" parameter to GeoJSON Object classes with default precision of 6 (0.1m)
 
-  - https://github.com/jazzband/python-geojson/pull/131
+  - https://github.com/jazzband/geojson/pull/131
 
 - Fix bug where `map_geometries()` util was not preserving Feature IDs
 
-  - https://github.com/jazzband/python-geojson/pull/128
-  - https://github.com/jazzband/python-geojson/pull/130
+  - https://github.com/jazzband/geojson/pull/128
+  - https://github.com/jazzband/geojson/pull/130
 
 - Remove `crs` module and features to conform to official WGS84-only GeoJSON spec
 
-  - https://github.com/jazzband/python-geojson/pull/124
+  - https://github.com/jazzband/geojson/pull/124
 
 - Set up semi-automatic PyPi releases via Travis/Jazzband
 
-  - https://github.com/jazzband/python-geojson/pull/123
+  - https://github.com/jazzband/geojson/pull/123
 
 2.4.2 (2019-03-12)
 ------------------
@@ -27,28 +27,28 @@ Changes
 - Tie Travis CI to jazzband instance
 - Remove EOL 3.3 and 3.4 version support
 
-  - https://github.com/jazzband/python-geojson/pull/120
+  - https://github.com/jazzband/geojson/pull/120
 
 2.4.1 (2018-10-17)
 ------------------
 
 - Allow ``FeatureCollections`` to be passed to ``coords``
 
-  - https://github.com/frewsxcv/python-geojson/pull/117
+  - https://github.com/jazzband/geojson/pull/117
 
 2.4.0 (2018-05-21)
 ------------------
 
 - Additional functional maps for GeoJSON entities
 
-  - https://github.com/frewsxcv/python-geojson/pull/112
+  - https://github.com/jazzband/geojson/pull/112
 
 2.3.0 (2017-09-18)
 ------------------
 
 - Add ``__getitem__`` methods to sequence-like objects
 
-  - https://github.com/frewsxcv/python-geojson/pull/103
+  - https://github.com/jazzband/geojson/pull/103
 
 
 2.2.0 (2017-09-17)
@@ -56,70 +56,70 @@ Changes
 
 - Allow constructing geojson objects from geojson objects
 
-  - https://github.com/frewsxcv/python-geojson/pull/104
+  - https://github.com/jazzband/geojson/pull/104
 
 2.1.0 (2017-08-29)
 ------------------
 
 - Implement validation for GeometryCollection
 
-  - https://github.com/frewsxcv/python-geojson/pull/102
+  - https://github.com/jazzband/geojson/pull/102
 
 2.0.0 (2017-07-28)
 ------------------
 
 - Rewrite of validation mechanism (breaking change).
 
-  - https://github.com/frewsxcv/python-geojson/pull/98
+  - https://github.com/jazzband/geojson/pull/98
 
 1.3.5 (2017-04-24)
 ------------------
 
 - Changed the validator to allow elevation
 
-  - https://github.com/frewsxcv/python-geojson/pull/92
+  - https://github.com/jazzband/geojson/pull/92
 
 1.3.4 (2017-02-11)
 ------------------
 
 - Remove runtime dependency on setuptools
 
-  - https://github.com/frewsxcv/python-geojson/pull/90
+  - https://github.com/jazzband/geojson/pull/90
 
 1.3.3 (2016-07-21)
 ------------------
 
 - Add validate parameter to GeoJSON constructors
 
-  - https://github.com/frewsxcv/python-geojson/pull/78
+  - https://github.com/jazzband/geojson/pull/78
 
 1.3.2 (2016-01-28)
 ------------------
 
 - Add __version__ and __version_info__ attributes
 
-  - https://github.com/frewsxcv/python-geojson/pull/74
+  - https://github.com/jazzband/geojson/pull/74
 
 1.3.1 (2015-10-12)
 ------------------
 
 - Fix validation bug for MultiPolygons
 
-  - https://github.com/frewsxcv/python-geojson/pull/63
+  - https://github.com/jazzband/geojson/pull/63
 
 1.3.0 (2015-08-11)
 ------------------
 
 - Add utility to generate geometries with random data
 
-  - https://github.com/frewsxcv/python-geojson/pull/60
+  - https://github.com/jazzband/geojson/pull/60
 
 1.2.2 (2015-07-13)
 ------------------
 
 - Fix tests by including test file into build
 
-  - https://github.com/frewsxcv/python-geojson/issues/61
+  - https://github.com/jazzband/geojson/issues/61
 
 - Build universal wheels
 
@@ -130,21 +130,21 @@ Changes
 
 - Encode long types correctly with Python 2.x
 
-  - https://github.com/frewsxcv/python-geojson/pull/57
+  - https://github.com/jazzband/geojson/pull/57
 
 1.2.0 (2015-06-19)
 ------------------
 
 - Utility function to validate GeoJSON objects
 
-  - https://github.com/frewsxcv/python-geojson/pull/56
+  - https://github.com/jazzband/geojson/pull/56
 
 1.1.0 (2015-06-08)
 ------------------
 
 - Stop outputting invalid GeoJSON value id=null on Features
 
-  - https://github.com/frewsxcv/python-geojson/pull/53
+  - https://github.com/jazzband/geojson/pull/53
 
 1.0.9 (2014-10-05)
 ------------------

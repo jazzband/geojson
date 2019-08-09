@@ -39,4 +39,4 @@ jobs:
          secure: V2dsQfSMdChZ+G9w4cBcoa/Gmo/kJf2BMaN3sb7pDcAkTHuPYHppfSfj3vWDfpZFNobg8kTed4xjeYdKJ/oxFMpSGBWhGGpzQauzXO8n6LFXM44r/b5uXzyOyzdwwnjWXBn3NkubNU/n3dSjnRr9ZTeXGjiOGTPW1wAWjARJvgg=
       on:
         tags: true
-        repo: jazzband/python-geojson
+        repo: jazzband/geojson

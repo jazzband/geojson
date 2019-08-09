@@ -1,4 +1,4 @@
-python-geojson
+geojson
 ==============
 
 .. image:: https://img.shields.io/travis/jazzband/geojson.svg
@@ -6,7 +6,7 @@ python-geojson
 .. image:: https://img.shields.io/codecov/c/github/jazzband/geojson.svg
    :target: https://codecov.io/github/jazzband/geojson?branch=master
 
-This library contains:
+This Python library contains:
 
 - Functions for encoding and decoding GeoJSON_ formatted data
 - Classes for all GeoJSON Objects
@@ -21,7 +21,7 @@ This library contains:
 Installation
 ------------
 
-python-geojson is compatible with Python 2.7, 3.5, 3.6 and 3.7. It is listed on `PyPi as 'geojson'`_. The recommended way to install is via pip_:
+geojson is compatible with Python 2.7, 3.5, 3.6 and 3.7. The recommended way to install is via pip_:
 
 .. code::
 
@@ -267,7 +267,7 @@ This encoding/decoding functionality shown in the previous can be extended to cu
   '{"coordinates": [52.23..., -19.23...], "type": "Point"}'
 
 Default and custom precision
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 GeoJSON Object-based classes in this package have an additional `precision` attribute which rounds off
 coordinates to 6 decimal places (roughly 0.1 meters) by default and can be customized per object instance.
@@ -330,7 +330,7 @@ map_tuples
   '{"coordinates": [37.24..., -115.81], "type": "Point"}'
 
 map_geometries
-~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 :code:`geojson.utils.map_geometries` maps a function over each geometry in the input.
 

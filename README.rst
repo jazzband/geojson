@@ -3,8 +3,13 @@ geojson
 
 .. image:: https://img.shields.io/travis/jazzband/geojson.svg
    :target: https://travis-ci.org/jazzband/geojson
+   :alt: Travis
 .. image:: https://img.shields.io/codecov/c/github/jazzband/geojson.svg
    :target: https://codecov.io/github/jazzband/geojson?branch=master
+   :alt: Codecov
+.. image:: https://jazzband.co/static/img/badge.svg
+   :target: https://jazzband.co/
+   :alt: Jazzband
 
 This Python library contains:
 

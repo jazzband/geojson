@@ -16,7 +16,7 @@ class Geometry(GeoJSON):
     Represents an abstract base class for a WGS84 geometry.
     """
 
-    def __init__(self, coordinates=None, validate=False, precision=6, **extra):
+    def __init__(self, coordinates=None, validate=False, precision, **extra):
         """
         Initialises a Geometry object.
 

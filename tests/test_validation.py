@@ -54,6 +54,9 @@ class TestValidationPoint(unittest.TestCase):
         point = geojson.Point((10, 20, 30, 40))
         self.assertEqual(point.is_valid, False)
 
+        point = geojson.Point([(10,20), (30,40)])
+        self.assertEqual(point.is_valid, False)
+
     def test_valid_point(self):
         point = geojson.Point((-3.68, 40.41))
         self.assertEqual(point.is_valid, True)

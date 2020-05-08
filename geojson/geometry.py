@@ -1,5 +1,6 @@
 import sys
 from decimal import Decimal
+from numbers import Number
 
 from geojson.base import GeoJSON
 
@@ -83,7 +84,9 @@ def check_point(coord):
         return 'each position must be a list'
     if len(coord) not in (2, 3):
         return 'a position must have exactly 2 or 3 values'
-
+    for number in coord:
+        if not isinstance(number, Number):
+               return 'a position cannot have inner positions'
 
 class Point(Geometry):
     def errors(self):

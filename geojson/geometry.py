@@ -86,7 +86,8 @@ def check_point(coord):
         return 'a position must have exactly 2 or 3 values'
     for number in coord:
         if not isinstance(number, Number):
-               return 'a position cannot have inner positions'
+            return 'a position cannot have inner positions'
+
 
 class Point(Geometry):
     def errors(self):

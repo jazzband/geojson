@@ -11,17 +11,22 @@ def coords(obj):
     :rtype: generator
     """
     # Handle recursive case first
-    if 'features' in obj:
+    if 'features' in obj:  # FeatureCollection
         for f in obj['features']:
             # For Python 2 compatibility
             # See https://www.reddit.com/r/learnpython/comments/4rc15s/yield_from_and_python_27/ # noqa: E501
             for c in coords(f):
                 yield c
+    elif 'geometry' in obj:  # Feature
+        for c in coords(obj['geometry']):
+            yield c
+    elif 'geometries' in obj:  # GeometryCollection
+        for g in obj['geometries']:
+            for c in coords(g):
+                yield c
     else:
         if isinstance(obj, (tuple, list)):
             coordinates = obj
-        elif 'geometry' in obj:
-            coordinates = obj['geometry']['coordinates']
         else:
             coordinates = obj.get('coordinates', obj)
         for e in coordinates:

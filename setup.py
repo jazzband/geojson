@@ -31,7 +31,7 @@ def test_suite():
 
 major_version, minor_version = sys.version_info[:2]
 if not (major_version == 3 and 5 <= minor_version <= 8):
-    sys.stderr.write("Sorry, only Python 3.5, 3.6, 3.7 and 3.8 are "
+    sys.stderr.write("Sorry, only Python 3.6, 3.7 and 3.8 are "
                      "supported at this time.\n")
     exit(1)
 
@@ -60,7 +60,6 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",

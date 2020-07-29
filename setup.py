@@ -30,15 +30,10 @@ def test_suite():
 
 
 major_version, minor_version = sys.version_info[:2]
-if not ((major_version == 2 and minor_version == 7)
-        or (major_version == 3 and minor_version >= 5)):
-    sys.stderr.write("Sorry, only Python 2.7, 3.5, 3.6 and 3.7 are supported "
-                     "at this time.\n")
+if not (major_version == 3 and 5 <= minor_version <= 8):
+    sys.stderr.write("Sorry, only Python 3.6, 3.7 and 3.8 are "
+                     "supported at this time.\n")
     exit(1)
-
-# Get around this issue: http://bugs.python.org/issue15881
-# Appears to be a problem in older versions of Python 2.7
-import multiprocessing  # NOQA
 
 setup(
     name="geojson",
@@ -64,12 +59,10 @@ setup(
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Topic :: Scientific/Engineering :: GIS",
     ]
 )

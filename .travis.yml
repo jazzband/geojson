@@ -5,6 +5,7 @@ python:
 - 3.5
 - 3.6
 - 3.7
+- 3.8
 - pypy2.7-6.0
 - pypy3.5-6.0
 install:
@@ -22,12 +23,12 @@ jobs:
   include:
   - stage: lint
     env: TOXENV=flake8
-    python: 3.7
+    python: 3.8
     install: pip install flake8
     script: flake8 .
   - stage: deploy
     env:
-    python: 3.7
+    python: 3.8
     install: skip
     script: skip
     deploy:

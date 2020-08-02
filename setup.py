@@ -30,7 +30,7 @@ def test_suite():
 
 
 major_version, minor_version = sys.version_info[:2]
-if not (major_version == 3 and 5 <= minor_version <= 8):
+if not (major_version == 3 and 6 <= minor_version <= 8):
     sys.stderr.write("Sorry, only Python 3.6, 3.7 and 3.8 are "
                      "supported at this time.\n")
     exit(1)

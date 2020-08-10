@@ -82,7 +82,7 @@ class FeaturesTest(unittest.TestCase):
                 ' "properties": {"summary": "The first feature",'
                 ' "link": "http://example.org/features/1",'
                 ' "title": "Feature 1"}}')
-        feature = geojson.loads(json, object_hook=factory, encoding="utf-8")
+        feature = geojson.loads(json, object_hook=factory)
         self.assertEqual(repr(type(feature)),
                          "<class 'geojson.examples.SimpleWebFeature'>")
         self.assertEqual(feature.id, '1')

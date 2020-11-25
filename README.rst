@@ -1,9 +1,9 @@
 geojson
 ==============
 
-.. image:: https://img.shields.io/travis/jazzband/geojson.svg
-   :target: https://travis-ci.org/jazzband/geojson
-   :alt: Travis
+.. image:: https://github.com/jazzband/geojson/workflows/Test/badge.svg
+   :target: https://github.com/jazzband/geojson/actions
+   :alt: GitHub Actions
 .. image:: https://img.shields.io/codecov/c/github/jazzband/geojson.svg
    :target: https://codecov.io/github/jazzband/geojson?branch=master
    :alt: Codecov

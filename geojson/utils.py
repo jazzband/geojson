@@ -13,8 +13,6 @@ def coords(obj):
     # Handle recursive case first
     if 'features' in obj:  # FeatureCollection
         for f in obj['features']:
-            # For Python 2 compatibility
-            # See https://www.reddit.com/r/learnpython/comments/4rc15s/yield_from_and_python_27/ # noqa: E501
             yield from coords(f)
     elif 'geometry' in obj:  # Feature
         yield from coords(obj['geometry'])

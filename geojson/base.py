@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import geojson
 from geojson.mapping import to_mapping
 
@@ -19,7 +17,7 @@ class GeoJSON(dict):
         :return: a GeoJSON object
         :rtype: GeoJSON
         """
-        super(GeoJSON, self).__init__(iterable)
+        super().__init__(iterable)
         self["type"] = getattr(self, "type", type(self).__name__)
         self.update(extra)
 

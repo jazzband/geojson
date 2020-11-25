@@ -23,7 +23,7 @@ class Feature(GeoJSON):
         :return: Feature object
         :rtype: Feature
         """
-        super(Feature, self).__init__(**extra)
+        super().__init__(**extra)
         if id is not None:
             self["id"] = id
         self["geometry"] = (self.to_instance(geometry, strict=True)
@@ -48,7 +48,7 @@ class FeatureCollection(GeoJSON):
         :return: FeatureCollection object
         :rtype: FeatureCollection
         """
-        super(FeatureCollection, self).__init__(**extra)
+        super().__init__(**extra)
         self["features"] = features
 
     def errors(self):

@@ -28,14 +28,14 @@ class Geometry(GeoJSON):
         :param precision: Number of decimal places for lat/lon coords.
         :type precision: integer
         """
-        super(Geometry, self).__init__(**extra)
+        super().__init__(**extra)
         self["coordinates"] = self.clean_coordinates(
             coordinates or [], precision)
 
         if validate:
             errors = self.errors()
             if errors:
-                raise ValueError('{}: {}'.format(errors, coordinates))
+                raise ValueError(f'{errors}: {coordinates}')
 
     @classmethod
     def clean_coordinates(cls, coords, precision):
@@ -63,7 +63,7 @@ class GeometryCollection(GeoJSON):
     """
 
     def __init__(self, geometries=None, **extra):
-        super(GeometryCollection, self).__init__(**extra)
+        super().__init__(**extra)
         self["geometries"] = geometries or []
 
     def errors(self):
@@ -147,7 +147,7 @@ class MultiPolygon(Geometry):
         return self.check_list_errors(check_polygon, self['coordinates'])
 
 
-class Default(object):
+class Default:
     """
     GeoJSON default object.
     """

@@ -1,5 +1,4 @@
-
-class SimpleWebFeature(object):
+class SimpleWebFeature:
 
     """
     A simple, Atom-ish, single geometry (WGS84) GIS feature.

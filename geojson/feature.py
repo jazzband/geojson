@@ -59,3 +59,23 @@ class FeatureCollection(GeoJSON):
             return self.get("features", ())[key]
         except (KeyError, TypeError, IndexError):
             return super(GeoJSON, self).__getitem__(key)
+
+    def __add__(self, other):
+        copy = self.copy()
+        copy["features"] += other
+        return copy
+
+    def __radd__(self, other):
+        return other + self["features"]
+
+    def clear(self) -> None:
+        self["features"].clear()
+
+    def append(self, x):
+        self["features"].append(x)
+
+    def extend(self, iterable):
+        self["features"].extend(iterable)
+
+    def insert(self, i, x):
+        self["features"].insert(i, x)

@@ -59,13 +59,6 @@ class FeatureCollectionTest(unittest.TestCase):
         assert fc["features"][0] == self.feature1
         assert fc["features"][1] == self.feature2
 
-    def test_feature_collection_clear(self):
-        fc = FeatureCollection([self.feature1, self.feature2])
-
-        fc.clear()
-
-        assert not fc["features"]
-
     def test_feature_collection_extend(self):
         fc1 = FeatureCollection([self.feature1])
         fc2 = FeatureCollection([self.feature2])

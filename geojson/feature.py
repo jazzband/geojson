@@ -68,9 +68,6 @@ class FeatureCollection(GeoJSON):
     def __radd__(self, other):
         return other + self["features"]
 
-    def clear(self) -> None:
-        self["features"].clear()
-
     def append(self, x):
         self["features"].append(x)
 

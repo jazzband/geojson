@@ -94,7 +94,7 @@ class FeaturesTest(unittest.TestCase):
                          '{"coordinates": [53.0, -4.0], "type": "Point"}')
 
     def test_geo_interface(self):
-        class Thingy(object):
+        class Thingy:
             def __init__(self, id, title, x, y):
                 self.id = id
                 self.title = title

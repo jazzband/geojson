@@ -15,15 +15,12 @@ def coords(obj):
         for f in obj['features']:
             # For Python 2 compatibility
             # See https://www.reddit.com/r/learnpython/comments/4rc15s/yield_from_and_python_27/ # noqa: E501
-            for c in coords(f):
-                yield c
+            yield from coords(f)
     elif 'geometry' in obj:  # Feature
-        for c in coords(obj['geometry']):
-            yield c
+        yield from coords(obj['geometry'])
     elif 'geometries' in obj:  # GeometryCollection
         for g in obj['geometries']:
-            for c in coords(g):
-                yield c
+            yield from coords(g)
     else:
         if isinstance(obj, (tuple, list)):
             coordinates = obj

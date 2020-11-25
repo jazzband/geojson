@@ -10,12 +10,12 @@ from geojson.mapping import to_mapping
 class EncodingDecodingTest(unittest.TestCase):
 
     def setUp(self):
-        class Restaurant(object):
+        class Restaurant:
             """
             Basic Restaurant class
             """
             def __init__(self, name, latlng):
-                super(Restaurant, self).__init__()
+                super().__init__()
                 self.name = name
                 self.latlng = latlng
 

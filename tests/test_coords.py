@@ -52,12 +52,12 @@ class CoordsTestCase(unittest.TestCase):
               (3.41, 77.91), (23.18, -34.29)],)])
         itr = coords(geojson.GeometryCollection([p1, p2, ln, g]))
         pairs = set(itr)
-        self.assertEqual(pairs, set([
+        self.assertEqual(pairs, {
             (-115.11, 37.11), (-115.22, 37.22),
             (-115.3, 37.3), (-115.4, 37.4), (-115.5, 37.5),
             (3.78, 9.28), (-130.91, 1.52), (35.12, 72.234), (3.78, 9.28),
             (23.18, -34.29), (-1.31, -4.61), (3.41, 77.91), (23.18, -34.29)
-        ]))
+        })
 
     def test_map_point(self):
         result = map_coords(lambda x: x, geojson.Point((-115.81, 37.24)))

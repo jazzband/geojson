@@ -1,4 +1,3 @@
-import io
 from setuptools import setup
 import sys
 import re
@@ -19,10 +18,7 @@ else:
 
 def test_suite():
     import doctest
-    try:
-        import unittest2 as unittest
-    except ImportError:
-        import unittest
+    import unittest
 
     suite = unittest.TestLoader().discover("tests")
     suite.addTest(doctest.DocFileSuite("README.rst"))

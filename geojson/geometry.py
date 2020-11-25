@@ -1,15 +1,7 @@
-import sys
 from decimal import Decimal
 from numbers import Number
 
 from geojson.base import GeoJSON
-
-
-if sys.version_info[0] == 3:
-    # Python 3.x has no long type
-    _JSON_compliant_types = (float, int, Decimal)
-else:
-    _JSON_compliant_types = (float, int, Decimal, long)  # noqa
 
 
 class Geometry(GeoJSON):
@@ -50,7 +42,7 @@ class Geometry(GeoJSON):
                 new_coords.append(cls.clean_coordinates(coord, precision))
             elif isinstance(coord, Geometry):
                 new_coords.append(coord['coordinates'])
-            elif isinstance(coord, _JSON_compliant_types):
+            elif isinstance(coord, (float, int, Decimal)):
                 new_coords.append(round(coord, precision))
             else:
                 raise ValueError("%r is not a JSON compliant number" % coord)

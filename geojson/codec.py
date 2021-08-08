@@ -27,9 +27,9 @@ def dump(obj, fp, cls=GeoJSONEncoder, allow_nan=False, **kwargs):
                      fp, cls=cls, allow_nan=allow_nan, **kwargs)
 
 
-def dumps(obj, cls=GeoJSONEncoder, allow_nan=False, **kwargs):
+def dumps(obj, cls=GeoJSONEncoder, allow_nan=False, ensure_ascii=False, **kwargs):
     return json.dumps(to_mapping(obj),
-                      cls=cls, allow_nan=allow_nan, **kwargs)
+                      cls=cls, allow_nan=allow_nan, ensure_ascii=ensure_ascii, **kwargs)
 
 
 def load(fp,

@@ -28,7 +28,7 @@ class Feature(GeoJSON):
             self["id"] = id
         self["geometry"] = (self.to_instance(geometry, strict=True)
                             if geometry else None)
-        self["properties"] = properties or {}
+        self["properties"] = properties or {} or None
 
     def errors(self):
         geo = self.get('geometry')

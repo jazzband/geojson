@@ -287,6 +287,25 @@ coordinates to 6 decimal places (roughly 0.1 meters) by default and can be custo
   >>> Point((-115.12341234, 37.12341234), precision=8)  # rounded to 8 decimal places
   {"coordinates": [-115.12341234, 37.12341234], "type": "Point"}
 
+
+Precision can be set at the package level by setting `geojson.geometry.DEFAULT_PRECISION` 
+
+
+.. code:: python
+
+  >>> import geojson
+
+  >>> geojson.geometry.DEFAULT_PRECISION = 5
+
+  >>> from geojson import Point
+
+  >>> Point((-115.12341234, 37.12341234))  # rounded to 8 decimal places
+  {"coordinates": [-115.12341, 37.12341], "type": "Point"}
+
+
+After setting the DEFAULT_PRECISION, `geojson.load` and `geojson.loads` will round of the coordinates. geosjson
+files can then be simplified by simply dumping the contents using `geojson.dump`
+
 Helpful utilities
 -----------------
 

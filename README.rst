@@ -303,8 +303,8 @@ Precision can be set at the package level by setting `geojson.geometry.DEFAULT_P
   {"coordinates": [-115.12341, 37.12341], "type": "Point"}
 
 
-After setting the DEFAULT_PRECISION, `geojson.load` and `geojson.loads` will round of the coordinates. geosjson
-files can then be simplified by simply dumping the contents using `geojson.dump`
+After setting the DEFAULT_PRECISION, coordinates will be rounded off to that precision with `geojson.load` or `geojson.loads`. Following one of those with `geojson.dump` is a quick and easy way to scale down the precision of excessively precise, arbitrarily-sized GeoJSON data.
+
 
 Helpful utilities
 -----------------

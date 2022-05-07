@@ -118,7 +118,7 @@ Polygon
   >>> from geojson import Polygon
 
   >>> # no hole within polygon
-  >>> Polygon([[(2.38, 57.322), (-120.43, 19.15), (23.194, -20.28), , (2.38, 57.322)]])  # doctest: +ELLIPSIS
+  >>> Polygon([[(2.38, 57.322), (-120.43, 19.15), (23.194, -20.28), (2.38, 57.322)]])  # doctest: +ELLIPSIS
   {"coordinates": [[[2.3..., 57.32...], [-120.4..., 19.1...], [23.19..., -20.2...]]], "type": "Polygon"}
 
   >>> # hole within polygon

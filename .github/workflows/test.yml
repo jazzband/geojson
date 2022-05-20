@@ -38,7 +38,10 @@ jobs:
         python -m pip install --upgrade codecov tox tox-gh-actions
 
     - name: Tests
-      run: tox
+      run: |
+        coverage run --branch --source=geojson setup.py test
+        coverage xml
+        tox
 
     - name: Upload coverage
       uses: codecov/codecov-action@v1

@@ -39,9 +39,8 @@ jobs:
 
     - name: Tests
       run: |
-        coverage run --branch --source=geojson setup.py test
+        coverage run --branch --source=geojson tox
         coverage xml
-        tox
 
     - name: Upload coverage
       uses: codecov/codecov-action@v1

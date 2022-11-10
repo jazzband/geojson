@@ -1,5 +1,5 @@
 from decimal import Decimal
-from numbers import Number
+from numbers import Number, Real
 
 from geojson.base import GeoJSON
 
@@ -47,7 +47,7 @@ class Geometry(GeoJSON):
                 new_coords.append(cls.clean_coordinates(coord, precision))
             elif isinstance(coord, Geometry):
                 new_coords.append(coord['coordinates'])
-            elif isinstance(coord, (float, int, Decimal)):
+            elif isinstance(coord, (Real, Decimal)):
                 new_coords.append(round(coord, precision))
             else:
                 raise ValueError("%r is not a JSON compliant number" % coord)

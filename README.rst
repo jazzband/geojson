@@ -33,7 +33,7 @@ geojson is compatible with Python 3.6 - 3.10. The recommended way to install is 
   pip install geojson
 
 .. _PyPi as 'geojson': https://pypi.python.org/pypi/geojson/
-.. _pip: http://www.pip-installer.org
+.. _pip: https://www.pip-installer.org
 
 GeoJSON Objects
 ---------------
@@ -425,6 +425,6 @@ Credits
 * Ray Riga <ray@strongoutput.com>
 
 
-.. _GeoJSON: http://geojson.org/
+.. _GeoJSON: https://geojson.org/
 .. _The GeoJSON Format Specification: https://tools.ietf.org/html/rfc7946
 .. _\_\_geo\_interface\_\_ Specification: https://gist.github.com/sgillies/2217756

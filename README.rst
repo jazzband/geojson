@@ -1,11 +1,11 @@
 geojson
 ==============
 
-.. image:: https://github.com/jazzband/geojson/workflows/Test/badge.svg
-   :target: https://github.com/jazzband/geojson/actions
+.. image:: https://github.com/jazzband/geojson/actions/workflows/test.yml/badge.svg
+   :target: https://github.com/jazzband/geojson/actions/workflows/test.yml
    :alt: GitHub Actions
 .. image:: https://img.shields.io/codecov/c/github/jazzband/geojson.svg
-   :target: https://codecov.io/github/jazzband/geojson?branch=master
+   :target: https://codecov.io/github/jazzband/geojson?branch=main
    :alt: Codecov
 .. image:: https://jazzband.co/static/img/badge.svg
    :target: https://jazzband.co/

@@ -26,7 +26,7 @@ This Python library contains:
 Installation
 ------------
 
-geojson is compatible with Python 3.6 - 3.10. The recommended way to install is via pip_:
+geojson is compatible with Python 3.7 - 3.11. The recommended way to install is via pip_:
 
 .. code::
 

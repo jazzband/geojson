@@ -1,6 +1,42 @@
 Changes
 =======
 
+3.0.0 (2022-01-26)
+------------------
+
+- Support for Python versions 3.7-3.11 (Python 2 no longer supported)
+
+- Primary development branch renamed from `master` to `main`
+
+- Handle all real numbers as coordinates
+
+  - https://github.com/jazzband/geojson/pull/188
+
+- Default precision improvements
+
+  - https://github.com/jazzband/geojson/pull/177
+
+- CI improvements
+
+  - https://github.com/jazzband/geojson/pull/172
+  - https://github.com/jazzband/geojson/pull/155
+
+- utf-8 support added to `geojson.dumps()`
+
+  - https://github.com/jazzband/geojson/pull/165
+
+- Polygons now constrained to bounding box
+
+  - https://github.com/jazzband/geojson/pull/147
+
+- Better GeometryCollection handling in `util.coords()`
+
+  - https://github.com/jazzband/geojson/pull/146
+
+- Improved point validation
+
+  - https://github.com/jazzband/geojson/pull/144
+
 2.5.0 (2019-07-18)
 ------------------
 

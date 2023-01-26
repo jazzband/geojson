@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    if: github.repository == 'jazzband/geojson'
+    if: github.repository_owner == 'jazzband'
     runs-on: ubuntu-latest
 
     steps:
@@ -18,20 +18,9 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.8'
-
-      - name: Get pip cache dir
-        id: pip-cache
-        run: |
-          echo "::set-output name=dir::$(pip cache dir)"
-
-      - name: Cache
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.pip-cache.outputs.dir }}
-          key: release-${{ hashFiles('**/setup.py') }}
-          restore-keys: |
-            release-
+          python-version: "3.x"
+          cache: pip
+          cache-dependency-path: setup.py
 
       - name: Install dependencies
         run: |

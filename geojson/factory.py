@@ -4,8 +4,15 @@ from geojson.geometry import GeometryCollection
 from geojson.feature import Feature, FeatureCollection
 from geojson.base import GeoJSON
 
-__all__ = ([Point, LineString, Polygon] +
-           [MultiLineString, MultiPoint, MultiPolygon] +
-           [GeometryCollection] +
-           [Feature, FeatureCollection] +
-           [GeoJSON])
+__all__ = (
+    "Point",
+    "LineString",
+    "Polygon",
+    "MultiLineString",
+    "MultiPoint",
+    "MultiPolygon",
+    "GeometryCollection",
+    "Feature",
+    "FeatureCollection",
+    "GeoJSON",
+)

@@ -1,4 +1,4 @@
-Copyright © 2007-2019, contributors of geojson
+Copyright © 2007-2023, contributors of geojson
 
 All rights reserved.
 

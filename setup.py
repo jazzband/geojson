@@ -14,7 +14,9 @@ with open(VERSIONFILE_PATH) as version_file:
     if mo:
         verstr = mo.group(1)
     else:
-        raise RuntimeError(f"Unable to find version string in {VERSIONFILE_PATH}.")
+        raise RuntimeError(
+            f"Unable to find version string in {VERSIONFILE_PATH}."
+        )
 
 
 def test_suite():
@@ -28,8 +30,9 @@ def test_suite():
 
 major_version, minor_version = sys.version_info[:2]
 if not (major_version == 3 and 7 <= minor_version <= 11):
-    sys.stderr.write("Sorry, only Python 3.7 - 3.11 are "
-                     "supported at this time.\n")
+    sys.stderr.write(
+        "Sorry, only Python 3.7 - 3.11 are " "supported at this time.\n"
+    )
     exit(1)
 
 setup(
@@ -64,5 +67,5 @@ setup(
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Topic :: Scientific/Engineering :: GIS",
-    ]
+    ],
 )

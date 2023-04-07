@@ -1,7 +1,25 @@
 """Coordinate utility functions."""
+from __future__ import annotations
+
+from decimal import Decimal
+from numbers import Real
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    Callable,
+    Generator,
+    List,
+    Tuple,
+    Union,
+)
+
+from geojson.factory import LineString, Point, Polygon
+
+if TYPE_CHECKING:
+    from geojson.types import CoordsAny, G, PointLike, SupportsRound
 
 
-def coords(obj):
+def coords(obj: Any) -> Generator[Tuple[SupportsRound, ...], None, None]:
     """
     Yields the coordinates from a Feature or Geometry.
 
@@ -25,14 +43,14 @@ def coords(obj):
         else:
             coordinates = obj.get('coordinates', obj)
         for e in coordinates:
-            if isinstance(e, (float, int)):
+            if isinstance(e, (Real, Decimal)):
                 yield tuple(coordinates)
                 break
             for f in coords(e):
                 yield f
 
 
-def map_coords(func, obj):
+def map_coords(func: Callable, obj: G) -> Union[G, dict]:
     """
     Returns the mapped coordinates from a Geometry after applying the provided
     function to each dimension in tuples list (ie, linear scaling).
@@ -45,17 +63,17 @@ def map_coords(func, obj):
     MultiPolygon
     :return: The result of applying the function to each dimension in the
     array.
-    :rtype: list
+    :rtype: dict
     :raises ValueError: if the provided object is not GeoJSON.
     """
 
-    def tuple_func(coord):
+    def tuple_func(coord: PointLike) -> PointLike:
         return (func(coord[0]), func(coord[1]))
 
     return map_tuples(tuple_func, obj)
 
 
-def map_tuples(func, obj):
+def map_tuples(func: Callable, obj: G) -> Union[G, dict]:
     """
     Returns the mapped coordinates from a Geometry after applying the provided
     function to each coordinate.
@@ -67,10 +85,10 @@ def map_tuples(func, obj):
     MultiPolygon
     :return: The result of applying the function to each dimension in the
     array.
-    :rtype: list
+    :rtype: dict
     :raises ValueError: if the provided object is not GeoJSON.
     """
-
+    coordinates: CoordsAny
     if obj['type'] == 'Point':
         coordinates = tuple(func(obj['coordinates']))
     elif obj['type'] in ['LineString', 'MultiPoint']:
@@ -91,7 +109,7 @@ def map_tuples(func, obj):
     return {'type': obj['type'], 'coordinates': coordinates}
 
 
-def map_geometries(func, obj):
+def map_geometries(func: Callable, obj: G) -> Union[G, dict]:
     """
     Returns the result of passing every geometry in the given geojson object
     through func.
@@ -101,7 +119,7 @@ def map_geometries(func, obj):
     :param obj: A geometry or feature to extract the coordinates from.
     :type obj: GeoJSON
     :return: The result of applying the function to each geometry
-    :rtype: list
+    :rtype: dict
     :raises ValueError: if the provided object is not geojson.
     """
     simple_types = [
@@ -128,8 +146,11 @@ def map_geometries(func, obj):
         raise ValueError("Invalid GeoJSON object %s" % repr(obj))
 
 
-def generate_random(featureType, numberVertices=3,
-                    boundingBox=[-180.0, -90.0, 180.0, 90.0]):
+def generate_random(
+    featureType: str,
+    numberVertices: int = 3,
+    boundingBox: List[float] = [-180.0, -90.0, 180.0, 90.0],
+) -> Union[Point, LineString, Polygon]:
     """
     Generates random geojson features depending on the parameters
     passed through.
@@ -148,29 +169,28 @@ def generate_random(featureType, numberVertices=3,
     :raises ValueError: if there is no featureType provided.
     """
 
-    from geojson import Point, LineString, Polygon
-    import random
     import math
+    import random
 
     lonMin = boundingBox[0]
     lonMax = boundingBox[2]
 
-    def randomLon():
+    def randomLon() -> float:
         return random.uniform(lonMin, lonMax)
 
     latMin = boundingBox[1]
     latMax = boundingBox[3]
 
-    def randomLat():
+    def randomLat() -> float:
         return random.uniform(latMin, latMax)
 
-    def createPoint():
+    def createPoint() -> Point:
         return Point((randomLon(), randomLat()))
 
-    def createLine():
+    def createLine() -> LineString:
         return LineString([createPoint() for unused in range(numberVertices)])
 
-    def createPoly():
+    def createPoly() -> Polygon:
         aveRadius = 60
         ctrX = 0.1
         ctrY = 0.2
@@ -180,7 +200,7 @@ def generate_random(featureType, numberVertices=3,
         angleSteps = []
         lower = (2 * math.pi / numberVertices) - irregularity
         upper = (2 * math.pi / numberVertices) + irregularity
-        sum = 0
+        sum = float(0)
         for i in range(numberVertices):
             tmp = random.uniform(lower, upper)
             angleSteps.append(tmp)
@@ -208,12 +228,12 @@ def generate_random(featureType, numberVertices=3,
         points.append(firstVal)
         return Polygon([points])
 
-    def clip(x, min, max):
-        if(min > max):
+    def clip(x: float, min: float, max: float) -> float:
+        if (min > max):
             return x
-        elif(x < min):
+        elif (x < min):
             return min
-        elif(x > max):
+        elif (x > max):
             return max
         else:
             return x
@@ -226,3 +246,7 @@ def generate_random(featureType, numberVertices=3,
 
     if featureType == 'Polygon':
         return createPoly()
+
+    raise ValueError(
+        f'Got featureType: {featureType}. Expected: Point, LineString, Polygon'
+    )

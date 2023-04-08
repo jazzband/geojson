@@ -2,7 +2,7 @@ Changes
 =======
 
 
-3.0.1 (2022-02-15)
+3.0.1 (2023-02-15)
 ------------------
 
 - Add Support for Python 3.11.x minor revisions
@@ -10,7 +10,7 @@ Changes
   - https://github.com/jazzband/geojson/pull/198
 
 
-3.0.0 (2022-01-26)
+3.0.0 (2023-01-26)
 ------------------
 
 - Support for Python versions 3.7-3.11 (Python 2 no longer supported)

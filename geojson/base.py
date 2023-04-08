@@ -1,5 +1,12 @@
+from __future__ import annotations
+
+from typing import Any, Callable, Iterable, Optional, Type, Union, TYPE_CHECKING
+
 import geojson
 from geojson.mapping import to_mapping
+
+if TYPE_CHECKING:
+    from geojson.types import G, LineLike, PolyLike, ErrorList, CheckErrorFunc
 
 
 class GeoJSON(dict):
@@ -7,31 +14,29 @@ class GeoJSON(dict):
     A class representing a GeoJSON object.
     """
 
-    def __init__(self, iterable=(), **extra):
+    def __init__(self, iterable: Iterable[Any] = (), **extra) -> None:
         """
-        Initialises a GeoJSON object
+        Initializes a GeoJSON object
 
         :param iterable: iterable from which to draw the content of the GeoJSON
         object.
         :type iterable: dict, array, tuple
-        :return: a GeoJSON object
-        :rtype: GeoJSON
         """
         super().__init__(iterable)
         self["type"] = getattr(self, "type", type(self).__name__)
         self.update(extra)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return geojson.dumps(self, sort_keys=True)
 
     __str__ = __repr__
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str) -> Any:
         """
         Permit dictionary items to be retrieved like object attributes
 
         :param name: attribute name
-        :type name: str, int
+        :type name: str
         :return: dictionary value
         """
         try:
@@ -39,7 +44,7 @@ class GeoJSON(dict):
         except KeyError:
             raise AttributeError(name)
 
-    def __setattr__(self, name, value):
+    def __setattr__(self, name: str, value: Any) -> None:
         """
         Permit dictionary items to be set like object attributes.
 
@@ -50,7 +55,7 @@ class GeoJSON(dict):
 
         self[name] = value
 
-    def __delattr__(self, name):
+    def __delattr__(self, name: str) -> None:
         """
         Permit dictionary items to be deleted like object attributes
 
@@ -61,12 +66,19 @@ class GeoJSON(dict):
         del self[name]
 
     @property
-    def __geo_interface__(self):
-        if self.type != "GeoJSON":
+    def __geo_interface__(self) -> Optional[G]:
+        if self.type == "GeoJSON":
+            return None
+        else:
             return self
 
     @classmethod
-    def to_instance(cls, ob, default=None, strict=False):
+    def to_instance(
+        cls,
+        ob: Optional[G],
+        default: Union[Type[GeoJSON], Callable[..., G], None] = None,
+        strict: bool = False,
+    ) -> G:
         """Encode a GeoJSON dict into an GeoJSON object.
         Assumes the caller knows that the dict should satisfy a GeoJSON type.
 
@@ -91,49 +103,58 @@ class GeoJSON(dict):
         :raises AttributeError: If the input dict contains items that are not
         valid GeoJSON types.
         """
-        if ob is None and default is not None:
-            instance = default()
-        elif isinstance(ob, GeoJSON):
-            instance = ob
-        else:
-            mapping = to_mapping(ob)
-            d = {}
-            for k in mapping:
-                d[k] = mapping[k]
-            try:
-                type_ = d.pop("type")
-                try:
-                    type_ = str(type_)
-                except UnicodeEncodeError:
-                    # If the type contains non-ascii characters, we can assume
-                    # it's not a valid GeoJSON type
-                    raise AttributeError(
-                        "{0} is not a GeoJSON type").format(type_)
-                geojson_factory = getattr(geojson.factory, type_)
-                instance = geojson_factory(**d)
-            except (AttributeError, KeyError) as invalid:
-                if strict:
-                    msg = "Cannot coerce %r into a valid GeoJSON structure: %s"
-                    msg %= (ob, invalid)
-                    raise ValueError(msg)
-                instance = ob
-        return instance
+        if ob is None:
+            if default is None:
+                raise ValueError("At least one argument must be provided")
+            else:
+                return default()
+
+        if isinstance(ob, GeoJSON):
+            return ob
+
+        # If object is not an instance of GeoJSON
+        mapping = to_mapping(ob)
+        d = {k: v for k, v in mapping.items()}
+        error_msg = "Cannot coerce %r into a valid GeoJSON structure: %s"
+        try:
+            type_ = d.pop("type")
+        except KeyError as invalid:
+            if strict:
+                raise ValueError(error_msg.format(ob, invalid))
+            return ob
+        try:
+            type_ = str(type_)
+        except UnicodeEncodeError:
+            # If the type contains non-ascii characters, we can assume
+            # it's not a valid GeoJSON type
+            raise AttributeError(f"{type_} is not a GeoJSON type")
+        try:
+            geojson_factory: Type[GeoJSON] = getattr(geojson.factory, type_)
+            return geojson_factory(**d)
+        except (AttributeError, TypeError) as invalid:
+            if strict:
+                raise ValueError(error_msg.format(ob, invalid))
+            return ob
 
     @property
-    def is_valid(self):
+    def is_valid(self) -> bool:
         return not self.errors()
 
-    def check_list_errors(self, checkFunc, lst):
+    def check_list_errors(
+        self,
+        checkFunc: CheckErrorFunc,
+        lst: Union[LineLike, PolyLike],
+    ) -> ErrorList:
         """Validation helper function."""
-        # check for errors on each subitem, filter only subitems with errors
+        # Check for errors on each subitem, filter only subitems with errors
         results = (checkFunc(i) for i in lst)
         return [err for err in results if err]
 
-    def errors(self):
+    def errors(self) -> Any:
         """Return validation errors (if any).
         Implement in each subclass.
         """
 
-        # make sure that each subclass implements it's own validation function
+        # Make sure that each subclass implements it's own validation function
         if self.__class__ != GeoJSON:
             raise NotImplementedError(self.__class__)

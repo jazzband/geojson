@@ -1,11 +1,26 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Any, MutableMapping, Optional, Union
+
+if TYPE_CHECKING:
+    from geojson.geometry import Geometry
+    from geojson.types import G
+
+
 class SimpleWebFeature:
 
     """
     A simple, Atom-ish, single geometry (WGS84) GIS feature.
     """
 
-    def __init__(self, id=None, geometry=None, title=None, summary=None,
-                 link=None):
+    def __init__(
+        self,
+        id: Optional[Any] = None,
+        geometry: Union[Geometry, MutableMapping, None] = None,
+        title: Optional[str] = None,
+        summary: Optional[str] = None,
+        link: Optional[str] = None,
+    ) -> None:
         """
         Initialises a SimpleWebFeature from the parameters provided.
 
@@ -19,14 +34,12 @@ class SimpleWebFeature:
         :type summary: str
         :param link: Link associated with the object.
         :type link: str
-        :return: A SimpleWebFeature object
-        :rtype: SimpleWebFeature
         """
         self.id = id
         self.geometry = geometry
         self.properties = {'title': title, 'summary': summary, 'link': link}
 
-    def as_dict(self):
+    def as_dict(self) -> dict[str, Any]:
         return {
             "type": "Feature",
             "id": self.id,
@@ -43,7 +56,7 @@ class SimpleWebFeature:
     """
 
 
-def create_simple_web_feature(o):
+def create_simple_web_feature(o: G) -> Union[SimpleWebFeature, G]:
     """
     Create an instance of SimpleWebFeature from a dict, o. If o does not
     match a Python feature object, simply return o. This function serves as a

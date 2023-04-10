@@ -209,11 +209,11 @@ def generate_random(featureType, numberVertices=3,
         return Polygon([points])
 
     def clip(x, min, max):
-        if(min > max):
+        if min > max:
             return x
-        elif(x < min):
+        elif x < min:
             return min
-        elif(x > max):
+        elif x > max:
             return max
         else:
             return x

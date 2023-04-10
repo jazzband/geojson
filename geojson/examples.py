@@ -1,3 +1,9 @@
+"""
+SimpleWebFeature is a working example of a class that satisfies the Python geo
+interface.
+"""
+
+
 class SimpleWebFeature:
 
     """
@@ -35,12 +41,6 @@ class SimpleWebFeature:
             }
 
     __geo_interface__ = property(as_dict)
-
-    """
-    Create an instance of SimpleWebFeature from a dict, o. If o does not
-    match a Python feature object, simply return o. This function serves as a
-    json decoder hook. See coding.load().
-    """
 
 
 def create_simple_web_feature(o):

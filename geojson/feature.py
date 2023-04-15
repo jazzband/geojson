@@ -1,8 +1,3 @@
-"""
-SimpleWebFeature is a working example of a class that satisfies the Python geo
-interface.
-"""
-
 from geojson.base import GeoJSON
 
 

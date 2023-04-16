@@ -226,3 +226,5 @@ def generate_random(featureType, numberVertices=3,
 
     if featureType == 'Polygon':
         return createPoly()
+
+    raise ValueError(f"featureType: {featureType} is not supported.")

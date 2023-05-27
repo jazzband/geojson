@@ -288,7 +288,7 @@ coordinates to 6 decimal places (roughly 0.1 meters) by default and can be custo
   {"coordinates": [-115.12341234, 37.12341234], "type": "Point"}
 
 
-Precision can be set at the package level by setting `geojson.geometry.DEFAULT_PRECISION` 
+Precision can be set at the package level by setting `geojson.geometry.DEFAULT_PRECISION`
 
 
 .. code:: python
@@ -410,7 +410,7 @@ Development
 -----------
 
 To build this project, run :code:`python setup.py build`.
-To run the unit tests, run :code:`python setup.py test`.
+To run the unit tests, run :code:`python -m pip install tox && tox`.
 To run the style checks, run :code:`flake8` (install `flake8` if needed).
 
 Credits

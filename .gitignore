@@ -6,3 +6,5 @@ sdist/
 *.egg-info/
 *.egg
 .tox/
+.coverage
+coverage.xml

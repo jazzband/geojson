@@ -13,5 +13,10 @@ repos:
     hooks:
       - id: tox-ini-fmt
 
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.0.0
+    hooks:
+      - id: flake8
+
 ci:
   autoupdate_schedule: quarterly

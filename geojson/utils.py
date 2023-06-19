@@ -97,7 +97,7 @@ def map_tuples(func: Callable, obj: GeoJSON) -> GeoJSON:
     return obj_new
 
 
-def map_geometries(func, obj):
+def map_geometries(func: Callable, obj: GeoJSON) -> GeoJSON:
     """
     Returns the result of passing every geometry in the given geojson object
     through func.
@@ -119,19 +119,18 @@ def map_geometries(func, obj):
         'MultiPolygon',
     ]
 
+    obj_new = deepcopy(obj)
     if obj['type'] in simple_types:
         return func(obj)
     elif obj['type'] == 'GeometryCollection':
-        geoms = [func(geom) if geom else None for geom in obj['geometries']]
-        return {'type': obj['type'], 'geometries': geoms}
+        obj_new['geometries'] = [func(geom) if geom else None for geom in obj['geometries']]
     elif obj['type'] == 'Feature':
-        obj['geometry'] = func(obj['geometry']) if obj['geometry'] else None
-        return obj
+        obj_new['geometry'] = func(obj['geometry']) if obj['geometry'] else None
     elif obj['type'] == 'FeatureCollection':
-        feats = [map_geometries(func, feat) for feat in obj['features']]
-        return {'type': obj['type'], 'features': feats}
+        obj_new['features'] = [map_geometries(func, feat) for feat in obj['features']]
     else:
         raise ValueError("Invalid GeoJSON object %s" % repr(obj))
+    return obj_new
 
 
 def generate_random(featureType, numberVertices=3,

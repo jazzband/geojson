@@ -6,7 +6,7 @@ import random
 import unittest
 
 import geojson
-from geojson.utils import generate_random, map_geometries
+from geojson.utils import generate_random, map_geometries, map_tuples
 
 
 def generate_bbox():
@@ -97,3 +97,23 @@ class TestMapGeometries(unittest.TestCase):
         invalid_object = geojson.Feature(type="InvalidType")
         with self.assertRaises(ValueError):
             map_geometries(lambda g: g, invalid_object)
+
+
+class TestMapTuples(unittest.TestCase):
+    def test_map_tuples(self):
+        gp_deg = geojson.Point(
+            (-115.81, 37.24),
+            properties={"dogs": 5, "cats": 6, "frogs": 7}
+        )
+        gp_rad = geojson.Point(
+            (-115.81 * 3.14159 / 180.0, 37.24 * 3.14159 / 180.0),
+            properties={"dogs": 5, "cats": 6, "frogs": 7}
+        )
+        gp_rad_mapped = map_tuples(
+            lambda c: (
+                round(c[0] * 3.14159 / 180.0, geojson.geometry.DEFAULT_PRECISION),
+                round(c[1] * 3.14159 / 180.0, geojson.geometry.DEFAULT_PRECISION)
+            ),
+            gp_deg
+        )
+        self.assertEquals(geojson.dumps(gp_rad_mapped), geojson.dumps(gp_rad))

@@ -1,4 +1,7 @@
 """Coordinate utility functions."""
+from .base import GeoJSON
+from typing import Callable
+from copy import deepcopy
 
 
 def coords(obj):
@@ -55,7 +58,7 @@ def map_coords(func, obj):
     return map_tuples(tuple_func, obj)
 
 
-def map_tuples(func, obj):
+def map_tuples(func: Callable, obj: GeoJSON) -> GeoJSON:
     """
     Returns the mapped coordinates from a Geometry after applying the provided
     function to each coordinate.
@@ -88,7 +91,10 @@ def map_tuples(func, obj):
         return map_geometries(lambda g: map_tuples(func, g), obj)
     else:
         raise ValueError("Invalid geometry object %s" % repr(obj))
-    return {'type': obj['type'], 'coordinates': coordinates}
+
+    obj_new = deepcopy(obj)
+    obj_new['coordinates'] = coordinates
+    return obj_new
 
 
 def map_geometries(func, obj):

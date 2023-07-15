@@ -87,7 +87,7 @@ def map_tuples(func, obj):
     elif obj['type'] in ['Feature', 'FeatureCollection', 'GeometryCollection']:
         return map_geometries(lambda g: map_tuples(func, g), obj)
     else:
-        raise ValueError("Invalid geometry object %s" % repr(obj))
+        raise ValueError(f"Invalid geometry object {obj!r}")
     return {'type': obj['type'], 'coordinates': coordinates}
 
 
@@ -125,7 +125,7 @@ def map_geometries(func, obj):
         feats = [map_geometries(func, feat) for feat in obj['features']]
         return {'type': obj['type'], 'features': feats}
     else:
-        raise ValueError("Invalid GeoJSON object %s" % repr(obj))
+        raise ValueError(f"Invalid GeoJSON object {obj!r}")
 
 
 def generate_random(featureType, numberVertices=3,

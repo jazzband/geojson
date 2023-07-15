@@ -107,15 +107,15 @@ class GeoJSON(dict):
                 except UnicodeEncodeError:
                     # If the type contains non-ascii characters, we can assume
                     # it's not a valid GeoJSON type
-                    raise AttributeError(
-                        "{0} is not a GeoJSON type").format(type_)
+                    raise AttributeError(f"{type_} is not a GeoJSON type")
                 geojson_factory = getattr(geojson.factory, type_)
                 instance = geojson_factory(**d)
             except (AttributeError, KeyError) as invalid:
                 if strict:
-                    msg = "Cannot coerce %r into a valid GeoJSON structure: %s"
-                    msg %= (ob, invalid)
-                    raise ValueError(msg)
+                    raise ValueError(
+                        f"Cannot coerce {ob!r} into "
+                        f"a valid GeoJSON structure: {invalid}"
+                    )
                 instance = ob
         return instance
 

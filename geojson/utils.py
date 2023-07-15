@@ -152,79 +152,67 @@ def generate_random(featureType, numberVertices=3,
     import random
     import math
 
-    lonMin = boundingBox[0]
-    lonMax = boundingBox[2]
+    lon_min, lat_min, lon_max, lat_max = boundingBox
 
-    def randomLon():
-        return random.uniform(lonMin, lonMax)
+    def random_lon():
+        return random.uniform(lon_min, lon_max)
 
-    latMin = boundingBox[1]
-    latMax = boundingBox[3]
+    def random_lat():
+        return random.uniform(lat_min, lat_max)
 
-    def randomLat():
-        return random.uniform(latMin, latMax)
+    def create_point():
+        return Point((random_lon(), random_lat()))
 
-    def createPoint():
-        return Point((randomLon(), randomLat()))
+    def create_line():
+        return LineString([create_point() for _ in range(numberVertices)])
 
-    def createLine():
-        return LineString([createPoint() for unused in range(numberVertices)])
+    def create_poly():
+        ave_radius = 60
+        ctr_x = 0.1
+        ctr_y = 0.2
+        irregularity = clip(0.1, 0, 1) * math.tau / numberVertices
+        spikeyness = clip(0.5, 0, 1) * ave_radius
 
-    def createPoly():
-        aveRadius = 60
-        ctrX = 0.1
-        ctrY = 0.2
-        irregularity = clip(0.1, 0, 1) * 2 * math.pi / numberVertices
-        spikeyness = clip(0.5, 0, 1) * aveRadius
+        lower = (math.tau / numberVertices) - irregularity
+        upper = (math.tau / numberVertices) + irregularity
+        angle_steps = []
+        for _ in range(numberVertices):
+            angle_steps.append(random.uniform(lower, upper))
+        sum_angle = sum(angle_steps)
 
-        angleSteps = []
-        lower = (2 * math.pi / numberVertices) - irregularity
-        upper = (2 * math.pi / numberVertices) + irregularity
-        sum = 0
-        for i in range(numberVertices):
-            tmp = random.uniform(lower, upper)
-            angleSteps.append(tmp)
-            sum = sum + tmp
-
-        k = sum / (2 * math.pi)
-        for i in range(numberVertices):
-            angleSteps[i] = angleSteps[i] / k
+        k = sum_angle / math.tau
+        angle_steps = [x / k for x in angle_steps]
 
         points = []
-        angle = random.uniform(0, 2 * math.pi)
+        angle = random.uniform(0, math.tau)
 
-        for i in range(numberVertices):
-            r_i = clip(random.gauss(aveRadius, spikeyness), 0, 2 * aveRadius)
-            x = ctrX + r_i * math.cos(angle)
-            y = ctrY + r_i * math.sin(angle)
-            x = (x + 180.0) * (abs(lonMin-lonMax) / 360.0) + lonMin
-            y = (y + 90.0) * (abs(latMin-latMax) / 180.0) + latMin
-            x = clip(x, lonMin, lonMax)
-            y = clip(y, latMin, latMax)
+        for angle_step in angle_steps:
+            r_i = clip(random.gauss(ave_radius, spikeyness), 0, 2 * ave_radius)
+            x = ctr_x + r_i * math.cos(angle)
+            y = ctr_y + r_i * math.sin(angle)
+            x = (x + 180) * (abs(lon_min - lon_max) / 360) + lon_min
+            y = (y + 90) * (abs(lat_min - lat_max) / 180) + lat_min
+            x = clip(x, lon_min, lon_max)
+            y = clip(y, lat_min, lat_max)
             points.append((x, y))
-            angle = angle + angleSteps[i]
+            angle += angle_step
 
-        firstVal = points[0]
-        points.append(firstVal)
+        points.append(points[0])  # append first point to the end
         return Polygon([points])
 
-    def clip(x, min, max):
-        if min > max:
+    def clip(x, min_val, max_val):
+        if min_val > max_val:
             return x
-        elif x < min:
-            return min
-        elif x > max:
-            return max
         else:
-            return x
+            return min(max(min_val, x), max_val)
 
     if featureType == 'Point':
-        return createPoint()
+        return create_point()
 
     if featureType == 'LineString':
-        return createLine()
+        return create_line()
 
     if featureType == 'Polygon':
-        return createPoly()
+        return create_poly()
 
     raise ValueError(f"featureType: {featureType} is not supported.")

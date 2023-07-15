@@ -129,7 +129,7 @@ def map_geometries(func, obj):
 
 
 def generate_random(featureType, numberVertices=3,
-                    boundingBox=[-180.0, -90.0, 180.0, 90.0]):
+                    boundingBox=[-180, -90, 180, 90]):
     """
     Generates random geojson features depending on the parameters
     passed through.

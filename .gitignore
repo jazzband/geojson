@@ -8,3 +8,5 @@ sdist/
 .tox/
 .coverage
 coverage.xml
+.idea
+.venv*

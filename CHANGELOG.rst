@@ -2,11 +2,25 @@ Changes
 =======
 
 
-Unreleased
+3.1.0
 ----------
 
 - Add support for Python 3.12
 
+  - https://github.com/jazzband/geojson/pull/222
+  - https://github.com/jazzband/geojson/pull/211
+
+- CI improvements
+
+  - https://github.com/jazzband/geojson/pull/217
+  - https://github.com/jazzband/geojson/pull/212
+  - https://github.com/jazzband/geojson/pull/207
+
+- Unit test improvements
+
+  - https://github.com/jazzband/geojson/pull/215
+  - https://github.com/jazzband/geojson/pull/210
+  - https://github.com/jazzband/geojson/pull/209
 
 3.0.1 (2023-02-15)
 ------------------
@@ -14,7 +28,6 @@ Unreleased
 - Add Support for Python 3.11.x minor revisions
 
   - https://github.com/jazzband/geojson/pull/198
-
 
 3.0.0 (2023-01-26)
 ------------------

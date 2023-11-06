@@ -14,6 +14,7 @@ geojson
    :target: https://pypi.org/project/geojson/
    :alt: PyPI
 
+
 This Python library contains:
 
 - Functions for encoding and decoding GeoJSON_ formatted data

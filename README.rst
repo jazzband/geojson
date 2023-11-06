@@ -10,6 +10,9 @@ geojson
 .. image:: https://jazzband.co/static/img/badge.svg
    :target: https://jazzband.co/
    :alt: Jazzband
+.. image:: https://img.shields.io/pypi/dm/geojson.svg
+   :target: https://pypi.org/project/geojson/
+   :alt: PyPI
 
 This Python library contains:
 

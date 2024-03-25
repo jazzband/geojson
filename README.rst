@@ -12,7 +12,7 @@ geojson
    :alt: Jazzband
 .. image:: https://img.shields.io/pypi/dm/geojson.svg
    :target: https://pypi.org/project/geojson/
-   :alt: PyPI  
+   :alt: PyPI
 
 This Python library contains:
 

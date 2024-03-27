@@ -7,6 +7,6 @@ optionflags = (doctest.REPORT_ONLY_FIRST_FAILURE |
                doctest.ELLIPSIS)
 
 _basedir = os.path.dirname(__file__)
-paths = glob.glob("%s/*.txt" % _basedir)
+paths = glob.glob(f"{_basedir}/*.txt")
 test_suite = doctest.DocFileSuite(*paths, **dict(module_relative=False,
                                                  optionflags=optionflags))

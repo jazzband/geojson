@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: check-case-conflict
       - id: check-merge-conflict
@@ -14,7 +14,7 @@ repos:
       - id: tox-ini-fmt
 
   - repo: https://github.com/PyCQA/flake8
-    rev: 6.1.0
+    rev: 7.1.0
     hooks:
       - id: flake8
 

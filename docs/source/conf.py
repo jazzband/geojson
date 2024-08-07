@@ -7,8 +7,10 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'geojson'
-copyright = '2024, Sean Gillies, Matthew Russell, Corey Farwell, Blake Grotewold, Zsolt Ero, Sergey Romaov, Ray Riga'
-author = 'Sean Gillies, Matthew Russell, Corey Farwell, Blake Grotewold, Zsolt Ero, Sergey Romaov, Ray Riga'
+copyright = '2024, Sean Gillies, Matthew Russell, Corey Farwell, Blake Grotewold, \
+	Zsolt Ero, Sergey Romaov, Ray Riga'
+author = 'Sean Gillies, Matthew Russell, Corey Farwell, Blake Grotewold, Zsolt Ero, \
+	Sergey Romaov, Ray Riga'
 release = '3.1.0'
 
 # -- General configuration ---------------------------------------------------

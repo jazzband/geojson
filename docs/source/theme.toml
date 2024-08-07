@@ -1,0 +1,3 @@
+[theme]
+name = "sphinx_rtd_theme"
+base_url = "https://readthedocs.org/projects/sphinx-rtd-theme/"

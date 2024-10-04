@@ -50,7 +50,7 @@ class Geometry(GeoJSON):
             elif isinstance(coord, (Real, Decimal)):
                 new_coords.append(round(coord, precision))
             else:
-                raise ValueError("%r is not a JSON compliant number" % coord)
+                raise ValueError(f"{coord!r} is not a JSON compliant number")
         return new_coords
 
 

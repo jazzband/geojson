@@ -10,12 +10,12 @@ from geojson.utils import generate_random, map_geometries
 
 
 def generate_bbox():
-    min_lat = random.random() * 180 - 90
-    max_lat = random.random() * 180 - 90
+    min_lat = random.random() * 180.0 - 90.0
+    max_lat = random.random() * 180.0 - 90.0
     if min_lat > max_lat:
         min_lat, max_lat = max_lat, min_lat
-    min_lon = random.random() * 360 - 180
-    max_lon = random.random() * 360 - 180
+    min_lon = random.random() * 360.0 - 180.0
+    max_lon = random.random() * 360.0 - 180.0
     if min_lon > max_lon:
         min_lon, max_lon = max_lon, min_lon
     return [min_lon, min_lat, max_lon, max_lat]
@@ -46,7 +46,7 @@ def check_point_bbox(point, bbox):
 class TestGenerateRandom(unittest.TestCase):
     def test_simple_polygon(self):
         for _ in range(5000):
-            bbox = [-180, -90, 180, 90]
+            bbox = [-180.0, -90.0, 180.0, 90.0]
             result = generate_random('Polygon')
             self.assertIsInstance(result, geojson.geometry.Polygon)
             self.assertTrue(geojson.geometry.check_polygon(result))

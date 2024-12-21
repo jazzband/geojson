@@ -1,6 +1,21 @@
 Changes
 =======
 
+3.2.0
+----------
+
+- Add support for Python 3.13
+
+  - https://github.com/jazzband/geojson/pull/228
+
+- Code modernization
+
+  - https://github.com/jazzband/geojson/pull/218
+  - https://github.com/jazzband/geojson/pull/229
+
+- RtD bugfix
+
+  - https://github.com/jazzband/geojson/pull/227
 
 3.1.0
 ----------

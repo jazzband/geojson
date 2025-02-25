@@ -1,10 +1,19 @@
 from geojson.base import GeoJSON
 
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from typing import List, Literal, Optional, Union, Dict, Any
+    from .geometry import Geometry
 
 class Feature(GeoJSON):
     """
     Represents a WGS84 GIS feature.
     """
+    # https://datatracker.ietf.org/doc/html/rfc7946#section-3.2
+    type: Literal["Feature"]
+    geometry: Optional[Geometry]
+    properties: Dict[str, Any]
+    id: Optional[Union[int, str]]
 
     def __init__(self, id=None, geometry=None, properties=None, **extra):
         """
@@ -34,6 +43,7 @@ class FeatureCollection(GeoJSON):
     """
     Represents a FeatureCollection, a set of multiple Feature objects.
     """
+    features: List[Feature]
 
     def __init__(self, features, **extra):
         """

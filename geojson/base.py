@@ -1,11 +1,18 @@
 import geojson
 from geojson.mapping import to_mapping
 
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from typing import Literal
+
 
 class GeoJSON(dict):
     """
     A class representing a GeoJSON object.
     """
+    # https://datatracker.ietf.org/doc/html/rfc7946#section-3 has 'type'
+    # https://datatracker.ietf.org/doc/html/rfc7946#section-1.4 allowed values
+    type: Literal["Feature", "FeatureCollection", "Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", "MultiPolygon", "GeometryCollection"]
 
     def __init__(self, iterable=(), **extra):
         """

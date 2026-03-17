@@ -44,7 +44,10 @@ class FeatureCollection(GeoJSON):
         :rtype: FeatureCollection
         """
         super().__init__(**extra)
-        self["features"] = features
+        self["features"] = [
+            self.to_instance(f) if not isinstance(f, GeoJSON) else f
+            for f in features
+        ]
 
     def errors(self):
         return self.check_list_errors(lambda x: x.errors(), self.features)

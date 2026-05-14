@@ -17,8 +17,8 @@ else:
 
 
 major_version, minor_version = sys.version_info[:2]
-if not (major_version == 3 and 10 <= minor_version <= 13):
-    sys.stderr.write("Sorry, only Python 3.10 - 3.13 are "
+if not (major_version == 3 and 10 <= minor_version <= 14):
+    sys.stderr.write("Sorry, only Python 3.10 - 3.14 are "
                      "supported at this time.\n")
     exit(1)
 
@@ -51,6 +51,7 @@ setup(
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.14",
         "Topic :: Scientific/Engineering :: GIS",
     ]
 )

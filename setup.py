@@ -17,8 +17,8 @@ else:
 
 
 major_version, minor_version = sys.version_info[:2]
-if not (major_version == 3 and 7 <= minor_version <= 13):
-    sys.stderr.write("Sorry, only Python 3.7 - 3.13 are "
+if not (major_version == 3 and 10 <= minor_version <= 13):
+    sys.stderr.write("Sorry, only Python 3.10 - 3.13 are "
                      "supported at this time.\n")
     exit(1)
 
@@ -38,7 +38,7 @@ setup(
     package_dir={"geojson": "geojson"},
     package_data={"geojson": ["*.rst"]},
     install_requires=[],
-    python_requires=">=3.7",
+    python_requires=">=3.10",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
@@ -47,9 +47,6 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",

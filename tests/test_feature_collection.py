@@ -2,8 +2,8 @@ import unittest
 
 import geojson
 
-class FeatureCollectionsTest(unittest.TestCase):
 
+class FeatureCollectionsTest(unittest.TestCase):
     def test_to_instance_converts_nested_features(self):
         """to_instance() should convert dict features to Feature objects in FeatureCollection."""
 

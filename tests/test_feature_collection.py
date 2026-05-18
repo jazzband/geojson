@@ -6,7 +6,7 @@ class FeatureCollectionsTest(unittest.TestCase):
 
     def test_to_instance_converts_nested_features(self):
         """to_instance() should convert dict features to Feature objects in FeatureCollection."""
-        
+
         feature_collection_dict = {
             "type": "FeatureCollection",
             "features": [

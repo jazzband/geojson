@@ -19,7 +19,7 @@ class FeaturesTest(unittest.TestCase):
         json_str = geojson.dumps(f, sort_keys=True)
         # Parse JSON to avoid formatting issues across Python versions
         json_obj = json.loads(json_str)
-        
+
         expected = {
             "geometry": {"coordinates": [53.0, -4.0], "type": "Point"},
             "id": "1",
@@ -57,7 +57,7 @@ class FeaturesTest(unittest.TestCase):
         self.assertEqual(feature.properties['summary'], 'The first feature')
         self.assertEqual(feature.properties['link'],
                          'http://example.org/features/1')
-        
+
         # Encoding - use JSON comparison to avoid formatting issues
         geometry_obj = json.loads(geojson.dumps(feature.geometry, sort_keys=True))
         self.assertEqual(geometry_obj, {"coordinates": [53.0, -4.0], "type": "Point"})
@@ -72,7 +72,7 @@ class FeaturesTest(unittest.TestCase):
             },
             "type": "Feature"
         }
-        
+
         feature_json_obj = json.loads(geojson.dumps(feature, sort_keys=True))
         self.assertEqual(feature_json_obj, expected_feature)
 
@@ -92,7 +92,7 @@ class FeaturesTest(unittest.TestCase):
         self.assertEqual(feature.properties['summary'], 'The first feature')
         self.assertEqual(feature.properties['link'],
                          'http://example.org/features/1')
-        
+
         # Compare geometry using JSON
         geom_obj = json.loads(geojson.dumps(feature.geometry, sort_keys=True))
         self.assertEqual(geom_obj, {"coordinates": [53.0, -4.0], "type": "Point"})
@@ -113,12 +113,12 @@ class FeaturesTest(unittest.TestCase):
                                       "coordinates": (self.x, self.y)}}
 
         ob = Thingy('1', 'thingy one', -106.0, 40.0)
-        
+
         # Use JSON comparison for geometry
         geom_json = json.loads(geojson.dumps(ob.__geo_interface__['geometry'],
                                        sort_keys=True))
         self.assertEqual(geom_json, {"coordinates": [-106.0, 40.0], "type": "Point"})
-        
+
         # Use JSON comparison for the whole object
         expected_obj = {
             "geometry": {"coordinates": [-106.0, 40.0], "type": "Point"},

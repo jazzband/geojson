@@ -1,6 +1,33 @@
 Changes
 =======
 
+3.3.0
+----------
+
+- `__all__` must be a sequence of strings: fix `__init__.py` and `factory.py`
+
+  -  https://github.com/jazzband/geojson/pull/247
+
+- remove simplejson
+
+  -  https://github.com/jazzband/geojson/pull/246
+
+- Add support for Python 3.14
+
+  - https://github.com/jazzband/geojson/pull/245
+
+- Remove EOL Python version support
+
+  - https://github.com/jazzband/geojson/pull/244
+
+- Update GH action versions for Node 24
+
+  - https://github.com/jazzband/geojson/pull/243
+
+- fix: convert dict features to Feature objects in FeatureCollection
+
+  - https://github.com/jazzband/geojson/pull/242
+
 3.2.0
 ----------
 

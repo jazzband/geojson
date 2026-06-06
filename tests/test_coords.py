@@ -100,6 +100,41 @@ class CoordsTestCase(unittest.TestCase):
         self.assertEqual(result['id'], '123')
         self.assertEqual(result['geometry']['coordinates'], (-115.81, 37.24))
 
+    def test_map_featurecollection(self):
+        p1 = geojson.Feature(
+            geometry=geojson.Point((-115.11, 37.11)),
+            properties={'name': 'one'},
+        )
+        p2 = geojson.Feature(
+            geometry=geojson.LineString([(-115.22, 37.22), (-115.33, 37.33)]),
+            properties={'name': 'two'},
+        )
+
+        result = map_coords(lambda x: x + 1, geojson.FeatureCollection([p1, p2]))
+
+        self.assertEqual(result['type'], 'FeatureCollection')
+        self.assertEqual(result['features'][0]['properties'], {'name': 'one'})
+        self.assertEqual(result['features'][0]['geometry']['coordinates'], (-114.11, 38.11))
+        self.assertEqual(
+            result['features'][1]['geometry']['coordinates'],
+            [(-114.22, 38.22), (-114.33, 38.33)]
+        )
+
+    def test_map_geometrycollection(self):
+        g = geojson.GeometryCollection([
+            geojson.Point((-115.11, 37.11)),
+            geojson.LineString([(-115.22, 37.22), (-115.33, 37.33)]),
+        ])
+
+        result = map_coords(lambda x: x + 1, g)
+
+        self.assertEqual(result['type'], 'GeometryCollection')
+        self.assertEqual(result['geometries'][0]['coordinates'], (-114.11, 38.11))
+        self.assertEqual(
+            result['geometries'][1]['coordinates'],
+            [(-114.22, 38.22), (-114.33, 38.33)]
+        )
+
     def test_map_invalid(self):
         with self.assertRaises(ValueError):
             map_coords(lambda x: x, {"type": ""})

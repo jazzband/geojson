@@ -50,10 +50,16 @@ class FeatureCollection(GeoJSON):
         ]
 
     def errors(self):
-        return self.check_list_errors(lambda x: x.errors(), self.features)
+        return self.check_list_errors(_feature_errors, self.features)
 
     def __getitem__(self, key):
         try:
             return self.get("features", ())[key]
         except (KeyError, TypeError, IndexError):
             return super(GeoJSON, self).__getitem__(key)
+
+
+def _feature_errors(feature):
+    if not isinstance(feature, Feature):
+        return "FeatureCollection features must be Features"
+    return feature.errors()

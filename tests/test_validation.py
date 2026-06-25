@@ -138,6 +138,12 @@ class TestValidationPolygon(unittest.TestCase):
                 (-120.43, 19.15), (2.38, 57.323)]])
         self.assertEqual(poly2.is_valid, False)
 
+    def test_empty_polygon_is_invalid(self):
+        # A Polygon with no rings violates RFC 7946 and must not validate as valid
+        poly = geojson.Polygon()
+        self.assertEqual(poly.is_valid, False)
+        self.assertIn('linear ring', poly.errors())
+
     def test_valid_polygon(self):
         poly = geojson.Polygon(
             [[(2.38, 57.322), (23.194, -20.28),

@@ -138,3 +138,36 @@ class CoordsTestCase(unittest.TestCase):
     def test_map_invalid(self):
         with self.assertRaises(ValueError):
             map_coords(lambda x: x, {"type": ""})
+
+
+class NullGeometryCoordsTestCase(unittest.TestCase):
+    def test_feature_null_geometry(self):
+        feature = geojson.Feature(id=1, geometry=None, properties={'k': 'v'})
+        self.assertTrue(feature.is_valid)
+        self.assertEqual(list(coords(feature)), [])
+
+    def test_feature_default_geometry(self):
+        feature = geojson.Feature(id=2, properties={'k': 'v'})
+        self.assertIsNone(feature['geometry'])
+        self.assertEqual(list(coords(feature)), [])
+
+    def test_dict_feature_null_geometry(self):
+        feature = {'type': 'Feature', 'geometry': None, 'properties': {}}
+        self.assertEqual(list(coords(feature)), [])
+
+    def test_featurecollection_with_null_geometry(self):
+        located = geojson.Feature(geometry=geojson.Point((-115.81, 37.24)))
+        unlocated = geojson.Feature(geometry=None)
+        fc = geojson.FeatureCollection([unlocated, located, unlocated])
+        self.assertEqual(list(coords(fc)), [(-115.81, 37.24)])
+
+    def test_geometrycollection_with_null_member(self):
+        gc = geojson.GeometryCollection(
+            [geojson.Point((1.0, 2.0)), None, geojson.Point((3.0, 4.0))])
+        self.assertEqual(list(coords(gc)), [(1.0, 2.0), (3.0, 4.0)])
+
+    def test_coords_matches_map_coords_on_null_geometry(self):
+        feature = geojson.Feature(geometry=None)
+        mapped = map_coords(lambda x: x, feature)
+        self.assertIsNone(mapped['geometry'])
+        self.assertEqual(list(coords(feature)), [])

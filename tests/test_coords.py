@@ -64,6 +64,34 @@ class CoordsTestCase(unittest.TestCase):
         self.assertEqual(result['type'], 'Point')
         self.assertEqual(result['coordinates'], (-115.81, 37.24))
 
+    def test_map_point_3d(self):
+        result = map_coords(lambda x: x * 2, geojson.Point((1, 2, 3)))
+        self.assertEqual(result['type'], 'Point')
+        self.assertEqual(result['coordinates'], (2, 4, 6))
+
+    def test_map_point_zero_altitude(self):
+        result = map_coords(lambda x: x, geojson.Point((1, 2, 0)))
+        self.assertEqual(result['coordinates'], (1, 2, 0))
+
+    def test_map_nested_3d(self):
+        g = geojson.FeatureCollection([
+            geojson.Feature(geometry=geojson.GeometryCollection([
+                geojson.Point((1, 2, 3)),
+                geojson.MultiPolygon([
+                    [[(0, 0, 0), (4, 0, 2), (0, 4, 4), (0, 0, 0)]],
+                ]),
+            ])),
+        ])
+
+        result = map_coords(lambda x: x * 2, g)
+
+        geometries = result['features'][0]['geometry']['geometries']
+        self.assertEqual(geometries[0]['coordinates'], (2, 4, 6))
+        self.assertEqual(
+            geometries[1]['coordinates'],
+            [[[(0, 0, 0), (8, 0, 4), (0, 8, 8), (0, 0, 0)]]],
+        )
+
     def test_map_linestring(self):
         g = geojson.LineString(
             [(3.78, 9.28), (-130.91, 1.52), (35.12, 72.234), (3.78, 9.28)])

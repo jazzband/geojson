@@ -25,3 +25,25 @@ class FeatureCollectionsTest(unittest.TestCase):
         self.assertTrue(isinstance(obj, geojson.FeatureCollection))
         self.assertTrue(isinstance(obj.features[0], geojson.Feature))
         self.assertTrue(obj.is_valid)
+
+    def test_feature_collection_from_dict(self):
+        """FeatureCollection should initialize properly from a dictionary (#82)."""
+        feature_collection_dict = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": {"foo": "bar"},
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [0.0, 0.0],
+                    },
+                },
+            ],
+        }
+        fc = geojson.FeatureCollection(feature_collection_dict)
+        self.assertTrue(isinstance(fc, geojson.FeatureCollection))
+        self.assertEqual(len(fc.features), 1)
+        self.assertTrue(isinstance(fc.features[0], geojson.Feature))
+        self.assertTrue(fc.is_valid)
+

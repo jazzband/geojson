@@ -81,4 +81,3 @@ class TestGeoJSONConstructor(unittest.TestCase):
         # Ensure it is JSON-serializable
         encoded = json.dumps(d)
         self.assertIn('"type": "FeatureCollection"', encoded)
-

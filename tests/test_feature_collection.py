@@ -46,4 +46,3 @@ class FeatureCollectionsTest(unittest.TestCase):
         self.assertEqual(len(fc.features), 1)
         self.assertTrue(isinstance(fc.features[0], geojson.Feature))
         self.assertTrue(fc.is_valid)
-

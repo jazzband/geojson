@@ -87,4 +87,3 @@ def to_mapping(obj):
         return dict(obj)
 
     return json.loads(json.dumps(obj))
-

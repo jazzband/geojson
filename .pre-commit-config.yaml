@@ -9,12 +9,12 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/tox-dev/tox-ini-fmt
-    rev: 1.7.1
+    rev: 1.9.0
     hooks:
       - id: tox-ini-fmt
 
   - repo: https://github.com/PyCQA/flake8
-    rev: 7.3.0
+    rev: 7.4.1
     hooks:
       - id: flake8
 

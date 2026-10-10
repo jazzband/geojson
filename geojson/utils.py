@@ -1,5 +1,7 @@
 """Coordinate utility functions."""
 
+from copy import copy
+
 
 def coords(obj):
     """
@@ -119,6 +121,7 @@ def map_geometries(func, obj):
         geoms = [func(geom) if geom else None for geom in obj['geometries']]
         return {'type': obj['type'], 'geometries': geoms}
     elif obj['type'] == 'Feature':
+        obj = copy(obj)
         obj['geometry'] = func(obj['geometry']) if obj['geometry'] else None
         return obj
     elif obj['type'] == 'FeatureCollection':

@@ -74,6 +74,32 @@ class TestGenerateRandom(unittest.TestCase):
 
 
 class TestMapGeometries(unittest.TestCase):
+    def test_feature_mapping_preserves_input(self):
+        point = geojson.Point((1, 2))
+        feature = geojson.Feature(
+            id='point-1', geometry=point, properties={'name': 'original'})
+        for original in (feature, dict(feature)):
+            with self.subTest(type=type(original)):
+                mapped = map_geometries(
+                    lambda geom: geojson.Point((3, 4)), original)
+                self.assertIs(original['geometry'], point)
+                self.assertIsNot(mapped, original)
+                self.assertEqual(mapped['geometry'], geojson.Point((3, 4)))
+                self.assertEqual(mapped['id'], 'point-1')
+                self.assertEqual(mapped['properties'], {'name': 'original'})
+                self.assertIsInstance(mapped, type(original))
+
+    def test_feature_collection_mapping_preserves_input(self):
+        point = geojson.Point((1, 2))
+        feature = geojson.Feature(id='point-1', geometry=point)
+        collection = geojson.FeatureCollection([feature])
+        mapped = map_geometries(
+            lambda geom: geojson.Point((3, 4)), collection)
+        self.assertIs(collection['features'][0]['geometry'], point)
+        self.assertIsNot(mapped['features'][0], feature)
+        self.assertEqual(mapped['features'][0]['id'], 'point-1')
+        self.assertEqual(mapped['features'][0]['geometry'], geojson.Point((3, 4)))
+
     def test_with_simple_type(self):
         new_point = map_geometries(
             lambda g: geojson.MultiPoint([g["coordinates"]]),

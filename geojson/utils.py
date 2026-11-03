@@ -50,7 +50,7 @@ def map_coords(func, obj):
     """
 
     def tuple_func(coord):
-        return (func(coord[0]), func(coord[1]))
+        return tuple(func(value) for value in coord)
 
     return map_tuples(tuple_func, obj)
 

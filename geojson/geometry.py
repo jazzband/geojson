@@ -122,6 +122,9 @@ def check_polygon(coord):
     if not isinstance(coord, list):
         return 'Each polygon must be a list of linear rings'
 
+    if len(coord) == 0:
+        return 'a Polygon must have at least one linear ring'
+
     if not all(isinstance(elem, list) for elem in coord):
         return "Each element of a polygon's coordinates must be a list"
 

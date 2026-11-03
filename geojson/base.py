@@ -60,6 +60,21 @@ class GeoJSON(dict):
 
         del self[name]
 
+    def copy(self):
+        """
+        Return a shallow copy of the GeoJSON object preserving its class.
+
+        :return: A copy of the GeoJSON object
+        :rtype: GeoJSON
+        """
+        new_instance = self.__class__.__new__(self.__class__)
+        new_instance.update(self)
+        new_instance.__dict__.update(self.__dict__)
+        return new_instance
+
+    def __copy__(self):
+        return self.copy()
+
     @property
     def __geo_interface__(self):
         if self.type != "GeoJSON":

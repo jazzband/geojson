@@ -144,6 +144,11 @@ class TestValidationPolygon(unittest.TestCase):
                 (-120.43, 19.15), (2.38, 57.322)]])
         self.assertEqual(poly.is_valid, True)
 
+    def test_invalid_polygon_ring_vertex(self):
+        for bad in ([1], [1, 2, 3, 4], [[1, 2]]):
+            poly = geojson.Polygon([[bad, [5, 6], [7, 8], bad]])
+            self.assertEqual(poly.is_valid, False, bad)
+
 
 class TestValidationMultiPolygon(unittest.TestCase):
 

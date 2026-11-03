@@ -133,6 +133,12 @@ def check_polygon(coord):
     if isring is False:
         return 'Each linear ring must end where it started'
 
+    for ring in coord:
+        for pos in ring:
+            error = check_point(pos)
+            if error:
+                return error
+
 
 class Polygon(Geometry):
     def errors(self):

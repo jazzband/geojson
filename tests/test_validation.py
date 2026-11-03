@@ -193,3 +193,31 @@ class TestValidationGeometryCollection(unittest.TestCase):
                 geometries=[point, poly]
             )
         self.assertTrue(geom_collection.is_valid)
+
+
+class TestValidationFeatureCollection(unittest.TestCase):
+
+    def test_featurecollection_rejects_geometry_items(self):
+        collection = geojson.FeatureCollection([geojson.Point((0, 0))])
+
+        self.assertFalse(collection.is_valid)
+        self.assertIn("FeatureCollection features must be Features",
+                      collection.errors())
+
+    def test_featurecollection_rejects_nested_featurecollections(self):
+        collection = geojson.FeatureCollection([
+            geojson.FeatureCollection([
+                geojson.Feature(geometry=geojson.Point((0, 0)))
+            ])
+        ])
+
+        self.assertFalse(collection.is_valid)
+        self.assertIn("FeatureCollection features must be Features",
+                      collection.errors())
+
+    def test_valid_featurecollection(self):
+        collection = geojson.FeatureCollection([
+            geojson.Feature(geometry=geojson.Point((0, 0)))
+        ])
+
+        self.assertTrue(collection.is_valid)

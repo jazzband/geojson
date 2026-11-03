@@ -10,6 +10,9 @@ def coords(obj):
     :return: A generator with coordinate tuples from the geometry or feature.
     :rtype: generator
     """
+    # Null geometry (e.g. an unlocated Feature, RFC 7946 3.2) has no coords
+    if obj is None:
+        return
     # Handle recursive case first
     if 'features' in obj:  # FeatureCollection
         for f in obj['features']:

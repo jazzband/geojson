@@ -2,6 +2,7 @@ from decimal import Decimal
 from numbers import Number, Real
 
 from geojson.base import GeoJSON
+from geojson.mapping import extract_dict
 
 
 DEFAULT_PRECISION = 6
@@ -23,6 +24,20 @@ class Geometry(GeoJSON):
         :param precision: Number of decimal places for lat/lon coords.
         :type precision: integer
         """
+        d, coordinates = extract_dict(coordinates)
+        if d is not None:
+            super().__init__(d, **extra)
+            if precision is None:
+                precision = DEFAULT_PRECISION
+            if "coordinates" in self:
+                self["coordinates"] = self.clean_coordinates(
+                    self["coordinates"] or [], precision)
+            if validate:
+                errors = self.errors()
+                if errors:
+                    raise ValueError(f'{errors}: {self.get("coordinates")}')
+            return
+
         super().__init__(**extra)
         if precision is None:
             precision = DEFAULT_PRECISION
@@ -60,8 +75,20 @@ class GeometryCollection(GeoJSON):
     """
 
     def __init__(self, geometries=None, **extra):
+        d, geometries = extract_dict(geometries)
+        if d is not None:
+            super().__init__(d, **extra)
+            self["geometries"] = [
+                self.to_instance(g) if not isinstance(g, GeoJSON) else g
+                for g in (self.get("geometries") or [])
+            ]
+            return
+
         super().__init__(**extra)
-        self["geometries"] = geometries or []
+        self["geometries"] = [
+            self.to_instance(g) if not isinstance(g, GeoJSON) else g
+            for g in (geometries or [])
+        ]
 
     def errors(self):
         errors = [geom.errors() for geom in self['geometries']]

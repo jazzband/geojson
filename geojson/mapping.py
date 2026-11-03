@@ -1,4 +1,5 @@
-from collections.abc import MutableMapping
+from collections.abc import Iterable, MutableMapping
+import itertools
 
 try:
     import simplejson as json
@@ -21,6 +22,55 @@ def is_mapping(obj):
     :rtype: bool
     """
     return isinstance(obj, MutableMapping)
+
+
+def extract_dict(arg):
+    """
+    If arg represents a dictionary initialization sequence (mapping or iterable
+    of key-value pairs where keys match GeoJSON schema attributes, as produced
+    by dict constructors or dataclasses.asdict), returns (dict, None).
+    Otherwise returns (None, reconstructed_arg).
+    """
+    if isinstance(arg, geojson.GeoJSON):
+        return None, arg
+    if isinstance(arg, dict):
+        return arg, None
+    if isinstance(arg, (tuple, list)):
+        if len(arg) > 0:
+            first = arg[0]
+            if (
+                isinstance(first, (tuple, list))
+                and len(first) == 2
+                and isinstance(first[0], str)
+                and not isinstance(first, geojson.GeoJSON)
+                and not isinstance(first, dict)
+                and first[0] in (
+                    'type', 'coordinates', 'features', 'geometry',
+                    'properties', 'geometries', 'id'
+                )
+            ):
+                return dict(arg), None
+        return None, arg
+    if isinstance(arg, Iterable) and not isinstance(arg, (str, bytes)):
+        it = iter(arg)
+        try:
+            first = next(it)
+        except StopIteration:
+            return None, []
+        if (
+            isinstance(first, (tuple, list))
+            and len(first) == 2
+            and isinstance(first[0], str)
+            and not isinstance(first, geojson.GeoJSON)
+            and not isinstance(first, dict)
+            and first[0] in (
+                'type', 'coordinates', 'features', 'geometry',
+                'properties', 'geometries', 'id'
+            )
+        ):
+            return dict(itertools.chain([first], it)), None
+        return None, list(itertools.chain([first], it))
+    return None, arg
 
 
 def to_mapping(obj):

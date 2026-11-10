@@ -193,3 +193,29 @@ class TestValidationGeometryCollection(unittest.TestCase):
                 geometries=[point, poly]
             )
         self.assertTrue(geom_collection.is_valid)
+
+
+class TestGeometryCollectionDictMembers(unittest.TestCase):
+    def test_to_instance_converts_dict_geometries(self):
+        """dict geometries should convert to geometry objects in GeometryCollection,
+        mirroring what FeatureCollection does with dict features."""
+        geom_collection = geojson.GeometryCollection(
+            geometries=[{"type": "Point", "coordinates": [10, 20]}]
+        )
+        self.assertTrue(
+            isinstance(geom_collection.geometries[0], geojson.Point)
+        )
+        self.assertTrue(geom_collection.is_valid)
+        self.assertFalse(geom_collection.errors())
+
+    def test_dict_geometry_errors_are_reported(self):
+        geom_collection = geojson.GeometryCollection(
+            geometries=[{"type": "Point", "coordinates": [10, 20, 30, 40]}]
+        )
+        self.assertFalse(geom_collection.is_valid)
+        self.assertTrue(geom_collection.errors())
+
+    def test_none_geometries_are_preserved(self):
+        geom_collection = geojson.GeometryCollection(geometries=[None])
+        self.assertIsNone(geom_collection.geometries[0])
+        self.assertTrue(geom_collection.is_valid)

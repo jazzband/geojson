@@ -7,6 +7,21 @@ from geojson.base import GeoJSON
 DEFAULT_PRECISION = 6
 
 
+def _normalize_geometries(geometries):
+    """Convert plain dict members to GeoJSON geometry objects.
+
+    Mirrors what FeatureCollection does with its feature dicts so that
+    validation works on objects constructed from plain dicts.
+    """
+    if geometries is None:
+        return []
+    return [
+        GeoJSON.to_instance(g) if g is not None and not isinstance(g, GeoJSON)
+        else g
+        for g in geometries
+    ]
+
+
 class Geometry(GeoJSON):
     """
     Represents an abstract base class for a WGS84 geometry.
@@ -61,10 +76,12 @@ class GeometryCollection(GeoJSON):
 
     def __init__(self, geometries=None, **extra):
         super().__init__(**extra)
-        self["geometries"] = geometries or []
+        self["geometries"] = _normalize_geometries(geometries)
 
     def errors(self):
-        errors = [geom.errors() for geom in self['geometries']]
+        # None members are allowed and validated as absent, mirroring
+        # how Feature treats a null geometry.
+        errors = [geom.errors() for geom in self['geometries'] if geom is not None]
         return [err for err in errors if err]
 
     def __getitem__(self, key):

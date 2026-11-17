@@ -58,7 +58,11 @@ def loads(s,
           parse_constant=_enforce_strict_numbers,
           object_hook=_default_object_hook,
           **kwargs):
-    if object_hook == _default_object_hook and kwargs.get("object_pairs_hook") is None:
+    if (
+        (cls is None or cls is json.JSONDecoder)
+        and object_hook == _default_object_hook
+        and kwargs.get("object_pairs_hook") is None
+    ):
         obj = json.loads(s, cls=cls, parse_constant=parse_constant, **kwargs)
         return _decode_geojson(obj)
     return json.loads(s,

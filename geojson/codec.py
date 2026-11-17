@@ -29,22 +29,38 @@ def dumps(obj, cls=GeoJSONEncoder, allow_nan=False, ensure_ascii=False, **kwargs
                       cls=cls, allow_nan=allow_nan, ensure_ascii=ensure_ascii, **kwargs)
 
 
+_default_object_hook = geojson.base.GeoJSON.to_instance
+
+
+def _decode_geojson(obj):
+    if isinstance(obj, list):
+        return [_decode_geojson(value) for value in obj]
+    if isinstance(obj, dict):
+        is_feature = obj.get("type") == "Feature"
+        for key, value in obj.items():
+            if not (is_feature and key == "properties"):
+                obj[key] = _decode_geojson(value)
+        return _default_object_hook(obj)
+    return obj
+
+
 def load(fp,
          cls=json.JSONDecoder,
          parse_constant=_enforce_strict_numbers,
-         object_hook=geojson.base.GeoJSON.to_instance,
+         object_hook=_default_object_hook,
          **kwargs):
-    return json.load(fp,
-                     cls=cls, object_hook=object_hook,
-                     parse_constant=parse_constant,
-                     **kwargs)
+    return loads(fp.read(), cls=cls, object_hook=object_hook,
+                 parse_constant=parse_constant, **kwargs)
 
 
 def loads(s,
           cls=json.JSONDecoder,
           parse_constant=_enforce_strict_numbers,
-          object_hook=geojson.base.GeoJSON.to_instance,
+          object_hook=_default_object_hook,
           **kwargs):
+    if object_hook == _default_object_hook and kwargs.get("object_pairs_hook") is None:
+        obj = json.loads(s, cls=cls, parse_constant=parse_constant, **kwargs)
+        return _decode_geojson(obj)
     return json.loads(s,
                       cls=cls, object_hook=object_hook,
                       parse_constant=parse_constant,

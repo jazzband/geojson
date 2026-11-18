@@ -33,15 +33,29 @@ _default_object_hook = geojson.base.GeoJSON.to_instance
 
 
 def _decode_geojson(obj):
-    if isinstance(obj, list):
-        return [_decode_geojson(value) for value in obj]
-    if isinstance(obj, dict):
-        is_feature = obj.get("type") == "Feature"
-        for key, value in obj.items():
-            if not (is_feature and key == "properties"):
-                obj[key] = _decode_geojson(value)
-        return _default_object_hook(obj)
-    return obj
+    result = [obj]
+    # Convert children before their parents without Python recursion.
+    stack = [(None, None, result, iter(enumerate(result)), False)]
+    while stack:
+        parent, parent_key, container, children, is_feature = stack[-1]
+        try:
+            key, value = next(children)
+        except StopIteration:
+            stack.pop()
+            if isinstance(container, dict):
+                parent[parent_key] = _default_object_hook(container)
+            continue
+        if is_feature and key == "properties":
+            continue
+        if isinstance(value, list):
+            value = list(value)
+            container[key] = value
+            stack.append((container, key, value, iter(enumerate(value)),
+                          False))
+        elif isinstance(value, dict):
+            stack.append((container, key, value, iter(value.items()),
+                          value.get("type") == "Feature"))
+    return result[0]
 
 
 def load(fp,

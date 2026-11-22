@@ -18,9 +18,8 @@ else:
 
 major_version, minor_version = sys.version_info[:2]
 if not (major_version == 3 and 10 <= minor_version <= 14):
-    sys.stderr.write("Sorry, only Python 3.10 - 3.14 are "
+    sys.stderr.write("NOTICE: only Python 3.10 - 3.14 are "
                      "supported at this time.\n")
-    exit(1)
 
 setup(
     name="geojson",

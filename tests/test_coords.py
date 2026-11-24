@@ -15,6 +15,10 @@ class CoordsTestCase(unittest.TestCase):
         itr = coords(geojson.Point(TOO_PRECISE))
         self.assertEqual(next(itr), tuple([round(c, 6) for c in TOO_PRECISE]))
 
+    def test_point_without_rounding(self):
+        point = geojson.Point(TOO_PRECISE, precision=None)
+        self.assertEqual(point['coordinates'], list(TOO_PRECISE))
+
     def test_dict(self):
         itr = coords({'type': 'Point', 'coordinates': [-115.81, 37.24]})
         self.assertEqual(next(itr), (-115.81, 37.24))

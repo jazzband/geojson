@@ -5,6 +5,7 @@ from geojson.base import GeoJSON
 
 
 DEFAULT_PRECISION = 6
+_USE_DEFAULT_PRECISION = object()
 
 
 class Geometry(GeoJSON):
@@ -12,7 +13,7 @@ class Geometry(GeoJSON):
     Represents an abstract base class for a WGS84 geometry.
     """
 
-    def __init__(self, coordinates=None, validate=False, precision=None, **extra):
+    def __init__(self, coordinates=None, validate=False, precision=_USE_DEFAULT_PRECISION, **extra):
         """
         Initialises a Geometry object.
 
@@ -20,11 +21,12 @@ class Geometry(GeoJSON):
         :type coordinates: tuple or list of tuple
         :param validate: Raise exception if validation errors are present?
         :type validate: boolean
-        :param precision: Number of decimal places for lat/lon coords.
-        :type precision: integer
+        :param precision: Number of decimal places for lat/lon coords. Pass
+            ``None`` to preserve the input precision.
+        :type precision: integer or None
         """
         super().__init__(**extra)
-        if precision is None:
+        if precision is _USE_DEFAULT_PRECISION:
             precision = DEFAULT_PRECISION
         self["coordinates"] = self.clean_coordinates(
             coordinates or [], precision)
@@ -48,7 +50,7 @@ class Geometry(GeoJSON):
             elif isinstance(coord, Geometry):
                 new_coords.append(coord['coordinates'])
             elif isinstance(coord, (Real, Decimal)):
-                new_coords.append(round(coord, precision))
+                new_coords.append(coord if precision is None else round(coord, precision))
             else:
                 raise ValueError(f"{coord!r} is not a JSON compliant number")
         return new_coords
